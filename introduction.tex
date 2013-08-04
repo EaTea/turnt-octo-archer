@@ -1,0 +1,54 @@
+\section{Introduction --- fixed by 28 July 2013}
+
+% Here we motivate the problem from scratch. Usually a concrete
+% example will do this well. The first paragraph sets the scene
+% and states the problem explicitly. It sets up the second paragraph,
+% which will state explicitly your hypothesis for solving it.
+% 
+% Now comes a short, sharp and succinct exposition of your approach.
+% For example, ``It thus seems reasonable to conjecture that a
+% combination of the X algorithm and the Y algorithm would produce
+% superior results to either algorithm on its own. We show that this is
+% indeed the case, and prove that the combined algorithm has complexity,
+% on the average, that is an order of magnitude better than either the X
+% or the Y algorithm.''
+% 
+% Then there is a bit more motivation, linking the problem to other
+% researchers, but not in detail. You also talk in a general way about
+% the methodology you have employed to solve the problem.
+% 
+% The final paragraph should give the conclusions of your
+% paper. Something like ``We conclude that the combined X-Y algorithm is
+% better suited to robot control problems than either the X algorithm or
+% the Y algorithm'' would be appropriate.
+
+Suppose Alice and Bob are two share traders who fervently watch the stock market. They
+are particularly concerned about the fate of company ABC and are waiting for news on whether ABC is
+doing well or poorly. In the middle of their stock market vigil, Alice is given a letter that says
+ABC has done particularly well. Bob sees her open the letter and read its contents, but he does not
+know what the letter is about.\\
+\\
+If we wanted to formally model Alice and Bob's stock situation, we must consider how we can model
+\begin{enumerate}
+	\item the facts Alice and Bob know or believe before Alice obtained the letter
+	\item the change in belief or knowledge described by Alice's letter and Bob's observations
+	\item the updated facts Alice and Bob know or believe after the letter has been opened
+\end{enumerate}
+
+We are particularly concerned with items two and  three --- the updated facts Alice and Bob know.
+Given that there are facts that we want Alice and Bob to know or believe, we want to construct an
+update that will always achieve this information goal. We specify a series of languages to
+construct models of information change that realise information goals.\\
+\\
+In \cite{hales13synthesis} Hales approaches this and shows that such constructions are possible.
+We extend his work by providing a language that can be used to generate models, allowing
+translation into an automated framework for formal update construction. We show and example
+automation of the construction of these formal updates.\\
+\\
+A formally described update allows us to verify whether the update takes effect as we expect. We can
+determine the outcome of an update and if it is correct, as well as reason about the event and the
+knowledge situation before and after the update. This level of correctness and security can be
+critical in systems such as communications, as well as economics fields like stock marketing and
+auctioning. They can be used to reason about agents playing games and find their uses in how we can
+update the knowledges of automated agents.
+

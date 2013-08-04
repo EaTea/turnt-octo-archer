@@ -4,7 +4,7 @@
 \usepackage{amsmath, amsfonts, listings, amssymb, mathtools, amsthm} %Mathematical Expressions package
 \usepackage{mathtools}
 \usepackage[usenames, dvipsnames]{color} %Color naming packages
-\usepackage[margin=1.5cm]{geometry}
+\usepackage{geometry}
 \usepackage{float}
 \usepackage{verbatim} %for code
 \usepackage[pdftex]{graphics}
@@ -16,6 +16,7 @@
 %\usepackage[square]{natbib}
 \usepackage{caption}
 \usepackage{subcaption}
+\usepackage[toc,page]{appendix}
 
 \usetikzlibrary{arrows,shapes}
 
@@ -24,53 +25,6 @@
 \parindent 0pt
 
 % Predefined things such as commands, etc.
-
-\newtheorem{defn}{Definition}[subsection]
-\newtheorem{thm}{Theorem}[subsection]
-\newtheorem{lemma}{Lemma}[subsection]
-\newtheorem{corr}{Corrollary}[subsection]
-\newtheorem*{remrk}{Remark}
-
-\numberwithin{equation}{section}
-
-\newcommand{\cover}{\bigtriangledown}
-\newcommand{\sqex}[1]{[{#1}]}
-\newcommand{\anex}[1]{\langle {#1} \rangle}
-\newcommand{\lang}{\mathcal{L}}
-\newcommand{\langRefine}{\lang_{\forall}}
-\newcommand{\langActEx}{\lang_{\otimes}}
-\newcommand{\langArbAct}{\lang_{\otimes\forall}}
-\newcommand{\langProp}{\lang_0}
-
-\newcommand{\AXK}{{\bf K}}
-\newcommand{\AXAML}{${\bf AML_{\AXK}}$}
-\newcommand{\AXRML}{${\bf RML_{\AXK}}$}
-\newcommand{\AXAAML}{${\bf AAML_{\AXK}}$}
-
-\newcommand{\axP}{{\bf P}}
-\newcommand{\axK}{{\bf K}}
-\newcommand{\axMP}{{\bf MP}}
-\newcommand{\axNecK}{{\bf NecK}}
-\newcommand{\axAN}{{\bf AN}}
-\newcommand{\axAP}{{\bf AP}}
-\newcommand{\axAC}{{\bf AC}}
-\newcommand{\axAK}{{\bf AK}}
-\newcommand{\axAU}{{\bf AU}}
-\newcommand{\axNecA}{{\bf NecA}}
-\newcommand{\axR}{{\bf R}}
-\newcommand{\axRP}{{\bf RP}}
-\newcommand{\axRK}{{\bf RK}}
-\newcommand{\axRComm}{{\bf RComm}}
-\newcommand{\axRDist}{{\bf RDist}}
-\newcommand{\axNecR}{{\bf NecR}}
-
-\newcommand{\kripkeClass}{\mathcal{K}}
-\newcommand{\eventClass}{\mathcal{AM}}
-\newcommand{\insaneClass}{\eventClass_{IN}}
-\newcommand{\publicAnnClass}{\eventClass_{PA}}
-\newcommand{\treeClass}{\eventClass_{TR}}
-\newcommand{\forestClass}{\eventClass_{FOR}}
-
 \newcommand{\FIXME}{{\bf FIXME}}
 % Drawings of frames
 
@@ -82,26 +36,20 @@
 %-----------------------------------------------------------------------------%
 %Document%
 
-\title{Languages for epistemic event model synthesis in multi-agent systems}
+\title{CITS5502: Research Project}
 \author{Edwin Richard Yucheng Tay \\
 University of Western Australia \\
 email: taye03@student.uwa.edu.au }
 
 \date{\today}
 
+\includeonly{proposal}
+
 \begin{document}
 
-\maketitle
+%\FIXME \maketitle
 
-\begin{abstract}
-
-% A paper should begin with an insightful abstract, written in plain
-% English and containing no references. It should state clearly the
-% problem under consideration, the motivation for that problem, what you
-% have achieved and how, and why your results are interesting.  All this
-% in one paragraph too!
-
-\end{abstract}
+\include{./abstract}
 
 {\bf Keywords:} List, some, keywords, here.
 
@@ -109,22 +57,18 @@ email: taye03@student.uwa.edu.au }
 
 \pagebreak
 
-\tableofcontents
+%\FIXME \tableofcontents
 
 \include{./introduction}
 \include{./survey}
-\include{./preliminary}
-\include{./singleagent}
-\include{./multiagent}
 \include{./conclusion}
-\section*{Acknowledgements}
-
-I would like to acknowledge Tim French and James Hales for their valued assistance during this final
-year engineering project.
-
 % appendices
 
+%\FIXME \begin{appendices}
+\include{./proposal}
+%\FIXME \end{appendices}
+
 \bibliographystyle{ieeetr}
-\bibliography{thesis}
+\bibliography{research_project}
 
 \end{document}

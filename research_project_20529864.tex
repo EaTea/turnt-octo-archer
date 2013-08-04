@@ -11,12 +11,10 @@
 \usepackage{hyperref}
 \usepackage{cleveref}
 \usepackage{tikz}
-\usepackage{comment}
 \usepackage[nottoc]{tocbibind}
-%\usepackage[square]{natbib}
 \usepackage{caption}
 \usepackage{subcaption}
-\usepackage[toc,page]{appendix}
+\usepackage{fancyhdr}
 
 \usetikzlibrary{arrows,shapes}
 
@@ -33,6 +31,13 @@
 \tikzstyle{edge} = [draw,thick,->]
 \tikzstyle{weight} = [font=\small]
 
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+
+\fancyhf[FC]{\thepage}
+\fancyhf[HL]{Edwin Richard Yucheng Tay, 20529864}
+\fancyhf[HR]{CITS5502 Research Project}
+
 %-----------------------------------------------------------------------------%
 %Document%
 
@@ -43,11 +48,11 @@ email: taye03@student.uwa.edu.au }
 
 \date{\today}
 
-\includeonly{proposal}
+\includeonly{proposal.tex}
 
 \begin{document}
 
-%\FIXME \maketitle
+\maketitle
 
 \include{./abstract}
 
@@ -57,16 +62,15 @@ email: taye03@student.uwa.edu.au }
 
 \pagebreak
 
-%\FIXME \tableofcontents
+\tableofcontents
 
 \include{./introduction}
 \include{./survey}
 \include{./conclusion}
 % appendices
 
-%\FIXME \begin{appendices}
+\appendix
 \include{./proposal}
-%\FIXME \end{appendices}
 
 \bibliographystyle{ieeetr}
 \bibliography{research_project}

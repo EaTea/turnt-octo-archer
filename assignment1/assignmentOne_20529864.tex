@@ -1,0 +1,81 @@
+%-----------------------------------------------------------------------------%
+%Packages%
+\documentclass[12pt, a4paper, titlepage]{article}
+\usepackage{amsmath, amsfonts, listings, amssymb, mathtools, amsthm} %Mathematical Expressions package
+\usepackage{mathtools}
+\usepackage[usenames, dvipsnames]{color} %Color naming packages
+\usepackage{geometry}
+\usepackage{float}
+\usepackage{verbatim} %for code
+\usepackage[pdftex]{graphics}
+\usepackage{hyperref}
+\usepackage{cleveref}
+\usepackage{tikz}
+\usepackage[nottoc]{tocbibind}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{fancyhdr}
+
+\usetikzlibrary{arrows,shapes}
+
+%Graphis Extensions
+\DeclareGraphicsExtensions{.png, .jpg}
+\parindent 0pt
+
+% Predefined things such as commands, etc.
+\newcommand{\FIXME}{{\bf FIXME}}
+% Drawings of frames
+
+\tikzstyle{vertex}=[circle,fill=black!25,minimum size=20pt,inner sep=0pt]
+\tikzstyle{selected vertex} = [vertex, fill=red!24]
+\tikzstyle{edge} = [draw,thick,->]
+\tikzstyle{weight} = [font=\small]
+
+\setlength{\headheight}{15.2pt}
+\pagestyle{fancy}
+
+\fancyhf[FC]{\thepage}
+\fancyhf[HL]{Edwin Richard Yucheng Tay, 20529864}
+\fancyhf[HR]{CITS5502 Assignment One}
+
+%-----------------------------------------------------------------------------%
+%Document%
+
+\title{CITS5502: Software Processes Taxonomy}
+\author{Edwin Richard Yucheng Tay, 20529864 \\
+University of Western Australia \\
+email: taye03@student.uwa.edu.au }
+
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\include{./abstract}
+
+{\bf Keywords:} List, some, keywords, here.
+
+{\bf CR Classification:} A.1, B.2, C.3.
+
+\pagebreak
+
+\tableofcontents
+
+\include{./introduction}
+\include{./notation}
+\include{./diagrams}
+\include{./software_taxonomy}
+\include{./analysis}
+\include{./conclusion}
+
+% appendices
+
+\appendix
+
+\include{./short_program}
+
+\bibliographystyle{ieeetr}
+\bibliography{assignOne}
+
+\end{document}

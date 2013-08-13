@@ -1,4 +1,144 @@
-\section{Software Process Notation --- TODO by 0000 13th August 2013}
+\section{Software Process Notation --- TODO by 0000 13th August 2013} \label{notation}
+
+In Section \ref{introduction}, we briefly discussed the idea of classifying and comparing models.
+As we further noted, the different process descriptions make classification and comparison of
+development processes difficult.
+Thus, we introduce a standardised notation that will allow us to describe and discuss software
+processes in an unambiguous manner.\\
+\\
+We draw inspiration from UML Activity Diagrams \cite{Dumas01umlactivity,BellUMLBasics}, as well as
+the notation Woodings describes in \ref{Woodings2013Tut1}.
+
+\subsection{Notation}
+
+In \cite{fuggetta2000software} we define a process as
+\begin{quote}
+A software process can be defined as the coherent set of policies, organizational structures,
+	technologies, procedures, and artifacts that are needed to conceive, develop, deploy, and maintain
+	a software product.
+\end{quote}
+
+From this definition, we can note that we require the ability to denote four things
+\begin{itemize}
+	\item a point at which the set of policies and technologies should begin deployment
+	\item a point at which the policies and technologies should cease operation on the software
+	product development
+	\item sub-tasks to arbitrarily divide the component procedures of a process into as fine detail as
+	is necessary
+	\item inputs and outputs which are the artifacts used within a software development process
+\end{itemize}
+
+We first introduce the entry and exit points of a process; these are the points where it starts and
+ends.
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}[b]{.45\textwidth}
+\centering
+\includegraphics[scale=0.6]{media/Entry}
+\caption{The entry point in the program.}
+\label{entryFigure}
+\end{subfigure}
+~
+\begin{subfigure}[b]{.45\textwidth}
+\centering
+\includegraphics[scale=0.6]{media/Exit}
+\caption{The exit point of the program.}
+\label{exitFigure}
+\end{subfigure}
+\end{figure}
+
+Without knowing where we start and end, our process is a never-ending sequence of tasks, which
+either has no recognisable place to start or no point to recognise the software product as
+``finished".
+This is counter-intuitive to the purpose of a process which is to construct a software product.\\
+\\
+Next, we define a sub-task.
+As we noted in our previous definition, there are sub-procedures which make up our process.
+
+\begin{figure}[h!]
+\centering
+\includegraphics[scale=0.6]{media/Task}
+\caption{A single task of a process.}
+\label{taskFigure}
+\end{figure}
+
+A single task must act on {\em something}, and as a result of its actions it must produce something
+different.
+To denote dependencies upon inputs or other tasks, we use arrows, whilst we denote tangible outputs
+from a task with a circle.
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}[b]{.45\textwidth}
+\centering
+\includegraphics[scale=0.6]{media/Dependency}
+\caption{The arrow denotes a dependency of one task on another. As an example, suppose $A \to B$.
+	Then $B$ is dependent on $A$.}
+\label{depFigure}
+\end{subfigure}
+~
+\begin{subfigure}[b]{.45\textwidth}
+\centering
+\includegraphics[scale=0.6]{media/Output}
+\caption{This circle denotes the output from a task, and equivalently the input to another task. It
+is logical that each output is used as the input of {\em some} point in the process (including the
+		exit point), otherwise the output itself has no usage.
+Note that in no way does it suggest that tasks must have an input to them.}
+\label{outputFigure}
+\end{subfigure}
+\end{figure}
+
+Processes may branch at certain points due to needing to make a decision on the conditions of the
+process and the appropriate path the process should take to complete development.
+We will call these ``decision points".
+At other times, tasks can be parallelised between members of the software development team.
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}[b]{.45\textwidth}
+\centering
+\includegraphics[scale=0.6]{media/Parallelised}
+\caption{The above notation symbolises that multiple tasks should begin occurring in parallel (that
+		is, simultaneously).}
+\label{parFigure}
+\end{subfigure}
+~
+\begin{subfigure}[b]{.45\textwidth}
+\centering
+\includegraphics[scale=0.6]{media/Branching}
+\caption{The following is a decision point, where multiple paths can emerge from this single point.}
+\label{branFigure}
+\end{subfigure}
+\end{figure}
+
+\pagebreak %TODO: Check if pagebreak is good idea
+
+Finally, we pay a special attention to the verification process.
+Verification that a stage is correct and meets the requirements and standards expected by a client
+and other software maintainers is, in itself a process.
+We separate our notation of verification to thus distinguish it as a ``shadow" or ``reflection"
+procedure of a task (or sequence of tasks).
+
+\begin{figure}[h!]
+\centering
+\begin{subfigure}[b]{.45\textwidth}
+\centering
+\includegraphics[scale=0.6]{media/BeginVerification}
+\end{subfigure}
+~
+\begin{subfigure}[b]{.45\textwidth}
+\centering
+\includegraphics[scale=0.6]{media/EndVerification}
+\end{subfigure}
+\caption{Here, verification is treated as its own subprocess. The notation has the same meaning as
+	\ref{taskFigure} or \ref{branFigure}, except restricted to the verification process.
+	However, its dotted-line distinction is
+	two-fold; it is the ``shadow" process to ensure that a task has been completed correctly, but is
+		also treated in an ad-hoc and almost ``optional" manner by organisations.
+		Thus it is not a ``solid" or ``defined" process like \ref{taskFigure} or \ref{branFigure}.}
+\label{verification}
+\end{figure}
 
 \subsection{Design}
 
@@ -7,12 +147,7 @@
 	\item why did I choose this specific notation
 \end{itemize}
 
-\subsection{Notation}
-
-\begin{itemize}
-	\item introduce each operation
-	\item each operation is logical because ?
-\end{itemize}
+\subsection{Programming Translation}
 
 \subsection{Summary}
 

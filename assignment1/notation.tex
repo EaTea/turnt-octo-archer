@@ -6,8 +6,20 @@ development processes difficult.
 Thus, we introduce a standardised notation that will allow us to describe and discuss software
 processes in an unambiguous manner.\\
 \\
+To a reader interested in the notation used throughout the paper, we direct them
+to \FIXME which summarises the graphical and formal language notations we have
+designed.
+It gives the natural language meaning and semantics of each of the symbols and
+pseudo-code constructs we employ.\\
+\\
+Otherwise, this chapter introduces our graphical notation by justifying each symbol we
+use.
 We draw inspiration from UML Activity Diagrams \cite{Dumas01umlactivity,BellUMLBasics}, as well as
 the notation Woodings describes in \ref{Woodings2013Tut1}.
+We discuss the design and ideas behind our notation, and why we believe it is a
+good notation system.
+Finally, we motivate a formal pseudo-code style notation that is (approximately)
+  equivalent to our graphical notation.
 
 \subsection{Notation}
 
@@ -18,7 +30,7 @@ A software process can be defined as the coherent set of policies, organizationa
 	a software product.
 \end{quote}
 
-From this definition, we can note that we require the ability to denote four things
+From this definition, we can note that we must be able to at least denote four things
 \begin{itemize}
 	\item a point at which the set of policies and technologies should begin deployment
 	\item a point at which the policies and technologies should cease operation on the software
@@ -46,6 +58,10 @@ ends.
 \caption{The exit point of the program.}
 \label{exitFigure}
 \end{subfigure}
+\caption{Here, we show our notation for the entry and exit points of a process.
+Note that it is quite similar to notation in \ref{Dumas01umlactivity} for
+  signifying where a process begins and ends.}
+\label{entryExitFigure}
 \end{figure}
 
 Without knowing where we start and end, our process is a never-ending sequence of tasks, which
@@ -63,8 +79,13 @@ As we noted in our previous definition, there are sub-procedures which make up o
 \label{taskFigure}
 \end{figure}
 
-A single task must act on {\em something}, and as a result of its actions it must produce something
-different.
+In \cite{Woodings2013Tut1}, Woodings comments on the need to break down a
+process into tasks.
+A process that consists of a single task is pointless, as it offers no new
+insights into the innards and comparability of a process.\\
+\\
+Thus, a single task must act on {\em something}, and as a result of its actions
+it must produce something different.
 To denote dependencies upon inputs or other tasks, we use arrows, whilst we denote tangible outputs
 from a task with a circle.
 
@@ -81,14 +102,22 @@ from a task with a circle.
 \begin{subfigure}[b]{.45\textwidth}
 \centering
 \includegraphics[scale=0.6]{media/Output}
-\caption{This circle denotes the output from a task, and equivalently the input to another task. It
+\caption{This circle denotes the output from a task, but also the input to another task. It
 is logical that each output is used as the input of {\em some} point in the process (including the
-		exit point), otherwise the output itself has no usage.
-Note that in no way does it suggest that tasks must have an input to them.}
+		exit point), otherwise the output itself has no usage.}
 \label{outputFigure}
 \end{subfigure}
+\caption{An arrow will show dependency and a circle shows the output of a task,
+which also denotes the input for some point in the process.} \label{depOutFigure}
 \end{figure}
 
+Note that we have said that \ref{outputFigure} denotes either an input or an
+output.
+We note that although an output must implicitly be an output to some other
+process point, inputs need not necessarily be generated from a task.
+Similarly, we do not make the claim that all tasks require inputs, only that
+they must generate some output.\\
+\\
 Processes may branch at certain points due to needing to make a decision on the conditions of the
 process and the appropriate path the process should take to complete development.
 We will call these ``decision points".
@@ -115,7 +144,7 @@ At other times, tasks can be parallelised between members of the software develo
 \pagebreak %TODO: Check if pagebreak is good idea
 
 Finally, we pay a special attention to the verification process.
-Verification that a stage is correct and meets the requirements and standards expected by a client
+Verification that a task is correct and its outputs meet the requirements and standards expected by a client
 and other software maintainers is, in itself a process.
 We separate our notation of verification to thus distinguish it as a ``shadow" or ``reflection"
 procedure of a task (or sequence of tasks).

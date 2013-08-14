@@ -7,10 +7,9 @@ Thus, we introduce a standardised notation that will allow us to describe and di
 processes in an unambiguous manner.\\
 \\
 To a reader interested in the notation used throughout the paper, we direct them
-to \FIXME which summarises the graphical and formal language notations we have
+to \FIXME which summarises the graphical notations we have
 designed.
-It gives the natural language meaning and semantics of each of the symbols and
-pseudo-code constructs we employ.\\
+It gives the natural language meaning and semantics of each of the symbols we employ.\\
 \\
 Otherwise, this chapter introduces our graphical notation by justifying each symbol we
 use.
@@ -18,9 +17,6 @@ We draw inspiration from UML Activity Diagrams \cite{Dumas01umlactivity,BellUMLB
 the notation Woodings describes in \ref{Woodings2013Tut1}.
 We discuss the design and ideas behind our notation, and why we believe it is a
 good notation system.
-Finally, we motivate a formal pseudo-code style notation that is (approximately)
-  equivalent to our graphical notation.
-
 \subsection{Notation}
 
 In \cite{fuggetta2000software} we define a process as
@@ -95,7 +91,8 @@ from a task with a circle.
 \centering
 \includegraphics[scale=0.6]{media/Dependency}
 \caption{The arrow denotes a dependency of one task on another. As an example, suppose $A \to B$.
-	Then $B$ is dependent on $A$.}
+	Then $B$ is dependent on $A$.
+We can add further detail to this dependency by labelling the relation.}
 \label{depFigure}
 \end{subfigure}
 ~
@@ -171,13 +168,58 @@ procedure of a task (or sequence of tasks).
 
 \subsection{Design}
 
-\begin{itemize}
-	\item what makes a notation good
-	\item why did I choose this specific notation
-\end{itemize}
+The Object Modelling Group (OMG) specifies in \ref{bpmnfaq} that their Business Process Modelling Notation
+specifies ``the sequence of processes and messages" that are passed during a related set of
+activities.\\
+\\
+More importantly, \ref{bpmnfaq} states that a business user or manager ``should be able to easily
+understand a BPMN business process diagram."
+Conversely, a process implementer or reviewer ``should be able to adorn BPMN with further detail to
+represent the process in a physical implementation."\\
+\\
+We are converging on a set of criteria with which to judge a notation and argue for its usefulness,
+but as of yet our quotes have not explicitly stated what we want out of a notation.
+Woodings (in \ref{Woodings2013Tut1}) extends the implications stated by the OMG, by listing three criteria for a notation
+\begin{enumerate}
+	\item simple, or easily understandable by a reader \label{simpleNot}
+	\item detailed, and thus conveying enough meaning to a reader to implement and follow
+	a process \label{detailedNot}
+	\item complete, shows all essential features of a process \label{completeNot}
+\end{enumerate}
 
-\subsection{Programming Translation}
+We will address our notation with respect to each of the three criteria separately.
+Firstly, we note that our notation is limited, with only nine different symbols.
+Each symbol within our notation has a well-defined semantics, and thus the process notation has a
+clear and understandable meaning.
+In this way, we believe that criterion \ref{simpleNot} is fulfilled.\\
+\\
+Next, we address criterion \ref{detailedNot}.
+We noted that for a software development process $P$, we wished to break it into a set of tasks
+$T_1, T_2, \ldots, T_n$.
+We also noted that a process $P$ always outputted or delivered some kind of output, which is akin to
+a task as defined above.\\
+\\
+Then there is nothing that stops us from, for a $T_k$, performing the same analysis and breaking
+$T_k$ into a set of subtasks $T'_1, T'_2, \ldots, T'_{n'}$.
+A simple inductive argument will show that we can break down our process to an arbitrarily fine
+granularity and thereby add as much detail as is necessary to our notation.
+In this way, we can fulfill critertion \ref{detailedNot}.\\
+\\
+Finally, we address \ref{completeNot}.
+We must show that our notation captures all essential features of a process.
+Our notation uses natural language to describe tasks and dependencies in arbitrarily detail.
+In addition, we cover tasks which branch or iterate, feedback and parallelisation of tasks.
+It is difficult to conceive how any feature cannot thus be captured by the flexibility of natural
+language and the given structural constructs we already have.\\
+\\
+In having a simple, yet arbitrarily detailed (and thus powerful) notation, we have a standard method
+for treating processes.
+We can now really begin to compare and contrast different software development processes.
 
 \subsection{Summary}
 
-Big table of stuff.
+We present a summarised table of our operators.
+
+\begin{table}
+
+\end{table}

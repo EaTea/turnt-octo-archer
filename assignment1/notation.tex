@@ -7,14 +7,14 @@ Thus, we introduce a standardised notation that will allow us to describe and di
 processes in an unambiguous manner.\\
 \\
 To a reader interested in the notation used throughout the paper, we direct them
-to \FIXME which summarises the graphical notations we have
+to Table \ref{notationSummaryTable} which summarises the graphical notations we have
 designed.
 It gives the natural language meaning and semantics of each of the symbols we employ.\\
 \\
 Otherwise, this chapter introduces our graphical notation by justifying each symbol we
 use.
 We draw inspiration from UML Activity Diagrams \cite{Dumas01umlactivity,BellUMLBasics}, as well as
-the notation Woodings describes in \ref{Woodings2013Tut1}.
+the notation Woodings describes in \cite{Woodings2013Tut1}.
 We discuss the design and ideas behind our notation, and why we believe it is a
 good notation system.
 \subsection{Notation}
@@ -55,7 +55,7 @@ ends.
 \label{exitFigure}
 \end{subfigure}
 \caption{Here, we show our notation for the entry and exit points of a process.
-Note that it is quite similar to notation in \ref{Dumas01umlactivity} for
+Note that it is quite similar to notation in \cite{Dumas01umlactivity} for
   signifying where a process begins and ends.}
 \label{entryExitFigure}
 \end{figure}
@@ -108,7 +108,9 @@ is logical that each output is used as the input of {\em some} point in the proc
 which also denotes the input for some point in the process.} \label{depOutFigure}
 \end{figure}
 
-Note that we have said that \ref{outputFigure} denotes either an input or an
+\pagebreak %TODO: Check if pagebreak is good idea
+
+Note that we have said that Figure \ref{outputFigure} denotes either an input or an
 output.
 We note that although an output must implicitly be an output to some other
 process point, inputs need not necessarily be generated from a task.
@@ -120,7 +122,7 @@ process and the appropriate path the process should take to complete development
 We will call these ``decision points".
 At other times, tasks can be parallelised between members of the software development team.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \begin{subfigure}[b]{.45\textwidth}
 \centering
@@ -138,15 +140,13 @@ At other times, tasks can be parallelised between members of the software develo
 \end{subfigure}
 \end{figure}
 
-\pagebreak %TODO: Check if pagebreak is good idea
-
 Finally, we pay a special attention to the verification process.
 Verification that a task is correct and its outputs meet the requirements and standards expected by a client
 and other software maintainers is, in itself a process.
 We separate our notation of verification to thus distinguish it as a ``shadow" or ``reflection"
 procedure of a task (or sequence of tasks).
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \begin{subfigure}[b]{.45\textwidth}
 \centering
@@ -158,28 +158,28 @@ procedure of a task (or sequence of tasks).
 \includegraphics[scale=0.6]{media/EndVerification}
 \end{subfigure}
 \caption{Here, verification is treated as its own subprocess. The notation has the same meaning as
-	\ref{taskFigure} or \ref{branFigure}, except restricted to the verification process.
+	Figure \ref{taskFigure} or Figure \ref{branFigure}, except restricted to the verification process.
 	However, its dotted-line distinction is
 	two-fold; it is the ``shadow" process to ensure that a task has been completed correctly, but is
 		also treated in an ad-hoc and almost ``optional" manner by organisations.
-		Thus it is not a ``solid" or ``defined" process like \ref{taskFigure} or \ref{branFigure}.}
+		Thus it is not a ``solid" or ``defined" process like Figure \ref{taskFigure} or Figure \ref{branFigure}.}
 \label{verification}
 \end{figure}
 
 \subsection{Design}
 
-The Object Modelling Group (OMG) specifies in \ref{bpmnfaq} that their Business Process Modelling Notation
+The Object Modelling Group (OMG) specifies in \cite{bpmnfaq} that their Business Process Modelling Notation
 specifies ``the sequence of processes and messages" that are passed during a related set of
 activities.\\
 \\
-More importantly, \ref{bpmnfaq} states that a business user or manager ``should be able to easily
+More importantly, \cite{bpmnfaq} states that a business user or manager ``should be able to easily
 understand a BPMN business process diagram."
 Conversely, a process implementer or reviewer ``should be able to adorn BPMN with further detail to
 represent the process in a physical implementation."\\
 \\
 We are converging on a set of criteria with which to judge a notation and argue for its usefulness,
 but as of yet our quotes have not explicitly stated what we want out of a notation.
-Woodings (in \ref{Woodings2013Tut1}) extends the implications stated by the OMG, by listing three criteria for a notation
+Woodings (in \cite{Woodings2013Tut1}) extends the implications stated by the OMG, by listing three criteria for a notation
 \begin{enumerate}
 	\item simple, or easily understandable by a reader \label{simpleNot}
 	\item detailed, and thus conveying enough meaning to a reader to implement and follow
@@ -212,14 +212,49 @@ In addition, we cover tasks which branch or iterate, feedback and parallelisatio
 It is difficult to conceive how any feature cannot thus be captured by the flexibility of natural
 language and the given structural constructs we already have.\\
 \\
+A final comment we might add regarding our notation is that we do not discuss metrics or
+definitive measurements for process improvement.
+This is beyond the scope of this paper, but we note it as a possible point to expand and improve the
+given notation.\\
+\\
 In having a simple, yet arbitrarily detailed (and thus powerful) notation, we have a standard method
 for treating processes.
 We can now really begin to compare and contrast different software development processes.
+
+\pagebreak
 
 \subsection{Summary}
 
 We present a summarised table of our operators.
 
-\begin{table}
-
+\begin{table}[ht!]
+\centering
+\begin{tabular} {| c | c | p{5cm} |}
+	\hline
+	{\bf Symbol} & {\bf Meaning/Semantics} & {\bf Notes} \\
+	\hline
+	\raisebox{0\height}{\includegraphics[scale=0.3]{media/Entry}} & Entry Point & \\
+	\hline
+	\raisebox{-0.5\height}{\includegraphics[scale=0.3]{media/Exit}} & Exit Point & \\
+	\hline
+	\raisebox{-0.75\height}{\includegraphics[scale=0.3]{media/Task}} & Task & A well-defined component of a process \\
+	\hline
+	\raisebox{-1\height}{\includegraphics[scale=0.3]{media/Dependency}} & Dependencies & $A \to B$ means that $A$ produces
+	$B$ or $B$ is dependent on $A$\\
+	\hline
+	\raisebox{-0.75\height}{\includegraphics[scale=0.3]{media/Output}} & Input/Output & An output must be the input of some
+	other point (not necessarily task) in process\\
+	\hline
+	\raisebox{-0.5\height}{\includegraphics[scale=0.3]{media/Branching}} & Decision Point/Branching & \\
+	\hline
+	\raisebox{-0.15\height}{\includegraphics[scale=0.3]{media/Parallelised}} & Parallelised Execution & \\
+	\hline
+	\raisebox{-1\height}{\includegraphics[scale=0.3]{media/BeginVerification}} & Begin Verification & A dotted-line to
+	define the ``optional" nature of verification at many stages \\
+	\hline
+	\raisebox{-0.5\height}{\includegraphics[scale=0.3]{media/EndVerification}} & Complete verification & A dotted-line to define the ``optional" nature of verification at many stages \\
+	\hline
+\end{tabular}
+\caption{A summary of the notation that we use through the rest of the paper.}
+\label{notationSummaryTable}
 \end{table}

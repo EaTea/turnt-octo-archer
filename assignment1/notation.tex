@@ -39,25 +39,19 @@ From this definition, we can note that we must be able to at least denote four t
 We first introduce the entry and exit points of a process; these are the points where it starts and
 ends.
 
-\begin{figure}[h!]
-\centering
-\begin{subfigure}[b]{.45\textwidth}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.6]{media/Entry}
 \caption{The entry point in the program.}
 \label{entryFigure}
-\end{subfigure}
-~
-\begin{subfigure}[b]{.45\textwidth}
+\end{figure}
+
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.6]{media/Exit}
-\caption{The exit point of the program.}
-\label{exitFigure}
-\end{subfigure}
-\caption{Here, we show our notation for the entry and exit points of a process.
-Note that it is quite similar to notation in \cite{Dumas01umlactivity} for
+\caption{The exit point of the program. Note that our notation is quite similar to notation in \cite{Dumas01umlactivity} for
   signifying where a process begins and ends.}
-\label{entryExitFigure}
+\label{exitFigure}
 \end{figure}
 
 Without knowing where we start and end, our process is a never-ending sequence of tasks, which
@@ -68,7 +62,7 @@ This is counter-intuitive to the purpose of a process which is to construct a so
 Next, we define a sub-task.
 As we noted in our previous definition, there are sub-procedures which make up our process.
 
-\begin{figure}[h!]
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.6]{media/Task}
 \caption{A single task of a process.}
@@ -85,27 +79,22 @@ it might produce something different.
 To denote dependencies upon inputs or other tasks, we use arrows, whilst we denote tangible outputs
 from a task with a circle.
 
-\begin{figure}[h!]
-\centering
-\begin{subfigure}[b]{.45\textwidth}
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.6]{media/Dependency}
 \caption{The arrow denotes a dependency of one task on another. As an example, suppose $A \to B$.
 	Then $B$ is dependent on $A$.
 We can add further detail to this dependency by labelling the relation.}
 \label{depFigure}
-\end{subfigure}
-~
-\begin{subfigure}[b]{.45\textwidth}
+\end{figure}
+
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.6]{media/Output}
 \caption{This circle denotes the output from a task, but also the input to another task. It
 is logical that each output is used as the input of {\em some} point in the process (including the
 		exit point), otherwise the output itself has no usage.}
 \label{outputFigure}
-\end{subfigure}
-\caption{An arrow will show dependency and a circle shows the output of a task,
-which also denotes the input for some point in the process.} \label{depOutFigure}
 \end{figure}
 
 \pagebreak %TODO: Check if pagebreak is good idea
@@ -122,23 +111,25 @@ process and the appropriate path the process should take to complete development
 We will call these ``decision points".
 At other times, tasks can be parallelised between members of the software development team.
 
+\pagebreak
+
+
 \begin{figure}[ht!]
 \centering
-\begin{subfigure}[b]{.45\textwidth}
 \centering
 \includegraphics[scale=0.6]{media/Parallelised}
 \caption{The above notation symbolises that multiple tasks should begin occurring in parallel (that
 		is, simultaneously).}
 \label{parFigure}
-\end{subfigure}
-~
-\begin{subfigure}[b]{.45\textwidth}
+\end{figure}
+
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.6]{media/Branching}
 \caption{The following is a decision point, where multiple paths can emerge from this single point.}
 \label{branFigure}
-\end{subfigure}
 \end{figure}
+
 
 Finally, we pay a special attention to the verification process.
 Verification that a task is correct and its outputs meet the requirements and standards expected by a client
@@ -148,23 +139,24 @@ procedure of a task (or sequence of tasks).
 
 \begin{figure}[ht!]
 \centering
-\begin{subfigure}[b]{.45\textwidth}
-\centering
 \includegraphics[scale=0.6]{media/BeginVerification}
-\end{subfigure}
-~
-\begin{subfigure}[b]{.45\textwidth}
+\caption{The beginning of a verification process.}
+\label{veriprime}
+\end{figure}
+
+\begin{figure}[ht!]
 \centering
 \includegraphics[scale=0.6]{media/EndVerification}
-\end{subfigure}
-\caption{Here, verification is treated as its own subprocess. The notation has the same meaning as
-	Figure \ref{taskFigure} or Figure \ref{branFigure}, except restricted to the verification process.
-	However, its dotted-line distinction is
-	two-fold; it is the ``shadow" process to ensure that a task has been completed correctly, but is
-		also treated in an ad-hoc and almost ``optional" manner by organisations.
-		Thus it is not a ``solid" or ``defined" process like Figure \ref{taskFigure} or Figure \ref{branFigure}.}
+\caption{The end of a verification process.}
 \label{verification}
 \end{figure}
+
+In Figures \ref{veriprime} and \ref{verification}, verification is treated as its own subprocess. The notation has the same meaning as
+Figure \ref{taskFigure} or Figure \ref{branFigure}, except restricted to the verification process.
+However, its dotted-line distinction is
+two-fold; it is the ``shadow" process to ensure that a task has been completed correctly, but is
+also treated in an ad-hoc and almost ``optional" manner by organisations.
+Thus it is not a ``solid" or ``defined" process like Figure \ref{taskFigure} or Figure \ref{branFigure}.
 
 \subsection{Design}
 

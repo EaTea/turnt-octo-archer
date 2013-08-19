@@ -2,7 +2,7 @@
 
 In the following section, we use our notation to depict 
 
-\subsection{Software Development Lifecycle (SDLC)}
+\subsection{Software Development Lifecycle (SDLC) and its variants}
 Royce first introduced and formalised the SDLC in
 \cite{Royce:1987:MDL:41765.41801}.
 He was quick to criticise the SDLC as a software development methodology, and pointed out its flaws
@@ -16,6 +16,7 @@ We reproduce his diagrams in our own notation as follows.
 In Figure \ref{waterfallRoyceOne}, we show our interpretation of Royce's unmodified waterfall model.
 
 \begin{figure}[ht!]
+	\centering
 	\includegraphics[scale=0.3]{media/WaterfallRoyceOne}
 	\caption{Royce's original waterfall model. This is the theoretical way that the SDLC works.}
 	\label{waterfallRoyceOne}
@@ -32,6 +33,7 @@ Royce claimed this backtracking was quite a significant delay and waste of resou
 illustrate his point in our notation in Figure \ref{waterfallRoyceTwo}.
 
 \begin{figure}[ht!]
+	\centering
 	\includegraphics[scale=0.3]{media/WaterfallRoyceTwo}
 	\caption{Royce claims that this modified waterfall method was inefficient and caused unnecessary
 		backtracking, but that in 1987 it was the current mode of software production.}
@@ -47,7 +49,8 @@ on verification between each stage to dictate the backtracking.
 
 \pagebreak
 
-\begin{figure}[ht!]
+\begin{figure}
+	\centering
 	\includegraphics[angle=90,scale=0.3]{media/WaterfallRoyceThree}
 	\caption{Royce's final waterfall model resolves the repetition in process work by increasing the
 		verification and iteration between stages. We replicate this in our own notation.}
@@ -62,7 +65,8 @@ We show the Spiral model, after it has been unrolled from its original form, in 
 \ref{Spiral}.\\
 \\
 
-\begin{figure}[ht!]
+\begin{figure}
+	\centering
 	\includegraphics[scale=0.3]{media/Spiral}
 	\caption{Barry Boehm's spiral model. We note that it is quite similar to Figure
 		\ref{waterfallRoyceThree}.}
@@ -93,7 +97,8 @@ These plans are constructed before project implementation, and the explicit high
 construction distinguishes SLDC from the V-model.
 We show the V-Model within our notation in Figure \ref{VModel}.
 
-\begin{figure}[ht!]
+\begin{figure}
+	\centering
 	\includegraphics[scale=0.3]{media/VModel}
 	\caption{The V-Model, as represented within our notation. Due to its many verification construction stages it is quite an extensive
 		model within our notation. One might comment that it is a weakness of our notation that some
@@ -117,7 +122,8 @@ Based on these assumptions, we show Rapid Prototyping in our own notation --- se
 \ref{RapidProto}. We note that this methodology would be ineffective in the case that building a prototype would be very
 inexpensive or a user might not have much interaction with the system.
 
-\begin{figure}[ht!]
+\begin{figure}
+	\centering
 	\includegraphics[scale=0.4]{media/RapidPrototyping}
 	\caption{Rapid prototyping is shown above, only being used in the requirements gathering stage.
 		This is also known as ``throwaway prototyping", due to the prototype being used onl in
@@ -125,14 +131,99 @@ inexpensive or a user might not have much interaction with the system.
 	\label{RapidProto}
 \end{figure}
 
-\subsection{Evolutionary}
+
 \subsection{Incremental}
+In \cite{pressman1992software}, Pressman suggests that an iterative, or incremental application of the
+Waterfall model would be a way to offset the problems in software.
+It is difficult to see much value in this mode of thinking, since it is not fine-grained enough or flexible
+enough to truly make use of iteration.
+It is worthwhile noting that it is difficult to see when it is appropriate to stop building or
+iterating.
+We provide an interpretation of this model in our own notation in Figure \ref{IncrementalFig}.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.3]{media/Incremental}
+	\caption{The incremental model. Our references have suggested it is merely a Waterfall model being
+		applied iteratively to small chunks and we have modelled it as such.}
+	\label{IncrementalFig}
+\end{figure}
+
+\subsection{Evolutionary}
+
+We refer to the lecture given by Woodings, when we discuss Tom Gilb's evolutionary paradigm
+\cite{Woodings2013Lecture2}.
+In it, Woodings discusses the idea of building a house using the evolutionary paradigm, and of growing
+software.
+Unfortunately, we cannot actually distinguish between incremental and evolutionary within this
+context.
+To our mind, they might simply be the same methodology.
+We again reference Figure \ref{IncrementalFig}, as there appears to be no difference in the
+description of Evolutionary or Incremental software methodologies.
 
 \subsection{Extreme Programming}
+Extreme programming was first developed by Beck, and formalised in \cite{beck2004extreme}.
+It is an extremely streamlined process emphasising a lot of feedback loops, and a quick turnaround.
+It is noteworthy that we have come across an aspect of the process that we cannot communicate;
+namely, the timely and short manner in which Extreme Programming goes about its tasks.
+Beck highlights pair coding, clear communication and a quick delivery and release time as key
+attributes of the extreme programming software methodology.
+We outline it below in Figure \ref{WindowsXP}.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.3]{media/EXP}
+	\caption{The Extreme Programming methodology focuses on quick, constant feedback and short
+		iterations.}
+	\label{WindowsXP}
+\end{figure}
+
+\vfill
+\pagebreak
 
 \subsection{Crystal Clear}
+Crystal Clear was introduced by Cockburn in \cite{cockburn2004crystal}.
+He constructs a small-team methodology that particularly focuses on
+\begin{itemize}
+	\item frequent delivery
+	\item reflective improvement
+	\item osmotic communication
+\end{itemize}
 
-\subsection{Kanban}
+It stresses user involvement in the development process and has a somewhat happy union of advantages
+that SDLC offers with the development process of Scrum, but with a more light-weight version of the
+documentation-heavy SDLC.
+We present in Figure \ref{CrystalClean} the Crystal Process in our notation.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.3]{media/Crystal}
+	\caption{The Crystal Clear process is interesting in that it also recommends a point where the
+		methodology dictates exiting and cancelling a project. This is not so clear in the other
+			methodologies, and is instead implicit.}
+	\label{CrystalClean}
+\end{figure}
+
+\subsection{Test-Driven Development}
+
+Test-Driven Development was introduced and formalised by Beck in \cite{Beck:2002:TDD:579193}.
+It is an interesting method that is localised to the development stages.
+Primarily, it advocates writing a test and having it fail before writing the code itself.
+We make the following two assumptions:
+\begin{itemize}
+	\item test-driven development does not influence any other tasks besides development and testing
+	\item test-driven development can be fully modelled by simply looking at the development stage
+\end{itemize}
+
+We show Test-Driven Development in Figure \ref{TDD} using our notation.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.35]{media/TDD}
+	\caption{Test-Driven Development is a simple method of specifying the testing strategy first, then
+		the development afterwards.}
+	\label{TDD}
+\end{figure}
 
 \subsection{Scrum}
 The Scrum model was first introduced by Takeuchi and Nonaka in \cite{takeuchi1986new}.
@@ -143,9 +234,30 @@ This would be appropriate for user-facing software that an engineer or developme
 familiar in coding or working with.
 We show a representation of the Scrum process in our own notation in Figure \ref{ScrumFig}.
 
-\begin{figure}[ht!]
+\begin{figure}
+	\centering
 	\includegraphics[scale=0.3]{media/Scrum}
 	\caption{Scrum is a development model for software, and here we can see the feedback and
 		simplified, easy-to-understand and responsive process that Scrum employs.}
 	\label{ScrumFig}
+\end{figure}
+
+\subsection{My Process}
+I also document my own process.
+It bears some resemblance to Crystal Clear, but is tailored for a single-developer project where
+requirements are easily understood and external verification is possible.
+It concentrates on maintaining documentation so that another developer could easily join or take
+over the project.
+In a team environment, I would prefer to use a Scrum-like methodology or Crystal Clear pseudo-method
+to encourage clear communication within the team.
+My process is denoted in Figure \ref{MyProcess}.
+
+\begin{figure}
+	\centering
+	\includegraphics[scale=0.3]{media/MyProcess}
+	\caption{My process; in particular, note the heavy emphasis on updating documentation of the
+		project to match actual project state, and the need to ensure client input at every round of
+			input. Furthermore, the similar idea from Scrum and Crystal Clear --- that the client is
+			delivered working code on a timely, continuous basis.}
+	\label{MyProcess}
 \end{figure}

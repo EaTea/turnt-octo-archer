@@ -1,0 +1,6 @@
+Extracted from a hepatitis dataset. It has 20 attributes. Many of these attributes are in binary
+(e.g., male/female, die/live, anorexia (yes/no), liver big (yes/no), liber firm (yes/no)).
+The three columns extracted to form hepatitis_data1.txt are: 
+column 1: Alkaline phosphatase measure
+column 2: protime
+column 3: binary labels indicating die/live

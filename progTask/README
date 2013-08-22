@@ -1,0 +1,21 @@
+To build
+	chmod +x tmp.sh # makes tmp.sh executable
+	run tmp.sh
+	run main
+
+Edwin Richard Yucheng Tag
+224 Lines of code
+Time:
+	Reading + Design = 15 minutes
+	Generating Code Stubs = 18 minutes
+	Coding + Testing I/O framework = 37 minutes
+	Logic = 306 minutes
+Total Time:
+	366 minutes
+
+Comments:
+	I cannot reproduce your results no matter how hard I try.
+	I appear to have some weird logic bug that I can't find and I have spent over 4 hours trying to
+	debug less than twenty lines of code.
+	I'm not really sure what more I can do for something that was supposed to be a small programming
+	task.

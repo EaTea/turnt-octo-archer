@@ -11,9 +11,7 @@
 \usepackage{hyperref}
 \usepackage{cleveref}
 \usepackage{tikz}
-\usepackage[nottoc]{tocbibind}
-\usepackage{caption}
-\usepackage{subcaption}
+\usepackage{comment}
 \usepackage{fancyhdr}
 
 \usetikzlibrary{arrows,shapes}
@@ -48,17 +46,11 @@ email: taye03@student.uwa.edu.au }
 
 \date{\today}
 
-\includeonly{proposal.tex}
-
 \begin{document}
 
 \maketitle
 
 \include{./abstract}
-
-{\bf Keywords:} List, some, keywords, here.
-
-{\bf CR Classification:} A.1, B.2, C.3.
 
 \pagebreak
 
@@ -66,7 +58,11 @@ email: taye03@student.uwa.edu.au }
 
 \include{./introduction}
 \include{./survey}
+\include{./analysis}
+\include{./experiment}
+\include{./pipeline}
 \include{./conclusion}
+
 % appendices
 
 \appendix

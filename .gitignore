@@ -5,6 +5,7 @@
 *.bbl
 *.blg
 *.dvi
+*.ex
 *.fdb_latexmk
 *.fls
 *.glg
@@ -23,6 +24,7 @@
 *.nav
 *.nlo
 *.out
+*.o
 *.pdf
 *.pdfsync
 *.ps

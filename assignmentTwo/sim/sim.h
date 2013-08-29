@@ -8,16 +8,15 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <algorithm>
 
 // BOOST
 #include <boost/foreach.hpp>
-#include <boost/heap/priority_queue.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
-#include <boost/ratio.hpp>
 
 // IO
-//
 // code taken from http://stackoverflow.com/questions/1120140/csv-parser-in-c 
+
 class CSVRow
 {
   public:
@@ -92,8 +91,9 @@ class Defect
 {
 		const defect_type classification;
 		const int weekFound;
+    double defectCompletion;
 	public:
-		Defect(defect_type&, int&);
+		Defect(defect_type&, int&, double&);
 		defect_type getClassification() const { return classification; }
 		bool isMajor() const;
 		bool isEasy() const;
@@ -103,8 +103,14 @@ class Defect
 
 class Strategy
 {
+  private:
+    int nSWE;
+    int nSWETesting;
+    int nSWEFixing;
+    int weeksPassed;
 	public:
-		boost::priority_queue::value_compare getComparator
+    virtual Strategy(int, int, int);
+    virtual bool operator()(const Defect&, const Defect&);
 };
 
 // METRICS
@@ -114,6 +120,7 @@ class Metric
 		vector<double> values;
 	public:
 		Metric(string&);
+    virtual void update(const priority_queue<Defect>&);
 };
 
 // SIMULATION
@@ -127,11 +134,12 @@ class Simulation
 		const bool PART_FIXES;
 		CSVIteratir csv_file;
 		int weekNumber;
-		priority_queue<Defect> ds;
 		configure(const string&);
+		vector<Defect> defects;
 	public:
 		Simulation(const string&, Strategy&);
 		void addMetric(Metric&);
 		void setStrategy(Strategy&);
-		void beginSimulation();
+		void simulate();
+    void updateMetrics();
 };

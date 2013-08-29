@@ -87,6 +87,9 @@ enum defect_type {
  MAJ_EASY = 3
 };
 
+#define MAJOR_BITMASK 0x10
+#define EASY_BITMASK 0x01
+
 class Defect
 {
 		const defect_type classification;
@@ -95,8 +98,14 @@ class Defect
 	public:
 		Defect(defect_type&, int&, double&);
 		defect_type getClassification() const { return classification; }
-		bool isMajor() const;
-		bool isEasy() const;
+		bool isMajor() const
+    {
+      return classification & MAJOR_BITMASK ? true : false;
+    }
+		bool isEasy() const
+    {
+      return classification & EASY_BITMASK ? true : false;
+    }
 };
 
 // STRATEGIES
@@ -107,10 +116,10 @@ class Strategy
     int nSWE;
     int nSWETesting;
     int nSWEFixing;
-    int weeksPassed;
 	public:
-    virtual Strategy(int, int, int);
-    virtual bool operator()(const Defect&, const Defect&);
+    Strategy(int, int, int);
+    virtual void update(const Simulation&);
+    virtual bool comparison(const Defect&, const Defect&);
 };
 
 // METRICS
@@ -120,7 +129,7 @@ class Metric
 		vector<double> values;
 	public:
 		Metric(string&);
-    virtual void update(const priority_queue<Defect>&);
+    virtual void update(const vector<Defect>&);
 };
 
 // SIMULATION
@@ -130,16 +139,29 @@ class Simulation
 		vector<Metric> metrics;
 		Strategy defect_strategy;
 		const double FIX_TIME_HARD, FIX_TIME_EASY, IMPACT_MINOR, IMPACT_MAJOR;
-		const double ERROR;
+		const double FIX_TIME_ERROR, IMPACT_ERROR;
 		const bool PART_FIXES;
-		CSVIteratir csv_file;
+		CSVIterator csv_file;
 		int weekNumber;
 		configure(const string&);
 		vector<Defect> defects;
+    void updateMetrics();
+    void updateStrategy();
+    void nextRound();
 	public:
 		Simulation(const string&, Strategy&);
+    ~Simulation();
 		void addMetric(Metric&);
 		void setStrategy(Strategy&);
 		void simulate();
-    void updateMetrics();
+    void output(const string&);
+
+    int    getWeekNumber()    const { return weekNumber; }
+    double getFixTimeHard()   const { return FIX_TIME_HARD; }
+    double getFixTimeEasy()   const { return FIX_TIME_EASY; }
+    double getImpactMinor()   const { return IMPACT_MINOR; }
+    double getImpactMajor()   const { return IMPACT_MAJOR; }
+    double getFixTimeError()  const { return FIX_TIME_ERROR; }
+    double getImpactError()   const { return IMPACT_ERROR; }
+    bool   allowPartFixes()   const { return PART_FIXES; }
 };

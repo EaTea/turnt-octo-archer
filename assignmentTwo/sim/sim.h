@@ -11,7 +11,6 @@
 #include <algorithm>
 
 // BOOST
-#include <boost/foreach.hpp>
 #include <boost/random/uniform_int_distribution.hpp>
 
 // IO

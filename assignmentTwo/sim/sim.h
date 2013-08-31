@@ -1,5 +1,5 @@
 // LIBCONFIG
-#include <libconfig.hh>
+//#include <libconfig.hh>
 
 // STL
 #include <iostream>
@@ -9,9 +9,6 @@
 #include <vector>
 #include <string>
 #include <algorithm>
-
-// BOOST
-#include <boost/random/uniform_int_distribution.hpp>
 
 // IO
 // code taken from http://stackoverflow.com/questions/1120140/csv-parser-in-c 
@@ -70,10 +67,9 @@ class CSVIterator
     std::istream*     m_str;
     CSVRow            m_row;
 };
-
 // CONFIGURATION
 
-bool setup(const string&);
+bool setup(const std::string&);
 
 // DEFECTS
 
@@ -91,11 +87,11 @@ enum defect_type {
 
 class Defect
 {
+	public:
 		const defect_type classification;
 		const int weekFound;
-    double defectCompletion;
-	public:
-		Defect(defect_type&, int&, double&);
+    const double defectCompletion;
+		Defect(defect_type& c, int& wf, double& comp) : classification(c), weekFound(wf), defectCompletion(comp) { };
 		defect_type getClassification() const { return classification; }
 		bool isMajor() const
     {
@@ -107,12 +103,14 @@ class Defect
     }
 };
 
+class Simulation;
+
 // STRATEGIES
 
 class Strategy
 {
-  private:
-    int nSWE;
+  protected:
+    const int nSWE;
     int nSWETesting;
     int nSWEFixing;
 	public:
@@ -125,35 +123,44 @@ class Strategy
 
 class Metric
 {
-		vector<double> values;
+  protected:
+    std::vector<double> values;
 	public:
-		Metric(string&);
-    virtual void update(const vector<Defect>&);
+		Metric();
+    virtual void update(std::vector<Defect>&);
+    virtual std::string getName() const;
+    virtual std::vector<double> getValues() const;
+};
+
+
+class OutputMetric
+{
+  static void writeMetricToFile(const Metric&);
 };
 
 // SIMULATION
 
 class Simulation
 {
-		vector<Metric> metrics;
+    std::vector<Metric> metrics;
 		Strategy defect_strategy;
 		const double FIX_TIME_HARD, FIX_TIME_EASY, IMPACT_MINOR, IMPACT_MAJOR;
 		const double FIX_TIME_ERROR, IMPACT_ERROR;
 		const bool PART_FIXES;
 		CSVIterator csv_file;
 		int weekNumber;
-		configure(const string&);
-		vector<Defect> defects;
+		void configure(const std::string&);
+    std::vector<Defect> defects;
     void updateMetrics();
     void updateStrategy();
     void nextRound();
 	public:
-		Simulation(const string&, Strategy&);
+		Simulation(const std::string&, Strategy&);
     ~Simulation();
 		void addMetric(Metric&);
 		void setStrategy(Strategy&);
 		void simulate();
-    void output(const string&);
+    void output(const std::string&);
 
     int    getWeekNumber()    const { return weekNumber; }
     double getFixTimeHard()   const { return FIX_TIME_HARD; }

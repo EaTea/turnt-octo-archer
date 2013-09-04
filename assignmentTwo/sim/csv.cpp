@@ -39,3 +39,9 @@ CSVIterator CSVIterator::operator++(int)
 	++(*this);
 	return tmp;
 }
+
+void CSVIterator::closeStream()
+{
+	if (m_str)
+		m_str->close();
+}

@@ -1,6 +1,3 @@
-// LIBCONFIG
-//#include <libconfig.hh>
-
 // STL
 #include <iostream>
 #include <fstream>
@@ -9,6 +6,21 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+
+// Author: Edwin Tay, 20529864
+
+// CONSTANTS
+const int 		NUM_SWE								=		3;  //number of SWEs
+const double 	SWE_HOURS							=		25.0; //hours they work per week
+const double 	MAJOR_DEFECT_IMPACT		=		7.0;  //perceived impact of major defect
+const double	MINOR_DEFECT_IMPACT		=		1.0;  //perceived impact of minor defect
+const double	HARD_DEFECT_FIX_TIME	=		5.0;  //hours to fix a hard defect
+const double	EASY_DEFECT_FIX_TIME	=		2.0;  //hours to fix an easy defect
+
+// OPTIONS
+const bool		ALLOW_PART_FIXES			=		false;
+const double	DEFECT_IMPACT_ERROR		=		0.0;
+const double	FIX_TIME_ERROR		    =		0.0;
 
 // IO
 // code taken from http://stackoverflow.com/questions/1120140/csv-parser-in-c 
@@ -52,12 +64,12 @@ class CSVIterator
     CSVIterator operator++(int);
     CSVRow const& operator*()   const     {return m_row;}
     CSVRow const* operator->()  const     {return &m_row;}
+		void closeStream();
 
     bool operator==(CSVIterator const& rhs)
 		{
 			return ((this == &rhs)
-				|| ((this->m_str == NULL)
-				&& (rhs.m_str == NULL)));
+				|| ((this->m_str == NULL) && (rhs.m_str == NULL)));
 		}
     bool operator!=(CSVIterator const& rhs)
 		{
@@ -67,9 +79,6 @@ class CSVIterator
     std::istream*     m_str;
     CSVRow            m_row;
 };
-// CONFIGURATION
-
-bool setup(const std::string&);
 
 // DEFECTS
 
@@ -135,39 +144,29 @@ class Metric
 
 class OutputMetric
 {
-  static void writeMetricToFile(const Metric&);
+	public:
+		static void writeMetricToFile(const Metric&);
 };
 
 // SIMULATION
 
 class Simulation
 {
-    std::vector<Metric> metrics;
-		Strategy defect_strategy;
-		const double FIX_TIME_HARD, FIX_TIME_EASY, IMPACT_MINOR, IMPACT_MAJOR;
-		const double FIX_TIME_ERROR, IMPACT_ERROR;
-		const bool PART_FIXES;
+	private:
 		CSVIterator csv_file;
 		int weekNumber;
-		void configure(const std::string&);
+		Strategy defect_strategy;
+    std::vector<Metric> metrics;
     std::vector<Defect> defects;
-    void updateMetrics();
-    void updateStrategy();
-    void nextRound();
+
 	public:
-		Simulation(const std::string&, Strategy&);
+		Simulation(const string&, Strategy);
     ~Simulation();
-		void addMetric(Metric&);
-		void setStrategy(Strategy&);
-		void simulate();
-    void output(const std::string&);
+
+		void 	 addMetric(Metric&);
+		void	 setStrategy(Strategy&);
+		void	 simulate();
+    void	 output(const std::string&);
 
     int    getWeekNumber()    const { return weekNumber; }
-    double getFixTimeHard()   const { return FIX_TIME_HARD; }
-    double getFixTimeEasy()   const { return FIX_TIME_EASY; }
-    double getImpactMinor()   const { return IMPACT_MINOR; }
-    double getImpactMajor()   const { return IMPACT_MAJOR; }
-    double getFixTimeError()  const { return FIX_TIME_ERROR; }
-    double getImpactError()   const { return IMPACT_ERROR; }
-    bool   allowPartFixes()   const { return PART_FIXES; }
 };

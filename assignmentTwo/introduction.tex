@@ -1,23 +1,26 @@
 \section{Introduction}
 
-% Here we motivate the problem from scratch. Usually a concrete
-% example will do this well. The first paragraph sets the scene
-% and states the problem explicitly. It sets up the second paragraph,
-% which will state explicitly your hypothesis for solving it.
-% 
-% Now comes a short, sharp and succinct exposition of your approach.
-% For example, ``It thus seems reasonable to conjecture that a
-% combination of the X algorithm and the Y algorithm would produce
-% superior results to either algorithm on its own. We show that this is
-% indeed the case, and prove that the combined algorithm has complexity,
-% on the average, that is an order of magnitude better than either the X
-% or the Y algorithm.''
-% 
-% Then there is a bit more motivation, linking the problem to other
-% researchers, but not in detail. You also talk in a general way about
-% the methodology you have employed to solve the problem.
-% 
-% The final paragraph should give the conclusions of your
-% paper. Something like ``We conclude that the combined X-Y algorithm is
-% better suited to robot control problems than either the X algorithm or
-% the Y algorithm'' would be appropriate.
+Why Model?\\
+\\
+Epstein poses this as a rhetorical question, with an implicit retort that “You are a modeller”. His claim is that to predict, analyse or understand a real life situation is to model it. Furthermore, to construct valid models --- models that are verifiable and “valid” --- is an artifact of the modelling process. Epstein motivates this idea with respect to social or historical phenomena (such as wars, migrations and diseases) \FIXME.\\
+\\
+We can equally apply models to the software development process. \FIXME and \FIXME are examples of models of the software development process. They focus on the \FIXME and \FIXME concepts. In particular, modelling allows us to evolve strategies for new projects by analysing previous projects. That is, insights gathered from previously modelled projects can yield more reliable, accurate insights about a new project.\\
+\\
+Within this paper, we are especially interested in the defect detection and amendment. A defect, according to \FIXME, is
+\begin{quote}
+  Derp derp derp
+\end{quote}
+It is clear that from a client perspective, defects negatively affect software that clients use. \\
+\\
+Furthermore, how timely the detection and fixes of defects occur is an important part of software development. \FIXME shows that client perception is negatively influenced by \FIXME. \FIXME further yields that \FIXME is something (\FIXME: These sentences are great if they aren’t so shit).
+
+\FIXME: some figure showing the defect detection process
+
+\FIXME if possible some figure showing how defect fixing that’s slow gives bad perception
+
+This paper aims to answer the question: what is the ``best” way to find and fix defects in a project? Our contribution to answering this question is threefold; we will
+\begin{enumerate}
+  \item construct a basic model of the defect detection and reparation process
+  \item use previous defect detection data within our model to measure the effectiveness of different defect testing and fixing strategies
+  \item analyse the strategies we have used, as well as challenging the models we have constructed (and implicitly, of the effectiveness of the strategies we have employed)
+\end{enumerate}

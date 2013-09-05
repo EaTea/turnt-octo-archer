@@ -1,5 +1,7 @@
 // STL
 #include <iostream>
+#include <cstdlib>
+#include <ctime>
 #include <fstream>
 #include <iterator>
 #include <sstream>
@@ -10,7 +12,7 @@
 // Author: Edwin Tay, 20529864
 
 // CONSTANTS
-const int 		NUM_SWE								=		3;  //number of SWEs
+const int 		NUM_SWE								=		3;  	//number of SWEs
 const double 	SWE_HOURS							=		25.0; //hours they work per week
 const double 	MAJOR_DEFECT_IMPACT		=		7.0;  //perceived impact of major defect
 const double	MINOR_DEFECT_IMPACT		=		1.0;  //perceived impact of minor defect
@@ -18,9 +20,9 @@ const double	HARD_DEFECT_FIX_TIME	=		5.0;  //hours to fix a hard defect
 const double	EASY_DEFECT_FIX_TIME	=		2.0;  //hours to fix an easy defect
 
 // OPTIONS
-const bool		ALLOW_PART_FIXES			=		false;
-const double	DEFECT_IMPACT_ERROR		=		0.0;
-const double	FIX_TIME_ERROR		    =		0.0;
+const bool		ALLOW_PART_FIXES			=		false;//do we allow part fixes?
+const double	DEFECT_IMPACT_ERROR		=		0.0;	//error in percentages
+const double	FIX_TIME_ERROR		    =		0.0;	//error in percentages
 
 // IO
 // code taken from http://stackoverflow.com/questions/1120140/csv-parser-in-c 
@@ -110,6 +112,10 @@ class Defect
     {
       return classification & EASY_BITMASK ? true : false;
     }
+		double getFixTime() const
+		{
+			return this->isEasy() ? EASY_DEFECT_FIX_TIME : HARD_DEFECT_FIX_TIME;
+		}
 };
 
 class Simulation;
@@ -118,11 +124,10 @@ class Simulation;
 
 class Strategy
 {
-  protected:
+	public:
     const int nSWE;
     int nSWETesting;
     int nSWEFixing;
-	public:
     Strategy(int, int, int);
     virtual void update(const Simulation&);
     virtual bool comparison(const Defect&, const Defect&);
@@ -132,11 +137,10 @@ class Strategy
 
 class Metric
 {
-  protected:
-    std::vector<double> values;
 	public:
+    std::vector<double> values;
 		Metric();
-    virtual void update(std::vector<Defect>&);
+    virtual void update(const Simulation&);
     virtual std::string getName() const;
     virtual std::vector<double> getValues() const;
 };
@@ -154,12 +158,13 @@ class Simulation
 {
 	private:
 		CSVIterator csv_file;
+	public:
 		int weekNumber;
 		Strategy defect_strategy;
     std::vector<Metric> metrics;
     std::vector<Defect> defects;
+		std::vector<Defect> fixed_defects;
 
-	public:
 		Simulation(const string&, Strategy);
     ~Simulation();
 

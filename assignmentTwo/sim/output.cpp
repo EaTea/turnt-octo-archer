@@ -3,7 +3,7 @@
 void writeMetricToFile(const Metric& m)
 {
   std::string name = m.getName();
-  std::vector<double> values = m.getValues();
+  std::vector<double> values = m.values;
   std::ifstream fileReader(name.c_str(), std::fstream::in);
   std::vector<std::string> lines;
   std::string tmp;

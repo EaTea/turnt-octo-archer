@@ -8,6 +8,7 @@
 #include <vector>
 #include <string>
 #include <algorithm>
+using namespace std;
 
 // Author: Edwin Tay, 20529864
 
@@ -38,12 +39,12 @@ class CSVRow
   {
     return m_data.size();
   }
-  void readNextRow(std::istream&);
+  void readNextRow(std::ifstream&);
   private:
   std::vector<std::string>  m_data;
 };
 
-std::istream& operator>>(std::istream&,CSVRow&);
+std::ifstream& operator>>(std::ifstream&,CSVRow&);
 
 class CSVIterator
 {   
@@ -54,7 +55,7 @@ class CSVIterator
     typedef CSVRow*           pointer;
     typedef CSVRow&           reference;
 
-    CSVIterator(std::istream& str)  :m_str(str.good() ? & str : NULL)
+    CSVIterator(std::ifstream& str)  :m_str(str.good() ? & str : NULL)
 		{
 			++(*this);
 		}
@@ -77,7 +78,7 @@ class CSVIterator
 			return !((*this) == rhs);
 		}
   private:
-    std::istream		 *m_str;
+    std::ifstream		 *m_str;
     CSVRow            m_row;
 };
 
@@ -126,11 +127,11 @@ class Strategy
 		int nSWE;
 		int nSWETesting;
 		int nSWEFixing;
-		Strategy(int, int, int);
+		Strategy(int=-1, int=-1, int=-1);
 		Strategy(const Strategy&);
-		virtual void update(const Simulation&);
-		virtual bool comparison(const Defect&, const Defect&) const;
-		virtual void update_defects(std::vector<Defect>&) const;
+		virtual void update(const Simulation&) =0;
+		virtual void update_defects(std::vector<Defect>&) const =0;
+		virtual bool simContinue() const =0;
 };
 
 // METRICS
@@ -140,13 +141,12 @@ class Metric
 	public:
 		std::vector<double> values;
 		Metric();
-		virtual void update(const Simulation&);
-		virtual std::string getName() const;
-		virtual std::vector<double> getValues() const;
+		virtual void update(Simulation&) =0;
+		virtual std::string getName() const =0;
 };
 
 
-static void writeMetricToFile(const Metric&);
+void writeMetricToFile(const Metric&);
 
 // SIMULATION
 
@@ -154,17 +154,37 @@ struct Simulation
 {
 	CSVIterator csv_file;
 	int weekNumber;
-	Strategy defect_strategy;
-	std::vector<Metric> metrics;
+	Strategy* defect_strategy;
+	std::vector<Metric*> metrics;
 	std::vector<Defect> defects;
 	std::vector<Defect> fixed_defects;
 
-	Simulation(const std::string&, const Strategy&);
-	~Simulation();
+	Simulation(ifstream&);
 
-	void 	 addMetric(Metric m) { metrics.push_back(m); }
-	void	 setStrategy(Strategy s) { defect_strategy = s; }
+	void 	 addMetric(Metric* m) { metrics.push_back(m); }
+	void	 setStrategy(Strategy* s) { defect_strategy = s; }
 	void	 simulate();
 
 	int    getWeekNumber()    const { return weekNumber; }
+};
+
+class StrategyFixMajorDefectsFirst : public Strategy
+{
+	public:
+		bool keepGoing;
+		StrategyFixMajorDefectsFirst(int,int,int);
+		void update(const Simulation& s);
+		static bool comparison(const Defect& a, const Defect& b);
+		void update_defects(std::vector<Defect>& defects) const;
+		bool simContinue() const;
+};
+
+class DefectCountingMetric : public Metric
+{
+  public:
+		int curWeek;
+    DefectCountingMetric();
+    std::string getName() const;
+    std::vector<double> getValues() const;
+    void update(Simulation& s);
 };

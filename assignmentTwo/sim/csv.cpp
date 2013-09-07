@@ -1,6 +1,6 @@
 #include "sim.h"
 
-void CSVRow::readNextRow(std::istream& str)
+void CSVRow::readNextRow(std::ifstream& str)
 {
 	std::string         line;
 	std::getline(str,line);
@@ -11,16 +11,15 @@ void CSVRow::readNextRow(std::istream& str)
 	this->m_data.clear();
 	while(std::getline(lineStream,cell,','))
 	{
-			this->m_data.push_back(cell);
+		this->m_data.push_back(cell);
 	}
 }
 
-std::istream& operator>>(std::istream& str,CSVRow& data)
+std::ifstream& operator>>(std::ifstream& str,CSVRow& data)
 {
-    data.readNextRow(str);
-    return str;
+	data.readNextRow(str);
+	return str;
 }   
-
 
 CSVIterator& CSVIterator::operator++()
 {
@@ -31,7 +30,6 @@ CSVIterator& CSVIterator::operator++()
 	}
 	return *this;
 }
-
 
 CSVIterator CSVIterator::operator++(int)
 {

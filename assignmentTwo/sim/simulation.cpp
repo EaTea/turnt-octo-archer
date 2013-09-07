@@ -1,18 +1,16 @@
 #include "sim.h"
 
-Simulation::Simulation(const std::string& filename, const Strategy& legit)
-	: defect_strategy(legit), weekNumber(-1)
+Simulation::Simulation(std::ifstream& file) : weekNumber(-1)
 {
-	std::ifstream file(filename.c_str());
-
 	csv_file = CSVIterator(file);
 }
 
 void Simulation::simulate()
 {
-	for (weekNumber = 0; csv_file != CSVIterator(); ++csv_file, ++weekNumber)
+	for (weekNumber = 0; defect_strategy->simContinue(); ++weekNumber)
 	{
-		for (int detectors = 0; detectors < defect_strategy.nSWETesting; detectors++)
+		cerr << weekNumber << endl;
+		for (int detectors = 0; detectors < defect_strategy->nSWETesting && csv_file != CSVIterator(); detectors++, ++csv_file)
 		{
 			for (int dt = MIN_HARD; dt <= MAJ_EASY; dt++)
 			{
@@ -25,13 +23,13 @@ void Simulation::simulate()
 					defects.push_back(Defect(dtt,weekNumber,0));
 			}
 		}
-		for (int fixers = 0; fixers < defect_strategy.nSWEFixing; fixers++)
+		for (int fixers = 0; fixers < defect_strategy->nSWEFixing; fixers++)
 		{
 			// put the defects back in order
-			defect_strategy.update_defects(defects);
+			defect_strategy->update_defects(defects);
 			double sweHours = SWE_HOURS;
 			// while there are enough hours to fix either a hard or easy defect
-			while(sweHours >= HARD_DEFECT_FIX_TIME * (1.0+FIX_TIME_ERROR) ||
+			while(defects.size() && sweHours >= HARD_DEFECT_FIX_TIME * (1.0+FIX_TIME_ERROR) ||
 					sweHours >= EASY_DEFECT_FIX_TIME * (1.0+FIX_TIME_ERROR))
 			{
 				double f = (double)rand() / RAND_MAX;
@@ -39,7 +37,8 @@ void Simulation::simulate()
 				f *= (rand() % 2 ? 1 : -1);
 				f += 1.0;
 				f = std::max(f,0.25); //clamp to min of 0.25
-				for (int ind_dfct = defects.size()-1; ind_dfct >= 0; ind_dfct--)
+				int ind_dfct;
+				for (ind_dfct = defects.size()-1; ind_dfct >= 0; ind_dfct--)
 				{
 					if (sweHours >= f * defects[ind_dfct].getFixTime())
 					{
@@ -47,8 +46,11 @@ void Simulation::simulate()
 																			defects[ind_dfct].weekFound,
 																			1.0));
 						defects.erase(defects.begin()+ind_dfct);
+						sweHours -= f * defects[ind_dfct].getFixTime();
+						break;
 					}
 				}
+				if (ind_dfct < 0) break;
 			}
 			if (ALLOW_PART_FIXES)
 			{
@@ -69,8 +71,8 @@ void Simulation::simulate()
 				}
 			}
 		}
-		defect_strategy.update(*this);
-		for (std::vector<Metric>::iterator metric = metrics.begin(); metric != metrics.end(); metric++)
-			metric->update(*this);
+		defect_strategy->update(*this);
+		for (std::vector<Metric*>::iterator metric = metrics.begin(); metric != metrics.end(); metric++)
+			(*metric)->update(*this);
 	}
 }

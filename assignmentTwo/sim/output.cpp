@@ -1,6 +1,6 @@
 #include "sim.h"
 
-void OutputMetric::writeMetricToFile(const Metric& m)
+void writeMetricToFile(const Metric& m)
 {
   std::string name = m.getName();
   std::vector<double> values = m.getValues();

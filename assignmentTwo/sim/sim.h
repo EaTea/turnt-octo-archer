@@ -50,7 +50,7 @@ class CSVIterator
   public:
     typedef std::input_iterator_tag   iterator_category;
     typedef CSVRow            value_type;
-    typedef std::size_t         difference_type;
+    typedef std::size_t       difference_type;
     typedef CSVRow*           pointer;
     typedef CSVRow&           reference;
 
@@ -66,7 +66,6 @@ class CSVIterator
     CSVIterator operator++(int);
     CSVRow const& operator*()   const     {return m_row;}
     CSVRow const* operator->()  const     {return &m_row;}
-		void closeStream();
 
     bool operator==(CSVIterator const& rhs)
 		{
@@ -78,7 +77,7 @@ class CSVIterator
 			return !((*this) == rhs);
 		}
   private:
-    std::istream*     m_str;
+    std::istream		 *m_str;
     CSVRow            m_row;
 };
 
@@ -96,41 +95,42 @@ enum defect_type {
 #define MAJOR_BITMASK 0x10
 #define EASY_BITMASK 0x01
 
-class Defect
+struct Defect
 {
-	public:
-		const defect_type classification;
-		const int weekFound;
-    const double defectCompletion;
-		Defect(defect_type& c, int& wf, double& comp) : classification(c), weekFound(wf), defectCompletion(comp) { };
-		defect_type getClassification() const { return classification; }
-		bool isMajor() const
-    {
-      return classification & MAJOR_BITMASK ? true : false;
-    }
-		bool isEasy() const
-    {
-      return classification & EASY_BITMASK ? true : false;
-    }
-		double getFixTime() const
-		{
-			return this->isEasy() ? EASY_DEFECT_FIX_TIME : HARD_DEFECT_FIX_TIME;
-		}
+	defect_type classification;
+	int weekFound;
+	double defectCompletion;
+	Defect(defect_type c, int wf = -1, double comp = 0) : classification(c), weekFound(wf), defectCompletion(comp) { };
+	defect_type getClassification() const { return classification; }
+	bool isMajor() const
+	{
+		return classification & MAJOR_BITMASK ? true : false;
+	}
+	bool isEasy() const
+	{
+		return classification & EASY_BITMASK ? true : false;
+	}
+	double getFixTime() const
+	{
+		return this->isEasy() ? EASY_DEFECT_FIX_TIME : HARD_DEFECT_FIX_TIME;
+	}
 };
 
-class Simulation;
+struct Simulation;
 
 // STRATEGIES
 
 class Strategy
 {
 	public:
-    const int nSWE;
-    int nSWETesting;
-    int nSWEFixing;
-    Strategy(int, int, int);
-    virtual void update(const Simulation&);
-    virtual bool comparison(const Defect&, const Defect&);
+		int nSWE;
+		int nSWETesting;
+		int nSWEFixing;
+		Strategy(int, int, int);
+		Strategy(const Strategy&);
+		virtual void update(const Simulation&);
+		virtual bool comparison(const Defect&, const Defect&) const;
+		virtual void update_defects(std::vector<Defect>&) const;
 };
 
 // METRICS
@@ -138,40 +138,33 @@ class Strategy
 class Metric
 {
 	public:
-    std::vector<double> values;
+		std::vector<double> values;
 		Metric();
-    virtual void update(const Simulation&);
-    virtual std::string getName() const;
-    virtual std::vector<double> getValues() const;
+		virtual void update(const Simulation&);
+		virtual std::string getName() const;
+		virtual std::vector<double> getValues() const;
 };
 
 
-class OutputMetric
-{
-	public:
-		static void writeMetricToFile(const Metric&);
-};
+static void writeMetricToFile(const Metric&);
 
 // SIMULATION
 
-class Simulation
+struct Simulation
 {
-	private:
-		CSVIterator csv_file;
-	public:
-		int weekNumber;
-		Strategy defect_strategy;
-    std::vector<Metric> metrics;
-    std::vector<Defect> defects;
-		std::vector<Defect> fixed_defects;
+	CSVIterator csv_file;
+	int weekNumber;
+	Strategy defect_strategy;
+	std::vector<Metric> metrics;
+	std::vector<Defect> defects;
+	std::vector<Defect> fixed_defects;
 
-		Simulation(const string&, Strategy);
-    ~Simulation();
+	Simulation(const std::string&, const Strategy&);
+	~Simulation();
 
-		void 	 addMetric(Metric&);
-		void	 setStrategy(Strategy&);
-		void	 simulate();
-    void	 output(const std::string&);
+	void 	 addMetric(Metric m) { metrics.push_back(m); }
+	void	 setStrategy(Strategy s) { defect_strategy = s; }
+	void	 simulate();
 
-    int    getWeekNumber()    const { return weekNumber; }
+	int    getWeekNumber()    const { return weekNumber; }
 };

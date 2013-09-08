@@ -101,15 +101,17 @@ struct Defect
 	defect_type classification;
 	int weekFound;
 	double defectCompletion;
-	Defect(defect_type c, int wf = -1, double comp = 0) : classification(c), weekFound(wf), defectCompletion(comp) { };
+	int weekFixed;
+	Defect(defect_type c, int wf = -1, double comp = 0, int wkFxd = -1) :
+		classification(c), weekFound(wf), defectCompletion(comp), weekFixed(wkFxd) { }
 	defect_type getClassification() const { return classification; }
 	bool isMajor() const
 	{
-		return classification & MAJOR_BITMASK ? true : false;
+		return classification == MAJ_HARD || classification == MAJ_EASY;
 	}
 	bool isEasy() const
 	{
-		return classification & EASY_BITMASK ? true : false;
+		return classification == MAJ_EASY || classification == MIN_EASY;
 	}
 	double getFixTime() const
 	{
@@ -132,6 +134,7 @@ class Strategy
 		virtual void update(const Simulation&) =0;
 		virtual void update_defects(std::vector<Defect>&) const =0;
 		virtual bool simContinue() const =0;
+		virtual string getName() const =0;
 };
 
 // METRICS
@@ -146,7 +149,7 @@ class Metric
 };
 
 
-void writeMetricToFile(const Metric&);
+void writeMetricToFile(const Metric&, const string&);
 
 // SIMULATION
 
@@ -177,6 +180,7 @@ class StrategyFixMajorDefectsFirst : public Strategy
 		static bool comparison(const Defect& a, const Defect& b);
 		void update_defects(std::vector<Defect>& defects) const;
 		bool simContinue() const;
+		string getName() const;
 };
 
 class DefectCountingMetric : public Metric
@@ -184,6 +188,60 @@ class DefectCountingMetric : public Metric
   public:
 		int curWeek;
     DefectCountingMetric();
+    std::string getName() const;
+    std::vector<double> getValues() const;
+    void update(Simulation& s);
+};
+
+class DefMajCountMetric : public Metric
+{
+  public:
+		int curWeek;
+    DefMajCountMetric();
+    std::string getName() const;
+    std::vector<double> getValues() const;
+    void update(Simulation& s);
+};
+
+class DefectFixedMetric : public Metric
+{
+  public:
+		int curWeek;
+    DefectFixedMetric();
+    std::string getName() const;
+    std::vector<double> getValues() const;
+    void update(Simulation& s);
+};
+
+class DefectMajorFixedMetric : public Metric
+{
+  public:
+		int curWeek;
+    DefectMajorFixedMetric();
+    std::string getName() const;
+    std::vector<double> getValues() const;
+    void update(Simulation& s);
+};
+
+class RatioFoundFixedMetric : public Metric
+{
+  public:
+		int curWeek;
+		DefectCountingMetric dcm;
+		DefectFixedMetric dfm;
+    RatioFoundFixedMetric();
+    std::string getName() const;
+    std::vector<double> getValues() const;
+    void update(Simulation& s);
+};
+
+class RatioMajFoundFixedMetric : public Metric
+{
+  public:
+		int curWeek;
+		DefMajCountMetric dmcm;
+		DefectMajorFixedMetric dmfm;
+    RatioMajFoundFixedMetric();
     std::string getName() const;
     std::vector<double> getValues() const;
     void update(Simulation& s);

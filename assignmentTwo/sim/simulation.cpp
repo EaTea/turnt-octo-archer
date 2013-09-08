@@ -29,9 +29,11 @@ void Simulation::simulate()
 			defect_strategy->update_defects(defects);
 			double sweHours = SWE_HOURS;
 			// while there are enough hours to fix either a hard or easy defect
-			while(defects.size() && sweHours >= HARD_DEFECT_FIX_TIME * (1.0+FIX_TIME_ERROR) ||
-					sweHours >= EASY_DEFECT_FIX_TIME * (1.0+FIX_TIME_ERROR))
+			while(!defects.empty() &&
+					(sweHours >= HARD_DEFECT_FIX_TIME * (1.0+FIX_TIME_ERROR) ||
+					sweHours >= EASY_DEFECT_FIX_TIME * (1.0+FIX_TIME_ERROR)))
 			{
+				cerr << '\t' << sweHours << endl;
 				double f = (double)rand() / RAND_MAX;
 				f *= FIX_TIME_ERROR;
 				f *= (rand() % 2 ? 1 : -1);
@@ -42,16 +44,17 @@ void Simulation::simulate()
 				{
 					if (sweHours >= f * defects[ind_dfct].getFixTime())
 					{
+						sweHours -= f * defects[ind_dfct].getFixTime();
 						fixed_defects.push_back(Defect(defects[ind_dfct].classification,
 																			defects[ind_dfct].weekFound,
-																			1.0));
+																			1.0, weekNumber));
 						defects.erase(defects.begin()+ind_dfct);
-						sweHours -= f * defects[ind_dfct].getFixTime();
 						break;
 					}
 				}
 				if (ind_dfct < 0) break;
 			}
+			cerr << "\t fixed : " << fixed_defects.size() << endl;
 			if (ALLOW_PART_FIXES)
 			{
 				double f = (double)rand() / RAND_MAX;

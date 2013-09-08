@@ -8,3 +8,7 @@ OBJ = csv.o metric.o output.o strategy.o simulation.o main.o
 
 simulator: $(OBJ)
 	g++ -o $@ $^ $(CFLAGS)
+
+clean:
+	rm *.o
+	rm simulator

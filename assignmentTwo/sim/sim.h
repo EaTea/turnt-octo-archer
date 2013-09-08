@@ -342,3 +342,88 @@ class StrategyFIFO : public Strategy
 		string getName() const;
 };
 
+// RSHFTStrats
+
+class ExRShftStratFixMajorDefectsFirst : public Strategy
+{
+	public:
+		EstDefectsRemMetric edrm;
+		QueueImpactMetric qim;
+		bool keepGoing;
+		ExRShftStratFixMajorDefectsFirst(int,int,int);
+		void update(Simulation& s);
+		static bool comparison(const Defect& a, const Defect& b);
+		void update_defects(std::vector<Defect>& defects) const;
+		bool simContinue() const;
+		string getName() const;
+};
+
+class ExRShftStratFixEasyDefectsFirst : public Strategy
+{
+	public:
+		EstDefectsRemMetric edrm;
+		QueueImpactMetric qim;
+		bool keepGoing;
+		ExRShftStratFixEasyDefectsFirst(int,int,int);
+		void update(Simulation& s);
+		static bool comparison(const Defect& a, const Defect& b);
+		void update_defects(std::vector<Defect>& defects) const;
+		bool simContinue() const;
+		string getName() const;
+};
+
+class ExRShftStratFIFO : public Strategy
+{
+	public:
+		EstDefectsRemMetric edrm;
+		QueueImpactMetric qim;
+		bool keepGoing;
+		ExRShftStratFIFO(int,int,int);
+		void update(Simulation& s);
+		static bool comparison(const Defect& a, const Defect& b);
+		void update_defects(std::vector<Defect>& defects) const;
+		bool simContinue() const;
+		string getName() const;
+};
+
+class InRShftStratFixMajorDefectsFirst : public Strategy
+{
+	public:
+		EstDefectsRemMetric edrm;
+		QueueSizeMetric qim;
+		bool keepGoing;
+		InRShftStratFixMajorDefectsFirst(int,int,int);
+		void update(Simulation& s);
+		static bool comparison(const Defect& a, const Defect& b);
+		void update_defects(std::vector<Defect>& defects) const;
+		bool simContinue() const;
+		string getName() const;
+};
+
+class InRShftStratFixEasyDefectsFirst : public Strategy
+{
+	public:
+		EstDefectsRemMetric edrm;
+		QueueSizeMetric qim;
+		bool keepGoing;
+		InRShftStratFixEasyDefectsFirst(int,int,int);
+		void update(Simulation& s);
+		static bool comparison(const Defect& a, const Defect& b);
+		void update_defects(std::vector<Defect>& defects) const;
+		bool simContinue() const;
+		string getName() const;
+};
+
+class InRShftStratFIFO : public Strategy
+{
+	public:
+		EstDefectsRemMetric edrm;
+		QueueSizeMetric qim;
+		bool keepGoing;
+		InRShftStratFIFO(int,int,int);
+		void update(Simulation& s);
+		static bool comparison(const Defect& a, const Defect& b);
+		void update_defects(std::vector<Defect>& defects) const;
+		bool simContinue() const;
+		string getName() const;
+};

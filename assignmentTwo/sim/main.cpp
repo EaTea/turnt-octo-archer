@@ -4,7 +4,7 @@ int main()
 {
 	ifstream file("defect_detection.csv");
 	Simulation sim(file);
-	StrategyFIFO s(NUM_SWE,1,2);
+	InRShftStratFixMajorDefectsFirst s(NUM_SWE,1,2);
 	DefectCountingMetric dcm;
 	DefectFixedMetric dfm;
 	DefMajCountMetric dmcm;

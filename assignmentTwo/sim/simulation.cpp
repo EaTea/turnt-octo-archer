@@ -9,7 +9,6 @@ void Simulation::simulate()
 {
 	for (weekNumber = 0; defect_strategy->simContinue(); ++weekNumber)
 	{
-		cerr << weekNumber << endl;
 		for (int detectors = 0; detectors < defect_strategy->nSWETesting && csv_file != CSVIterator(); detectors++, ++csv_file)
 		{
 			for (int dt = MIN_HARD; dt <= MAJ_EASY; dt++)
@@ -33,7 +32,6 @@ void Simulation::simulate()
 					(sweHours >= HARD_DEFECT_FIX_TIME * (1.0+FIX_TIME_ERROR) ||
 					sweHours >= EASY_DEFECT_FIX_TIME * (1.0+FIX_TIME_ERROR)))
 			{
-				cerr << '\t' << sweHours << endl;
 				double f = (double)rand() / RAND_MAX;
 				f *= FIX_TIME_ERROR;
 				f *= (rand() % 2 ? 1 : -1);
@@ -54,7 +52,6 @@ void Simulation::simulate()
 				}
 				if (ind_dfct < 0) break;
 			}
-			cerr << "\t fixed : " << fixed_defects.size() << endl;
 			if (ALLOW_PART_FIXES)
 			{
 				double f = (double)rand() / RAND_MAX;

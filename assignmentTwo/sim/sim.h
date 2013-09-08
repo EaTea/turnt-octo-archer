@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
+#include <cmath>
 #include <fstream>
 #include <iterator>
 #include <sstream>
@@ -19,6 +20,7 @@ const double 	MAJOR_DEFECT_IMPACT		=		7.0;  //perceived impact of major defect
 const double	MINOR_DEFECT_IMPACT		=		1.0;  //perceived impact of minor defect
 const double	HARD_DEFECT_FIX_TIME	=		5.0;  //hours to fix a hard defect
 const double	EASY_DEFECT_FIX_TIME	=		2.0;  //hours to fix an easy defect
+const int			AT_LEAST_WEEKS				=		5;
 
 // OPTIONS
 const bool		ALLOW_PART_FIXES			=		false;//do we allow part fixes?
@@ -131,7 +133,7 @@ class Strategy
 		int nSWEFixing;
 		Strategy(int=-1, int=-1, int=-1);
 		Strategy(const Strategy&);
-		virtual void update(const Simulation&) =0;
+		virtual void update(Simulation&) =0;
 		virtual void update_defects(std::vector<Defect>&) const =0;
 		virtual bool simContinue() const =0;
 		virtual string getName() const =0;
@@ -169,18 +171,6 @@ struct Simulation
 	void	 simulate();
 
 	int    getWeekNumber()    const { return weekNumber; }
-};
-
-class StrategyFixMajorDefectsFirst : public Strategy
-{
-	public:
-		bool keepGoing;
-		StrategyFixMajorDefectsFirst(int,int,int);
-		void update(const Simulation& s);
-		static bool comparison(const Defect& a, const Defect& b);
-		void update_defects(std::vector<Defect>& defects) const;
-		bool simContinue() const;
-		string getName() const;
 };
 
 class DefectCountingMetric : public Metric
@@ -246,3 +236,109 @@ class RatioMajFoundFixedMetric : public Metric
     std::vector<double> getValues() const;
     void update(Simulation& s);
 };
+
+class AverageTimeInQueueMetric : public Metric
+{
+  public:
+		int curWeek;
+    AverageTimeInQueueMetric();
+    std::string getName() const;
+    std::vector<double> getValues() const;
+    void update(Simulation& s);
+};
+
+class AverageMajTimeInQueueMetric : public Metric
+{
+  public:
+		int curWeek;
+    AverageMajTimeInQueueMetric();
+    std::string getName() const;
+    std::vector<double> getValues() const;
+    void update(Simulation& s);
+};
+
+class QueueImpactMetric : public Metric
+{
+  public:
+		int curWeek;
+    QueueImpactMetric();
+    std::string getName() const;
+    std::vector<double> getValues() const;
+    void update(Simulation& s);
+};
+
+class QueueSizeMetric : public Metric
+{
+  public:
+		int curWeek;
+    QueueSizeMetric();
+    std::string getName() const;
+    std::vector<double> getValues() const;
+    void update(Simulation& s);
+};
+
+class EstDefectsRemMetric : public Metric
+{
+  public:
+		const static double estimation_rate = 0.2;
+		int curWeek;
+		DefectCountingMetric dcm;
+    EstDefectsRemMetric();
+    std::string getName() const;
+    std::vector<double> getValues() const;
+    void update(Simulation& s);
+};
+
+class EstMajDefRemMetric : public Metric
+{
+  public:
+		const static double estimation_rate = 0.2;
+		int curWeek;
+		DefMajCountMetric dmcm;
+    EstMajDefRemMetric();
+    std::string getName() const;
+    std::vector<double> getValues() const;
+    void update(Simulation& s);
+};
+
+// VANILLA STRATS
+
+class StrategyFixMajorDefectsFirst : public Strategy
+{
+	public:
+		EstDefectsRemMetric edrm;
+		bool keepGoing;
+		StrategyFixMajorDefectsFirst(int,int,int);
+		void update(Simulation& s);
+		static bool comparison(const Defect& a, const Defect& b);
+		void update_defects(std::vector<Defect>& defects) const;
+		bool simContinue() const;
+		string getName() const;
+};
+
+class StrategyFixEasyDefectsFirst : public Strategy
+{
+	public:
+		EstDefectsRemMetric edrm;
+		bool keepGoing;
+		StrategyFixEasyDefectsFirst(int,int,int);
+		void update(Simulation& s);
+		static bool comparison(const Defect& a, const Defect& b);
+		void update_defects(std::vector<Defect>& defects) const;
+		bool simContinue() const;
+		string getName() const;
+};
+
+class StrategyFIFO : public Strategy
+{
+	public:
+		EstDefectsRemMetric edrm;
+		bool keepGoing;
+		StrategyFIFO(int,int,int);
+		void update(Simulation& s);
+		static bool comparison(const Defect& a, const Defect& b);
+		void update_defects(std::vector<Defect>& defects) const;
+		bool simContinue() const;
+		string getName() const;
+};
+

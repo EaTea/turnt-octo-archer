@@ -1,1 +1,40 @@
 \section{Simulation Framework} \label{simframe}
+
+My simulation framework was built in C++; it reflects all the assumptions that I
+outlined in Section \ref{constraints}.
+It was somewhat flawed, but it essentially did the following in a loop
+\begin{verbatim}
+  while strategy is not finished
+    for each tester
+      put all of a week's defects into defect queue
+    for each fixer
+      update defect queue to reflect suggested ordering
+      take each defect out of a queue
+    update strategy's state
+    for each metric
+      update metric
+\end{verbatim}
+
+This allowed me to encode a flexible strategy and simulation that worked as I
+wanted.
+By taking advantage of polymorphism, I was able to encode a generic metric and
+strategy interface that could be tailored to behave as need be.
+Metrics could be composed of other metrics and strategies could be composed of
+other metrics.\\
+\\
+Although I didn't end up doing it, I would have found it interesting to actually
+put strategies inside other strategies to have more complex rounds and
+strategies to take.
+Nevertheless, this allowed me to run a simulation which measured nine or ten
+different metrics per run.
+This allowed me to construct a lot of experiments within a relatively short
+period of time.\\
+\\
+Building this framework took a lot of time, however, and I feel like it was more
+of a time-sink than I expected.
+I really came up against a classic software engineering situation where I
+underestimated how much time I needed, and paid for it with some sleepless
+nights.\\
+\\
+For the interested reader I have zipped my datafiles and source code and
+submitted them with my paper.

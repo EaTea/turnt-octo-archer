@@ -1,4 +1,4 @@
-\section{Constraints --- TODO by 30 August 2013}
+\section{Constraints}
 
 Modelling is the field of formalising assumptions about the world in logical and mathematical terms.
 The formality of such models allows us to test, validate and analyse our model using objective, rather than subjective observations.
@@ -28,7 +28,7 @@ They are of either \major or \minor severity, and either \easy or \hard in terms
 We are told that \major defects are approximately ``seven times as damaging on average as minor
 ones".
 Furthermore, on average a \hard defect requires 5 hours to fix, whilst an \easy defect requires 2
-hours to fix \FIXME.
+hours to fix \cite{duterryassspeci}.
 We shall take on the role of the project manager and use models to simulate different strategies against different
 metrics.\\
 \\
@@ -71,9 +71,11 @@ quickly? \label{openQuestNine}
   \item are there defects we do not want to fix? \label{openQuestThirteen}
 \end{enumerate}
 
-\begin{figure}
-	\FIXME the defect detect/fix process
-	\caption{derp} \label{realDefectProcess}
+\begin{figure}[ht!]
+  \centering
+	\includegraphics[scale=0.5]{Blah.png}
+	\caption{The usual way a defect detection-fixing process works.
+  Each is an independent process that works in parallel.} \label{realDefectProcess}
 \end{figure}
 
 We will now outline and justify our assumptions, and answer the open questions we have raised as
@@ -89,7 +91,8 @@ unitless form --- there is less to be gained from attaching some unit to it sinc
 of what our client values and how they are being affected here.\\
 \\
 For Question \ref{openQuestThree}, we are going to assume the estimates are exactly accurate.
-This is, of course, a blatant falsehood --- there are estimation techniques such as \FIXME which
+This is, of course, a blatant falsehood --- there are estimation techniques such
+as \cite{pulford1996overconfidence} which
 indicate the {\em confidence} of an estimate.
 Indeed, estimates are seemingly useless without some idea of standard deviation or variance.
 Nevertheless, for ease of modelling we will let the values for \easy, \hard, \minor and \major be
@@ -102,11 +105,15 @@ model would be quite an accurate representation of the real world.
 This is difficult to actually build into our model, however.
 For the purposes of this paper, we limit our model to a sequential, instead of parallel defect
 detection and fixing process.
-This process is shown in Figure \ref{fakeDefectProcess}
+This process is shown in Figure \ref{fakeDefectProcess}.
 
 \begin{figure}[ht!]
-	\FIXME the defect detect/fix process
-	\caption{derp} \label{fakeDefectProcess}
+  \centering
+	\includegraphics[scale=0.5]{Derp.png}
+	\caption{ Our way of modelling a process. In this case, this is a serial
+    process, that is it is sequential. We fill the queue in the detection
+      process, then pass it to the fixing process. It it not an accurate reflection, but it
+  is easier to model.} \label{fakeDefectProcess}
 \end{figure}
 
 Questions \ref{openQuestFive} and \ref{openQuestSix} ask whether a software engineer should be reassigned from testing, and
@@ -117,12 +124,13 @@ When should we do so?
 These are artefacts of the strategies we use, and the simulation will allow a strategy to test
 this.
 We will also say that all software engineers are equally competent at testing and development,
-although it is true, according to \FIXME that some engineers might be approximately twenty times
+although it is true, as from tutorials that some engineers might be approximately twenty times
 more skilled than another engineer.\\
 \\
 To make our modelling easier, we assume that for Question \ref{openQuestSeven} all defects are
 independent and do not affect each other.
-This is not a good reflection of the world (see \FIXME) but it makes our modelling process much
+This is not a good reflection of the world (in my opinion, which I would say is
+    logically sound but I cannot qualify with references at this stage) but it makes our modelling process much
 easier since we need not construct some topological order which defects should be fixed in.\\
 \\
 We say for Question \ref{openQuestEight} that a defect will not reintroduce bugs into our system.
@@ -132,7 +140,7 @@ Conversely, the fewer people in testing, the slower defect detection will be.
 People also cannot split their time between defect detection and defect fixing --- they are either
 doing one or the other the whole time.
 Of course, all of this is not an accurate reflection of the real world (indeed, Brooks espouses in
-\FIXME why the assumption of more people speeding up software work is particularly flawed), but again
+\ref{brooks1987no} why the assumption of more people speeding up software work is particularly flawed), but again
 it eases the modelling process.\\
 \\
 We say that for Question \ref{openQuestTen}, the only person finding defects are the
@@ -163,8 +171,10 @@ To answer Question \ref{openQuestEleven}, we must also give thought to
 
 To begin with, let us discuss the tangential topic of ``internal" and ``external"
 perspectives on a project.
-\FIXME notes that a software engineering project has two views --- the ``internal" view, which is
-that of a software organision, and the ``external" view, which is that of a client.
+I will say that a software engineering project has two views --- the ``internal" view, which is
+that of a software organision, and the ``external" view, which is that of a
+client (this is qualified in references within our lectures, but unfortunately I
+    do not have the references).
 We want to be able to model our process in terms of these metrics, to gauge the client's view of our
 efforts, and also make useful measurements for our own ``internal" usage.
 Note that this does {\em not} mean that an ``external" metric is not useful for the ``internal"
@@ -175,7 +185,8 @@ We will make the following assumptions about the client behaviour
 \begin{itemize}
 	\item clients prefer major defects to be fixed over minor defects --- this seems logical since a
 client is being affected negatively seven times more by a major defect, than by a minor one
-	\item clients prefer defects to be fixed quickly --- this is evidenced by \FIXME
+	\item clients prefer defects to be fixed quickly --- this is evidenced by
+  \cite{gaugingStakeholderPerc}
 \end{itemize}
 
 We will aim to measure the following ``external" metrics
@@ -183,12 +194,12 @@ We will aim to measure the following ``external" metrics
 	\item queue severity --- a simple sum that takes into the total importance of found defects yet to
 be fixed.
 	Note that it does not increase the severity for defects that have been in the queue for longer ---
-according to \FIXME this degrades client satisfaction and it was actually an oversight of my
+according to \cite{gaugingStakeholderPerc} this degrades client satisfaction and it was actually an oversight of my
 modelling process to not do this.
 	\item on average, how long have major defects been within the queue?
 	This is related to our above comments on the importance of timeliness of fixes and the perception
-that slow fixes has on clients, as shown in \FIXME
-	\item the estimated number of major defects remaining in the system, an important estimate to a
+that slow fixes has on clients, as shown in \cite{gaugingStakeholderPerc}
+  \item the estimated number of major defects remaining in the system, an important estimate to a
 client
 	\item the ratio of major defects to major defects found in that week
 \end{itemize}
@@ -198,7 +209,7 @@ We will also measure the following ``internal" metrics
 	\item the estimated number of defects remaining, no matter what severity or difficulty they are
 --- this will give us a stopping criteria.
 	We will assume that an exponential line of best fit can be fitted to the data, using a model
-similar to Boehm's COCOMO equations \FIXME.
+similar to Boehm's COCOMO equations \cite{boehm1984software}.
 	We thus expect that the number of defects remaining in a system can be modelled by a negative
 exponential, as in Figure \ref{negExp}.
 	\item the size of our defect queue --- indeed, this is a metric that could be used in an audit,
@@ -209,7 +220,11 @@ unrelated matter
 \end{itemize}
 
 \begin{figure}[ht!]
-	\caption{Neg exp \FIXME} \label{negExp}
+  \centering
+  \includegraphics[scale=0.75]{Exp.png}
+	\caption{A sample negative exponential function. This is how I expect the
+    model will behave with respect to number of defects remaining in the system
+      \cite{negex}.} \label{negExp}
 \end{figure}
 
 \subsection{Summary of metrics and assumptions}

@@ -1,7 +1,5 @@
 \section{Constraints --- TODO by 30 August 2013}
 
-\FIXME Fluff text
-
 Modelling is the field of formalising assumptions about the world in logical and mathematical terms.
 The formality of such models allows us to test, validate and analyse our model using objective, rather than subjective observations.
 However, the more assumptions we make, the more specific our model is.
@@ -61,6 +59,7 @@ defects from the priority queue for fixing.
 	\item if a testing engineer can do other work, when do they stop testing and start other work?
 	And when do they become a testing engineer again? these questions apply equally to a normal software engineer and we ought to answer them for
 the development engineers \label{openQuestSix}. 
+	\item are defects independent of each other? Do they have no dependencies? \label{openQuestSeven}
 	\item when a defect is fixed, does it reintroduce bugs or is it always fixed?
 	\label{openQuestEight}
 	\item if we had twice as many testers, would we go through our defect detection data twice as
@@ -68,6 +67,7 @@ quickly? \label{openQuestNine}
 	\item does a defect only affect the customers the moment the tester has found them?
 	Indeed, is the tester the only way of a defect to be detected? \label{openQuestTen}
 	\item what do we actually want to measure? \label{openQuestEleven}
+	\item will the severity or difficulty of defects ever change? \label{openQuestTwelve}
 \end{enumerate}
 
 \begin{figure}
@@ -119,6 +119,11 @@ We will also say that all software engineers are equally competent at testing an
 although it is true, according to \FIXME that some engineers might be approximately twenty times
 more skilled than another engineer.\\
 \\
+To make our modelling easier, we assume that for Question \ref{openQuestSeven} all defects are
+independent and do not affect each other.
+This is not a good reflection of the world (see \FIXME) but it makes our modelling process much
+easier since we need not construct some topological order which defects should be fixed in.\\
+\\
 We say for Question \ref{openQuestEight} that a defect will not reintroduce bugs into our system.
 For Question \ref{openQuestNine} we claim that this is indeed the case, and if we assign more people
 to testing then the effect scales multiplicatively.
@@ -129,9 +134,14 @@ Of course, all of this is not an accurate reflection of the real world (indeed, 
 \FIXME why the assumption of more people speeding up software work is particularly flawed), but again
 it eases the modelling process.\\
 \\
-Finally, we say that for Question \ref{openQuestTen}, the only person finding defects are the
+We say that for Question \ref{openQuestTen}, the only person finding defects are the
 testers.
-Implicitly, a developer can only fix a defect after a tester has found it.\\
+Implicitly, a developer can only fix a defect after a tester has found it.
+This element of randomness from users is much more difficult to model (we theorise that it could be
+done with a Poisson distribution) and so we will assume it cannot occur.
+Finally, and again for the sake of ease of modelling Question \ref{openQuestTwelve}, defects cannot
+change their severity or their difficulty.
+Once detected their attributes will remain the same.
 
 \subsection{What are we measuring?}
 
@@ -171,6 +181,7 @@ modelling process to not do this.
 that slow fixes has on clients, as shown in \FIXME
 	\item the estimated number of major defects remaining in the system, an important estimate to a
 client
+	\item the ratio of major defects to major defects found in that week
 \end{itemize}
 
 We will also measure the following ``internal" metrics
@@ -186,7 +197,6 @@ though whether such a measurement is appopriate for an audit of our processes or
 unrelated matter
 	\item the average time a defect has been in our defect queue
 	\item the ratio of defects fixed to defects found in that week
-	\item the ratio of major defects to major defects found in that week
 \end{itemize}
 
 \begin{figure}[ht!]
@@ -202,11 +212,14 @@ In summary, we make the following assumptions:
 	\item all estimates are reliable and entirely accurate
 	\item sequential, as opposed to parallelised defect fixing process
 	\item engineers can be reassigned --- an artefact of the strategy
-	\item engineers are all equally competent
+	\item engineers are all equally competent at all tasks, whether it is testing or development
+	\item defects are independent and do not have an ordering that must be adhered to when fixing them
 	\item defect fixing does not reintroduce defects
 	\item having $k$ testers implies we will complete our work $k$ times as quickly
 	\item only the tester is finding the defects, and developers cannot fix a defect unless a tester
 has found it
+	\item a defect is immutable, in the sense that once its severity and difficulty are established
+they can neither escalate nor be downplayed
 \end{itemize}
 
 These assumptions seem, perhaps, to be very trivial or to not reflect the actual state of a software
@@ -221,6 +234,7 @@ We will measure the following ``external" metrics
 	\item queue severity
 	\item the average amount of time, in weeks, that a major defect is in the queue
 	\item the estimated number of major defects remaining in the system
+	\item the ratio of major defects to major defects found in that week
 \end{itemize}
 
 We will also measure the following ``internal" metrics.
@@ -229,5 +243,4 @@ We will also measure the following ``internal" metrics.
 	\item the size of our defect queue
 	\item the average time, in weeks, that a defect has been in our defect queue
 	\item the ratio of defects fixed to defects found in that week
-	\item the ratio of major defects to major defects found in that week
 \end{itemize}

@@ -68,6 +68,7 @@ quickly? \label{openQuestNine}
 	Indeed, is the tester the only way of a defect to be detected? \label{openQuestTen}
 	\item what do we actually want to measure? \label{openQuestEleven}
 	\item will the severity or difficulty of defects ever change? \label{openQuestTwelve}
+  \item are there defects we do not want to fix? \label{openQuestThirteen}
 \end{enumerate}
 
 \begin{figure}
@@ -138,7 +139,15 @@ We say that for Question \ref{openQuestTen}, the only person finding defects are
 testers.
 Implicitly, a developer can only fix a defect after a tester has found it.
 This element of randomness from users is much more difficult to model (we theorise that it could be
-done with a Poisson distribution) and so we will assume it cannot occur.
+done with a Poisson distribution) and so we will assume it cannot occur.\\
+\\
+Perhaps an odd question is \ref{openQuestThirteen} --- why would we {\em not}
+want to fix a defect?
+We will assume that all defects must be fixed, but it is a fair question.
+Is the defect actually a defect?
+Is it someone not reporting correctly, or is it a duplicate?
+Perhaps the workaround is already so ingrained into the users that it causes
+more trouble to remove it!
 Finally, and again for the sake of ease of modelling Question \ref{openQuestTwelve}, defects cannot
 change their severity or their difficulty.
 Once detected their attributes will remain the same.
@@ -218,6 +227,7 @@ In summary, we make the following assumptions:
 	\item having $k$ testers implies we will complete our work $k$ times as quickly
 	\item only the tester is finding the defects, and developers cannot fix a defect unless a tester
 has found it
+  \item we want to remove all defects we find
 	\item a defect is immutable, in the sense that once its severity and difficulty are established
 they can neither escalate nor be downplayed
 \end{itemize}

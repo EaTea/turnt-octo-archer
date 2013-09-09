@@ -1,4 +1,4 @@
-\section{Analysis} \ref{analysis}
+\section{Analysis} \label{analysis}
 
 Here, we analyse our modelling method, the different attributes of the strategies, and which
 strategies we would use overall.
@@ -40,7 +40,15 @@ specific resource reallocation should occur.\\
 Nevertheless, we reach a limitation of my modelling approach --- I encoded these assumptions without
 a review of literature or looking at previous work.
 I felt I was too time-pressed to review literature and back up my judgements and assumptions.
-I feel that the lack of empirical evidence in some of my assumptions detracted from my work.
+I feel that the lack of empirical evidence in some of my assumptions detracted
+from my work.\\
+\\
+Other things that I think would have helped would be to do more comparisons with
+my data; I would like to have seen how different variants of a strategy matched
+up against each other.
+Unfortunately, I did not have the foresight and resources to do this!
+I would reserve this for future work to see how tweaking strategies improves or
+degrades strategy performance.
 
 \subsection{Defect Resolution Strategies}
 
@@ -50,8 +58,135 @@ We will analyse our strategies and the metrics we evaluated them with against th
 	\item does the system satisfy the client?
 \end{itemize}
 
-The first of these questions
+The first of these questions revolves around how many defects we left in the
+system by the time it finished.
+An example metric we could use here would be mean-time-to-failure.
+We could estimate the number of remaining bugs, and divide it by the
+number of weeks that had elapsed.\\
+\\
+The idea of estimating system reliability using this metric
+  is less interesting in the sense that all the
+strategies (excluding FIFO with external influences) ended up with very similar
+amounts of
+defects left by the time the strategy was finished.
+Furthermore, we note that all of the strategies had begun to stabilise (around 5
+defects left and no new data being read in), suggesting that all the systems
+delivered a system of similar reliability.\\
+\\
+In addition, most of the systems managed to account for almost all major
+defects.
+This suggests that the strategies were overall effective in capturing and
+constructing a reliable system.
+I would contend that there is actually not very much interesting insights to
+talk about here.
+Perhaps it is an artifact of my methodology, but because all
+my metrics had the same terminating condition and that terminating condition
+revolved around a reasonably accurate extrapolation of the number of remaining
+defects, they all delivered the same level of system reliability.\\
+\\
+More interesting is the idea ``does our system satisfy the client?"
+Here, we have a lot of richer and more worthwhile discussions.\\
+\\
+{\em Who} is the client?
+An external entity?
+A higher level of the organisational hierarchy?
+Are they an ``internal" or ``external" stakeholder?
+(e.g. are we developing an internal subsystem or product for the large company
+ we are a part of, or are our services being contracted out as a smaller software house?)
+Furthermore, if there are conflicts of interest, is there a strategy that
+somewhat satisfies them all?\\
+\\
+Let us suppose that our client is an external entity.
+Clients will use external pressure to attempt to have a subsystem be usable
+faster.
+Our analysis suggests that when under such external pressure, the best strategy
+to adopt is to fix the major defects first.
+Furthermore, the specific variant of the strategy that seems to be quite
+effective would be to value major defects first, whilst using the size of the
+defects queue to judge whether resource reallocation is necessary.
+This is somewhat surprising to me, but it is worth noting that the resource
+allocation here seems to be a more powerful strategy overall.\\
+\\
+Let us suppose thast our ``client" is in fact an internal entity.
+We might say that they are our boss or team leader.
+Perhaps we are the software project manager for a team in a large technology
+company and we are building the latest product to be marketed.
+In this case, to satisfy the client is to actually satisfy internal forces.
+If internal pressure is being applied, it is interesting to note that the FIFO
+strategy might be optimal here.
+We refer to Table \ref{summary_in} to back up our claim, as FIFO seems to
+actually do well in at least two of the three internal metrics.\\
+\\
+What happens if there is a conflict of interest between internal and external
+stakeholders?
+We tentatively suggest that the best approach is to use major-fixes-first,
+   whilst using resoure reallocation based on the size of the defects queue.
+The qualification ``tentatively" is required since we have a flawed measurement
+for the external stakeholders measurement.\\
+\\
+We have explored different cases for strategies to choose, why we choose them
+and which situations they are appropriate for.
+Overall, prioritising client (external) satisfaction (that is, user
+    satisfaction) seems more important than organisation requirements, due to
+the long term benefits and the ethical obligations that I have as a software
+developer.
+Thus, I would personally employ a strategy that fixed the major defects first,
+  and would reassign resources based on the size of the defect queue.
 
 \subsection{Future Work}
 
-\FIXME explicitly outline any future work that could be undertaken
+Here, we discuss future work that this project has generated.
+Firstly, we need to address the weaknesses in simulation framework.
+It is clear that my framework is insufficient as is --- it is flawed in some
+ways.
+Fixing this would be the first step to extending my work.\\
+\\
+Secondly, extending the simulation framework would be interesting.
+There are some assumptions, particularly involving defects not being
+reintroduced, the unreliability of estimates regarding severity and time and the
+parallelisation of the defect finding-fixing process that I would have liked to
+have generalised within the strategy.\\
+\\
+Instead, I had to make the assumption that these were fixed or irrelevant, which
+I believed weakened the model.
+I was not able to test my model against a broader range of test environments as
+a result.
+Whether or not it is a good idea to make the model account for all assumptions
+is perhaps another matter, since there are quite possibly diminishing returns on
+addressing some of these open questions and the assumptions that we've made.\\
+\\
+Finally, I discuss a proposed automated learner for strategy classification.
+
+\subsubsection{Automated Learner for Strategy Classification}
+I constructed a small, currently ineffectual automated learner.
+It would be conceivable that with this high number of metrics, a machine learner
+could use these metrics to devise better, improved strategies.\\
+\\
+A suggested approach would be to evolve a strategy based on a subset of good,
+accurate metrics.
+Algorithms such as neural networks, evolutionary algorithms or particle swarm
+optimisations come to mind.\\
+\\
+Essentially, with test data from many projects, it would be possible to try a
+bunch of strategies, use a fitness function constructed from our metrics and
+evolve a strategy that was suitable to maximising those metrics' scores.\\
+\\
+It would involve the following
+\begin{itemize}
+  \item transforming a strategy into a space suitable for machine learning ---
+  finding an appropriate mapping, as well as specifically which attributes to
+  map is an important question
+  \item using an appropriate learning algorithm is also tantamount, and the ones
+  I suggested are without basis or research
+  \item use an appropriate set of metrics to construct a fitness function that
+  accurately reflects what a project would want out of a strategy
+  \item be able to generate possible strategies for arbitrary sets of data based
+  on learned data and values from previous or strategies for learning on a new
+  data set
+\end{itemize}
+
+I am reminded of the advances used to improve the COCOMO model, and the machine
+learning acorss many projects that the project used.
+This future work follows in the same vein but we leave it as an open question of
+whether this would be an appropriate or rewarding way to find a strategy for
+building software.

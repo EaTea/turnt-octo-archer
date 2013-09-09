@@ -525,7 +525,7 @@ queue, wouldn't we?
 	\centering
 	\includegraphics[scale=0.45]{graphs/avgQueueTime_in.png}
 	\caption{FIFO is the clear optimal choice here. It already was a queue minimiser and with the
-resource reallocation it even better.} 
+resource reallocation it does even better.} 
 	\label{in_avgqtime}
 \end{figure}
 
@@ -557,11 +557,12 @@ each metric.
 	{\em Queue Severity} & Major First & N/A \\ \hline
 	{\em Mean time in queue per major defect} & Major First & N/A\\ \hline
 	{\em Ratio of Major defects found-to-fixed} & Major First & Easy-first \\ \hline
-	Queue Size & Easy First & N/A \\ \hline
+	Queue Size & FIFO & N/A \\ \hline
 	Time in Queue & FIFO & N/A \\ \hline
 	Ratio of defects found-to-fixed & Easy-first & All quite close \\ \hline
 	\end{tabular}
-	\caption{A summary of our strategies and their performances with different metrics when external
+	\caption{A summary of our strategies and their performances with different
+    metrics wheninternal 
 pressure is applied.
 External metrics are italicised.
 Employing this strategy for resource reallocation (based on queue size) seemed to yield good results, in terms of making

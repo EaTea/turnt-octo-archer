@@ -15,8 +15,7 @@ More importantly, we ought to justify why assumptions could be made and what the
 \\
 This chapter begins by describing our problem, in terms of observations and open questions.
 We then lay down our assumptions to answer the open questions, as well as justifications for {\em why} these assumptions were made.
-We also discuss how this weakens our result, and its impact on finding the ``best" strategy.
-Finally, we headline whether we will attempt to challenge our model later by removing or changing a specific assumption.
+We summarise our results in our final subchapter.
 
 \subsection{Observations}
 
@@ -60,9 +59,8 @@ defects from the priority queue for fixing.
 	Can they do other work?
 	Are they as effective at doing other work? \label{openQuestFive}
 	\item if a testing engineer can do other work, when do they stop testing and start other work?
-	And when do they become a testing engineer again? \label{openQuestSix}
-	\item these questions apply equally to a normal software engineer and we ought to answer them for
-the development engineers. \label{openQuestSeven}
+	And when do they become a testing engineer again? these questions apply equally to a normal software engineer and we ought to answer them for
+the development engineers \label{openQuestSix}. 
 	\item when a defect is fixed, does it reintroduce bugs or is it always fixed?
 	\label{openQuestEight}
 	\item if we had twice as many testers, would we go through our defect detection data twice as
@@ -85,8 +83,9 @@ best we can.
 Firstly, Question \ref{openQuestOne} asks whether we can have ``part fixes".
 We will disallow this in our simulation --- it makes the model more realisitc but at this stage it
 is too difficult to model.
-Similarly, for Question \ref{openQuestTwo} we will simply let the model measure severity in its
-unitless form.\\
+For Question \ref{openQuestTwo} we will simply let the model measure severity in its
+unitless form --- there is less to be gained from attaching some unit to it since we have no concept
+of what our client values and how they are being affected here.\\
 \\
 For Question \ref{openQuestThree}, we are going to assume the estimates are exactly accurate.
 This is, of course, a blatant falsehood --- there are estimation techniques such as \FIXME which
@@ -97,11 +96,46 @@ exact values of the difficulty and severity of fixing a defect.\\
 \\
 Question \ref{openQuestFour} again opens a method by which the accuracy of our model, and its power
 could be much improved.
-If the defect fixing and detection process actually resembles Figure \ref{realDefectProcess}
+If the defect fixing and detection process actually resembles Figure \ref{realDefectProcess}, our
+model would be quite an accurate representation of the real world.
+This is difficult to actually build into our model, however.
+For the purposes of this paper, we limit our model to a sequential, instead of parallel defect
+detection and fixing process.
+This process is shown in Figure \ref{fakeDefectProcess}
+
+\begin{figure}[ht!]
+	\FIXME the defect detect/fix process
+	\caption{derp} \label{fakeDefectProcess}
+\end{figure}
+
+Questions \ref{openQuestFive} and \ref{openQuestSix} ask whether a software engineer should be reassigned from testing, and
+when that should occur.
+We will allow this, and its occurrance is something we are interested in.
+How should we allocate resources?
+When should we do so?
+These are artefacts of the strategies we use, and the simulation will allow a strategy to test
+this.
+We will also say that all software engineers are equally competent at testing and development,
+although it is true, according to \FIXME that some engineers might be approximately twenty times
+more skilled than another engineer.\\
+\\
+We say for Question \ref{openQuestEight} that a defect will not reintroduce bugs into our system.
+For Question \ref{openQuestNine} we claim that this is indeed the case, and if we assign more people
+to testing then the effect scales multiplicatively.
+Conversely, the fewer people in testing, the slower defect detection will be.
+People also cannot split their time between defect detection and defect fixing --- they are either
+doing one or the other the whole time.
+Of course, all of this is not an accurate reflection of the real world (indeed, Brooks espouses in
+\FIXME why the assumption of more people speeding up software work is particularly flawed), but again
+it eases the modelling process.\\
+\\
+Finally, we say that for Question \ref{openQuestTen}, the only person finding defects are the
+testers.
+Implicitly, a developer can only fix a defect after a tester has found it.\\
 
 \subsection{What are we measuring?}
 
-To answer Question \ref{openQuestElevent}, we must also give thought to 
+To answer Question \ref{openQuestEleven}, we must also give thought to 
 \begin{itemize}
 	\item what we are measuring
 	\item assumptions about how the client behaves and
@@ -142,6 +176,11 @@ client
 We will also measure the following ``internal" metrics
 \begin{itemize}
 	\item the estimated number of defects remaining, no matter what severity or difficulty they are
+--- this will give us a stopping criteria.
+	We will assume that an exponential line of best fit can be fitted to the data, using a model
+similar to Boehm's COCOMO equations \FIXME.
+	We thus expect that the number of defects remaining in a system can be modelled by a negative
+exponential, as in Figure \ref{negExp}.
 	\item the size of our defect queue --- indeed, this is a metric that could be used in an audit,
 though whether such a measurement is appopriate for an audit of our processes or teams is another
 unrelated matter
@@ -150,4 +189,45 @@ unrelated matter
 	\item the ratio of major defects to major defects found in that week
 \end{itemize}
 
+\begin{figure}[ht!]
+	\caption{Neg exp \FIXME} \label{negExp}
+\end{figure}
+
 \subsection{Summary of metrics and assumptions}
+
+In summary, we make the following assumptions:
+\begin{itemize}
+	\item no partial fixes
+	\item unitless severity
+	\item all estimates are reliable and entirely accurate
+	\item sequential, as opposed to parallelised defect fixing process
+	\item engineers can be reassigned --- an artefact of the strategy
+	\item engineers are all equally competent
+	\item defect fixing does not reintroduce defects
+	\item having $k$ testers implies we will complete our work $k$ times as quickly
+	\item only the tester is finding the defects, and developers cannot fix a defect unless a tester
+has found it
+\end{itemize}
+
+These assumptions seem, perhaps, to be very trivial or to not reflect the actual state of a software
+engineering project.
+The observant reader will note that the reasons for most of these assumptions are ``they make the modelling
+process easier".
+It is unfortunate that these notions cannot at this stage be challeneged, but we will give a
+treatise later on how we might challenge or improve our models.\\
+\\
+We will measure the following ``external" metrics
+\begin{itemize}
+	\item queue severity
+	\item the average amount of time, in weeks, that a major defect is in the queue
+	\item the estimated number of major defects remaining in the system
+\end{itemize}
+
+We will also measure the following ``internal" metrics.
+\begin{itemize}
+	\item the estimated number of defects remaining
+	\item the size of our defect queue
+	\item the average time, in weeks, that a defect has been in our defect queue
+	\item the ratio of defects fixed to defects found in that week
+	\item the ratio of major defects to major defects found in that week
+\end{itemize}

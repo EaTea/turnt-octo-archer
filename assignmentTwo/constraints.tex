@@ -20,9 +20,134 @@ Finally, we headline whether we will attempt to challenge our model later by rem
 
 \subsection{Observations}
 
-\FIXME Lay out the problem and put down as many observations and open questions
-as possible
+We will lay down our model assumptions by first describing the data we are working with.
+We are given data about a two-stage process which finds, then fixes defects.
+This project involves 3 software engineers who worked 25 hours per week, where one engineer was testing.
+The data provided is the result of that engineer devoting all of his/her time to testing each
+week and uncovering defects.\\
+\\
+Defects can be classed into 2 levels of ``severity", and 2 levels of "difficulty".
+They are of either \major or \minor severity, and either \easy or \hard in terms of difficulty.
+We are told that \major defects are approximately ``seven times as damaging on average as minor
+ones".
+Furthermore, on average a \hard defect requires 5 hours to fix, whilst an \easy defect requires 2
+hours to fix \FIXME.
+We shall take on the role of the project manager and use models to simulate different strategies against different
+metrics.\\
+\\
+This describes the data and initial constraints of our model.
+There are many open questions that we ought to at least consider, and hopefully answer before
+beginning our modelling.
+We enumerate them below
+\begin{enumerate}
+	\item can an engineer do ``part of" a defect?
+	For example, if an engineer has 1 hour left in their working week, can they do half of an \easy
+defect? \label{openQuestOne}
+	\item we have estimated the ``impact" --- how does this translate to impacting the customer?
+	Is it by money?
+	By time?
+	Should we assign some units to it, or is the arbitrary ``severity" measure good enough?
+	\label{openQuestTwo}
+	\item are our estimates of ``severity" and ``difficulty" accurate?
+	If they are not, how accurate are they actually, and how does inaccuracy translate in our model?
+	\label{openQuestThree}
+	\item when do defects get fixed?
+	In real life, the defect detection/fixing process is a two-stage parallel process, where detection
+puts defects onto an ordered priority queue of defects to fix, whilst fixing simultaneously takes
+defects from the priority queue for fixing.
+	This is illustrated in Figure \ref{realDefectProcess}. \label{openQuestFour}
+	\item does the testing engineer only do testing?
+	Can they do other work?
+	Are they as effective at doing other work? \label{openQuestFive}
+	\item if a testing engineer can do other work, when do they stop testing and start other work?
+	And when do they become a testing engineer again? \label{openQuestSix}
+	\item these questions apply equally to a normal software engineer and we ought to answer them for
+the development engineers. \label{openQuestSeven}
+	\item when a defect is fixed, does it reintroduce bugs or is it always fixed?
+	\label{openQuestEight}
+	\item if we had twice as many testers, would we go through our defect detection data twice as
+quickly? \label{openQuestNine}
+	\item does a defect only affect the customers the moment the tester has found them?
+	Indeed, is the tester the only way of a defect to be detected? \label{openQuestTen}
+	\item what do we actually want to measure? \label{openQuestEleven}
+\end{enumerate}
 
-\subsection{Assumptions}
+\begin{figure}
+	\FIXME the defect detect/fix process
+	\caption{derp} \label{realDefectProcess}
+\end{figure}
 
-\FIXME Say how many assumptions and justify each one
+We will now outline and justify our assumptions, and answer the open questions we have raised as
+best we can.
+
+\subsection{Assumptions about our simulation}
+
+Firstly, Question \ref{openQuestOne} asks whether we can have ``part fixes".
+We will disallow this in our simulation --- it makes the model more realisitc but at this stage it
+is too difficult to model.
+Similarly, for Question \ref{openQuestTwo} we will simply let the model measure severity in its
+unitless form.\\
+\\
+For Question \ref{openQuestThree}, we are going to assume the estimates are exactly accurate.
+This is, of course, a blatant falsehood --- there are estimation techniques such as \FIXME which
+indicate the {\em confidence} of an estimate.
+Indeed, estimates are seemingly useless without some idea of standard deviation or variance.
+Nevertheless, for ease of modelling we will let the values for \easy, \hard, \minor and \major be
+exact values of the difficulty and severity of fixing a defect.\\
+\\
+Question \ref{openQuestFour} again opens a method by which the accuracy of our model, and its power
+could be much improved.
+If the defect fixing and detection process actually resembles Figure \ref{realDefectProcess}
+
+\subsection{What are we measuring?}
+
+To answer Question \ref{openQuestElevent}, we must also give thought to 
+\begin{itemize}
+	\item what we are measuring
+	\item assumptions about how the client behaves and
+	\item what interests both us and them.
+\end{itemize}
+
+To begin with, let us discuss the tangential topic of ``internal" and ``external"
+perspectives on a project.
+\FIXME notes that a software engineering project has two views --- the ``internal" view, which is
+that of a software organision, and the ``external" view, which is that of a client.
+We want to be able to model our process in terms of these metrics, to gauge the client's view of our
+efforts, and also make useful measurements for our own ``internal" usage.
+Note that this does {\em not} mean that an ``external" metric is not useful for the ``internal"
+metrics --- rather, we say that ``internal" metrics measure things that are less desired or useful
+to the client than an ``external" metric.\\
+\\
+We will make the following assumptions about the client behaviour
+\begin{itemize}
+	\item clients prefer major defects to be fixed over minor defects --- this seems logical since a
+client is being affected negatively seven times more by a major defect, than by a minor one
+	\item clients prefer defects to be fixed quickly --- this is evidenced by \FIXME
+\end{itemize}
+
+We will aim to measure the following ``external" metrics
+\begin{itemize}
+	\item queue severity --- a simple sum that takes into the total importance of found defects yet to
+be fixed.
+	Note that it does not increase the severity for defects that have been in the queue for longer ---
+according to \FIXME this degrades client satisfaction and it was actually an oversight of my
+modelling process to not do this.
+	\item on average, how long have major defects been within the queue?
+	This is related to our above comments on the importance of timeliness of fixes and the perception
+that slow fixes has on clients, as shown in \FIXME
+	\item the estimated number of major defects remaining in the system, an important estimate to a
+client
+\end{itemize}
+
+We will also measure the following ``internal" metrics
+\begin{itemize}
+	\item the estimated number of defects remaining, no matter what severity or difficulty they are
+	\item the size of our defect queue --- indeed, this is a metric that could be used in an audit,
+though whether such a measurement is appopriate for an audit of our processes or teams is another
+unrelated matter
+	\item the average time a defect has been in our defect queue
+	\item the ratio of defects fixed to defects found in that week
+	\item the ratio of major defects to major defects found in that week
+\end{itemize}
+
+\subsection{Summary of metrics and assumptions}

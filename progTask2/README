@@ -1,0 +1,15 @@
+Written in C++
+
+For Unix compile with g++
+
+>g++ simulator.cpp -o sim
+
+Usage:
+
+./sim inputFile.txt
+
+Assumes file format
+
+attribute1 attribute2 {1|2}
+
+attribute1 and attribute2 can be integers or floating point numbers

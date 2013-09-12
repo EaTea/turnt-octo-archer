@@ -1,1 +1,9 @@
-18:00 minutes
+Edwin Tay
+20529864
+
+Requirements Analysis / Discussion / Research 18:00 minutes
+Coding 43 minutes
+Debugging 37 minutes
+----------
+Total time = 88 minutes
+Total SLOC = 114 lines

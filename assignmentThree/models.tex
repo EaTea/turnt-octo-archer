@@ -42,14 +42,15 @@ they are valid (or invalid) models in subsection \ref{subsecAppropriateness}.
 This following section is based on an unpublished paper by Woodings, which we
 reproduce for the completeness of the paper.
 It is a good motivation for each of the models we use, and it is clear, by
-inspection, that each of the models will be able to fit the criterion.\\
+inspection, that each of the models will be able to fit the criterion.
+We present the four models, labelled as $m_1, m_2, m_3$ and $m_4$.\\
 \\
 Our first model is based on the logarithmic Poisson distribution, which
 deals with time-based data and incidents.
 This hyperbolic model is ideal and has been used to analyse failure intensity.
 This model is given by
 \begin{equation} \label{modelOne}
-  m(t) = \frac{a+bct}{bt+1}
+  m_1(t) = \frac{a+bct}{bt+1}
 \end{equation}
 
 Our second model is a psychological model on learning, which is used by Kemerer
@@ -57,7 +58,7 @@ and Sherdii\FIXME referencing.
 We can derive a similar equation to the one used in Humphries Personal Software
 Process (PSP) \FIXME referencing, resulting in
 \begin{equation} \label{modelTwo}
-  m(t) = \frac{a-c}{(t+1)^{b}}+c
+  m_2(t) = \frac{a-c}{(t+1)^{b}}+c
 \end{equation}
 
 Our third model is based on the idea that the improvement is proportional
@@ -77,7 +78,7 @@ This then yields
 Adding the asymptote when $t \to \infty$ yields our third model, and setting the
 constant $k = e$ (the base of the natural logarithm) results in
 \begin{equation} \label{modelThree}
-  m(t) = (a-c) e^{-bt} + c
+  m_3(t) = (a-c) e^{-bt} + c
 \end{equation}
 
 Note that we set $e$ as the constant since it assists in regression analysis,
@@ -87,7 +88,7 @@ regression.\\
 Our final model is a model presented by Woodings in \FIXME.
 It is a simple polynomial, given as
 \begin{equation} \label{modelFour}
-  m(t) = a + bt + ct^2
+  m_4(t) = a + bt + ct^2
 \end{equation}
 It might immediately be clear to the reader why this model is inappropriate, but
 we will formally justify its exclusion in the subsection \ref{subsecAppropriateness}.

@@ -1,1 +1,120 @@
 \section{Results} \label{secResults}
+
+We present our results from each of our fits.
+We used Wolfram Mathematica 9 to calibrate our models, and much of our analysis
+assumes the correctness of Wolfram Mathematica 9's kernel and functions.\\
+\\
+This section of results is organised as follows.
+Subsection \ref{subsecData} briefly gives some salient points about the data
+itself, such as the mean time to complete each attempt and the standard
+deviation.
+Subsection \ref{subsecP1LA} shows the results of fitting our three models to
+\PO\ using \LA.
+Subsection \ref{subsecP1LB} shows the results of fitting our three moodels to
+\PO\ using \LB.
+Subsection \ref{subsecP2LA} shows the results of fitting our three models to
+\PT\ using \LA.
+
+\subsection{Analysing the data} \label{subsecData}
+
+Some basic analyses that we performed on the data are presented below.
+Although they do not contribute to answering our seven questions, we can make
+some further comments and possible insights into the data and its usefulness.
+
+First, we begin by analysing the data for \PO\ when it was completed four
+separate times in \LA, as shown in table \ref{tableP1La}.
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+{\bf Attempt} &  {\bf Mean} & {\bf Standard Deviation} \\
+\AZ & 172.857 & 91.6195 \\
+\AO & 91.2143 & 69.0698 \\
+\AT & 73.7857 & 49.6343 \\
+\ATh & 40.2143 & 28.722
+\end{tabular}
+\caption{Data from the analysis of \PO\ when completed with \LA.}
+\label{tableP1LA}
+\end{table}
+
+Table \ref{tableP1LB} shows the analysis of the data for completing \PO\ in
+\LB\ four times.
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+{\bf Attempt} &  {\bf Mean} & {\bf Standard Deviation} \\
+\AZ & 102.643 & 40.3229 \\
+\AO & 62.7143 & 38.0777 \\
+\AT & 50.1429  & 30.1046 \\
+\ATh & 43.5714 & 27.2134
+\end{tabular}
+\caption{Data from the analysis of \PO\ when completed with \LB.}
+\label{tableP1LB}
+\end{table}
+
+Table \ref{tableP2LA} shows the analysis of the data for completing \PT\ in
+\LA\ four times.
+\begin{table}
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+{\bf Attempt} &  {\bf Mean} & {\bf Standard Deviation} \\
+\AZ & 100.143 & 70.1415 \\
+\AO & 54.2143 & 38.573 \\
+\AT & 49.9286  & 38..8794 \\
+\ATh & 39.1429 & 34.9436
+\end{tabular}
+\caption{Data from the analysis of \PT\ when completed with \LA.}
+\label{tableP2LA}
+\end{table}
+
+\subsection{Problem one in language A} \label{subsecP1LA}
+
+Model One gave
+$a = 172.652 b = 0.712 c = -19.8246$
+with error $a = 4.51941, b = 0.18701, c = 19.8109$
+Fit residuals = $\{0.205268, -1.80489, 3.61833, -2.01871\}$
+
+After adding in conditions \ref{conThree} and \ref{conFour} as explicit model
+constraints, as opposed to testing whether they were true after the fit
+$a = 172.931, b = 281.107, c = 64.8165$
+with error $a = 35.9144, b = 53906.8, c = 49.4857$ with the fit not
+converging
+Fit residuals = $\{-0.738226, 26.0146, -1.2227, -24.7302\}$
+
+Model two gave
+
+$a = 172.607 b = 0.638207 c = -49.9154$ with error $a = 4.1785, b = 0.236003 c =
+54.71152$
+Fit residuals = $\{0.249911, -1.84353, 3.32579, -1.73217\}$
+
+After adding in conditions \ref{conThree} and \ref{conFour}
+$a = 172.857, b = 1.67721 \times 10^10, c = 65.0713$ and crashed the engine,
+  unable to get error but assume this result is junk
+Fit residuals = $\{0.000113456, 26.143, -1.2856, -24.857\}$
+
+Model three gave
+$a = 172.322 b = 0.794716 c = 29.691$ with error
+$a = 6.34312, b = 0.189644, c = 13.1391$
+Fit residuals = $\{0.535135, -2.909451, 4.99205, -2.62268\}$
+
+\subsection{Problem one in language B} \label{subsecP1LB}
+
+Model One gave
+$a = 103.736 b = 1.05646 c = 25.0616$
+with error $a = 0.200046, b = 0.0268934, c = 0.635585$
+Fit residuals = $\{0.00553068, -0.0701684, 0.160782, -0.0961443\}$
+
+Model two gave
+$a = 102.633 b = 1.05789 c = 25.9886$
+
+with error $a = 0.224989, b = 0.0312964 c = 1.17134$
+Fit residuals = $\{0.00975271, -0.089332, 0.180277, -0.100698\}$
+
+Model three gave
+$a = 102.57 b = 1.03095 c = 41.3707$ with error
+$a = 1.24103, b = 0.0954955 c = 1.80347$
+Fit residuals = $\{0.0732756, -0.481464, 0.986894, -0.576006\}$
+
+\subsection{

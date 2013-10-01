@@ -21,16 +21,16 @@ We apply each of the constraints that we have to ensure that they comply with
 our criteria.\\
 \\
 For a model $m$, a function of $t$ (the number of iterations), our constraints, as equations, are
-\begin{equation}
+\begin{equation} \label{conOne}
   t = 0 \implies m(t) = a
 \end{equation}
-\begin{equation}
+\begin{equation} \label{conTwo}
   \lim_{t \to \infty} m(t) = c
 \end{equation}
-\begin{equation}
+\begin{equation} \label{conThree}
   b > 0
 \end{equation}
-\begin{equation}
+\begin{equation} \label{conFour}
   a > c > 0
 \end{equation}
 
@@ -74,11 +74,16 @@ This then yields
 \[
   m(t) = k^t 
 \]
-Adding the asymptote when $t \to \infty$ yields our third model
+Adding the asymptote when $t \to \infty$ yields our third model, and setting the
+constant $k = e$ (the base of the natural logarithm) results in
 \begin{equation} \label{modelThree}
-  m(t) = (a-c) e^{-bt}
+  m(t) = (a-c) e^{-bt} + c
 \end{equation}
 
+Note that we set $e$ as the constant since it assists in regression analysis,
+since we can simply take a natural log of the equation and then perform linear
+regression.\\
+\\
 Our final model is a model presented by Woodings in \FIXME.
 It is a simple polynomial, given as
 \begin{equation} \label{modelFour}
@@ -88,3 +93,70 @@ It might immediately be clear to the reader why this model is inappropriate, but
 we will formally justify its exclusion in the subsection \ref{subsecAppropriateness}.
 
 \subsection{Appropriateness of models} \label{subsecAppropriateness}
+
+Firstly, we will argue that the models \ref{modelOne}, \ref{modelTwo} and
+\ref{modelThree} are sound models.
+We will then show why we discount model \ref{modelFour} as a valid model.\\
+\\
+We can see in each of models \ref{modelOne}, \ref{modelTwo} and \ref{modelThree}
+that if $t = 0$, $m(t) = a$ (condition \ref{conOne}).
+For model \ref{modelOne},
+\begin{equation}
+  \frac{a+0bc}{0b+1} = \frac{a + 0}{0+1} = \frac{a}{1} = a
+\end{equation}
+For model \ref{modelTwo},
+\begin{equation}
+  \frac{a-c}{(0+1)^{b}}+c = \frac{a-c}{1}+c = a-c+c = a
+\end{equation}
+For model \ref{modelThree},
+\begin{equation}
+  (a-c) e^{-0b} + c = (a-c) + c = a
+\end{equation}
+Even in model \ref{modelFour}, this holds;
+\begin{equation}
+  a + 0b + 0^2c = a
+\end{equation}
+
+We next note that models \ref{modelOne}, \ref{modelTwo} and \ref{modelThree}
+also have an asymptote at $c$ (condition \ref{conTwo}).
+For model \ref{modelOne},
+\begin{align}
+  &\lim_{t \to \infty} \frac{a+bct}{bt+1} \\
+    =& \lim_{t \to \infty} (\frac{a}{bt+1} +
+      \frac{bct}{bt+1})\\ \approx&\lim_{t \to \infty} (\frac{a}{bt+1} +
+        \frac{bct}{bt})\\ =& \lim_{t \to \infty} \frac{a}{bt+1} + c\\ = &c
+\end{align}
+For model \ref{modelTwo},
+\begin{equation}
+  \lim_{t \to \infty} (\frac{a-c}{(t+1)^{b}}+c) = (\lim_{t \to \infty}
+  \frac{a-c}{(t+1)a^{b}}) + c = 0 + c = c
+\end{equation}
+For model \ref{modelThree},
+\begin{equation}
+  \lim_{t \to \infty} ((a-c) e^{-bt} + c) = \lim_{t \to \infty} ((a-c) e^{-bt})
+  + c = 0 + c = c
+\end{equation}
+
+The remaining conditions are requirements for the parameter fits that we obtain.
+If the best fit of a model breaks either of conditions \ref{conThree} or
+\ref{conFour}, it is a good reason to doubt the validity of the model.\\
+\\
+But what about model \ref{modelFour}?
+We have already foreshadowed that it is an inappropriate model to use.
+Let us assume that both of conditions \ref{conThree} and \ref{conFour} held.
+Does condition \ref{conTwo} hold?
+\begin{equation}
+  \lim_{t \to \infty} (a + bt + ct^2) = a + \lim_{t \to \infty} (bt+ct^2) =
+  \infty
+\end{equation}
+
+This informal argument states that when $c > 0$ and $b > 0$, there is no
+asymptote --- the model is unbounded and monotonically increases to infinity.
+We can interpret this result as stating that after doing more iterations and
+learning more about the problem, we would take longer to complete it, which I
+think is completely counterintuitive.
+If so, no matter what fit we make, we are going to end up with a result that we
+cannot rely upon.
+This justifies discarding model \ref{modelFour} as a reasonable model to use.
+We are left with three models which are theoretically sound, and which we will
+attempt to calibrate using the data we have.

@@ -1,1 +1,258 @@
 \section{Methodology} \label{secMethod}
+
+Our seven questions, as stated in section \ref{secMotivation}, are
+\begin{enumerate}
+  \item To what extent does learning carry over between two software projects of similar
+  specifications?\label{questOne}
+  \item To what extent does learning carry over between two software projects using
+  similar resources?\label{questTwo}
+  \item To what extent does practice enable us to better predict the effort required
+  for software?\label{questThree}
+  \item How does learning differ as we practice on different problems? \label{questFour}
+  \item Prior research suggests that most of the time spent in making software is spent
+thinking --- if all the thinking has been performed, how long should it take to
+finish a project?\label{questFive}
+  \item  How similar and consistent are the sizes of the solutions\label{questSix}
+  \item Out of the theoretical models we have chosen, which is the best and why?
+  Impicitly, we also ought to answer why the other models are inappropriate.\label{questSeven}
+\end{enumerate}
+
+We restate these questions in a summarised form, since we will be referring to
+them from now on as we discuss our experimental methodology.
+We will discuss our experimental data and methodology, requirements, weaknesses
+and finally reframe each question in terms of our experiment.
+This section is structured as follows
+\begin{itemize}
+  \item subsection \ref{subsecData} discusses our data, how it was collected,
+  what we will measure with and possible experimental errors
+  \item subsection \ref{subsecModelling} discusses the constraints we desire in
+  our models, and gives a general form that our models should ascribe to
+  \item subsection \ref{subsecReform} frames our initial questions from section
+  \ref{secMotivation} in terms of our experiment
+\end{itemize}
+
+\subsection{Data} \label{subsecData}
+
+We have two datasets that we will performs experiments and modelling upon.
+The primary dataset we are using measures the times (in minutes) for
+honours-level students performing programming tasks.
+Each student had to perform a task four times (which we will call \AZ,\AO,\AT\ 
+and \ATh).
+Each student had to complete two different tasks (we will call them \PO\ and
+\PT).
+The two tasks were similar to each other --- both of them revolved around
+methods to find the roots of an equation.
+Furthermore, \PO\ was implemented in two different programming languages of the
+student's selection, which we will refer to \LA\ and \LB.
+The tasks were performed in the order
+\begin{itemize}
+  \item \PO\ with \LA: \AZ, \AO, \AT\ and \ATh
+  \item \PT\ with \LA: \AZ, \AO, \AT\ and \ATh
+  \item \PO\ with \LB: \AZ, \AO, \AT\ and \ATh
+\end{itemize}
+with a three-day gap in between each attempt.\\
+\\
+There are some obvious weaknesses with the dataset; we list four below.
+Firstly, these are student developers, and their knowledge and experience is
+unknown.
+Secondly, these results are self-reported.
+We have no guarantee that the student results are accurate, and that their
+results are not fabricated.
+The third weakness we note is that each student might have a different
+development process which accounts for different times.
+A fourth weakness is that each student used different languages and development
+methods, and could have changed algorithms between iterations.\\
+\\
+The other dataset we use are the times (in minutes), and the lines of code I
+took to complete a programming task involving separating a set of points into
+two clusters, based upon their classification.
+I only did this program using one language (C++).
+I also performed the task four times.
+This approximates the difficulty of the tasks which the students in our first
+dataset completed.\\
+\\
+An obvious issue with this dataset is that my dataset is not centred around
+solving the same problem as the other dataset.
+Furthermore, there is no data in the primary dataset about lines of code.
+Comparisons between my dataset and the primary dataset with regards to lines of
+code will be nonexistent, meaning that we have less rich or interesting data to
+compare against.\\
+\\
+Beyond these experimental issues, there are other issues that pertain to
+the design of our experiment.
+We do not discuss how similar the problems are, or what the actual change in
+specification and resources are between, say, \PO\ and \PT\ or \LA\ and \LB\ 
+respectively.
+This returns us to the original statements about the unmeasurable quality of
+knowledge, and the somewhat arbitrary changes between problems and resources.
+Unfortunately, we cannot justify the selection of problems or the allowance of
+variation in resources using literature.
+Instead we note that in future experiments it would be a source of experimental
+error that should be controlled.
+
+\subsection{Modelling constraints} \label{subsecModelling}
+
+We take the means from the datasets we have found, and perform analyses on them
+to answer our seven questions.
+Our analyses use different models that each have theoretical grounding and
+motivation.
+We give a more in-depth motivation for each model we use in section
+\ref{secModels}.\\
+\\
+However, we can give a general description for our models, by focusing on
+3 desirable attributes of each model.
+Firstly, we note that when students first approached the problem, they knew
+nothing about the problem.
+Secondly, if they were to repeat the problem an infinite amount of times, these students
+should know everything about the problem (which would be an infinite amount of
+knowledge).
+It is then sensible to say that any time they still require is the
+implementation of the solution.
+Thirdly, we should see some non-linear rate over multiple iterations as students acquire
+more knowledge.\\
+\\
+We can formalise this as a set of parameters that our models should incorporate:
+\begin{itemize}
+  \item $a$: the amount of time taken to complete the solution with no knowledge,
+  which should be the value the model takes on \AZ
+  \item $c$: the amount of time taken to complete the solution with complete
+  knowledge, which should be the value the model takes as the number of attempts
+  goes to infinite --- this is the same as saying the model asymptotes at $c$
+  \item $b$: the learning rate, which should determine the curvature of the
+  model and control how fast the students learn
+\end{itemize}
+
+\FIXME graph goes here to show everything
+
+Furthermore, we can impose constraints on the best fits we can get --- that $a$
+and $c$ should be positive values, since taking 0 or negative time to complete a
+solution makes no sense.
+$b$ should also be positive since negative learning would make very little
+sense.\\
+\\
+We have encoded several assumptions into our models, as listed below:
+\begin{itemize}
+  \item developers knew nothing about a problem before they began working on it
+  \item there is an infinite amount of knowledge involved in understanding each
+  problem
+  \item the assumptions we made about our dataset, such as students having
+  comparable algorithms, resources and consistent usage of each, was not easily
+  encoded
+\end{itemize}
+
+These assumtions weaken our results slightly, since different developers might
+do different things (indeed, we will comment on students in the primary
+dataset where our model might make no sense for them).
+However, I personally feel that the majority of students would follow the same
+algorithm, have very little or no knowledge about the problem they were working
+on when they first began, and always be able to learn more about the problem as
+they continued to work on it.
+
+\subsection{Reformulating our questions} \label{subsecReform}
+
+We can now frame our questions in terms of our methodology.
+We present the questions in terms of our experiment and models.\\
+\\
+Our original question \ref{questOne} asked about 
+\begin{quote}
+  To what extent does learning carry over between two software projects of similar
+  specifications?
+\end{quote}
+
+The reformulated question asks
+\begin{quote}
+  What are the differences in $a$ between \PO\ using \LA\ and \PT\ using \LA?
+\end{quote}\label{qq1}
+
+Since these are the similar problems, done with the same resources, but with
+\PO\ attempted after \PT, we can use the learning from completing \PO\ to
+discuss how this affected completion of \PT.\\
+\\
+Question \ref{questTwo} originally asked
+\begin{quote}
+  To what extent does learning carry over between two software projects using
+  similar resources?
+\end{quote}
+
+Similar to question \ref{questOne}, our framework allows us to ask
+\begin{quote}
+   What are the differences in $a$ between \PO\ using \LA\ and \PO\ using
+  \LB?
+\end{quote} \label{qq2}
+
+Again, this is the same problem with different resources and we can thus
+translate this perfectly into our original question \ref{questTwo}.\\
+\\
+The original question \ref{questThree} asked
+\begin{quote}
+  To what extent does practice enable us to better predict the effort required
+  for software?
+\end{quote}
+
+Our models are designed to aid in predicting the effort required for further iterations of
+this software development.
+Given we have done this much practice now, how reliable are our predictions for
+the effort needed for future iterations?
+This question is framed in our experimental context simply as
+\begin{quote}
+  How well do our models fit the data?
+\end{quote}\label{qq3}
+
+In question \ref{questFour} we ask
+\begin{quote}
+  How does learning differ as we practice on different problems? 
+\end{quote}
+
+We want to know how our learning has changed between each of the problems and
+resources we have worked on.
+Has learning decreased as a result of knowing more about the problem domain?
+How does the rate of learning compare between each model?
+This question is thus easily rephrased as
+\begin{quote}
+   How does $b$ change between each of \PO\ in \LA, \PO\ in
+   \LB\ and \PT\ in \LA?
+\end{quote} \label{qq4}
+
+Question \ref{questFive} says
+\begin{quote}
+  Prior research suggests that most of the time spent in making software is spent
+  thinking --- if all the thinking has been performed, how long should it take to
+  finish a project?
+\end{quote}
+
+This question can be rephrased in terms of the minimum time to complete a task,
+     which is the implementation time with maximal knowledge achieved.
+Within our framework it asks
+\begin{quote}
+  What are the values for $c$ for each of \PO\ in \LA, \PO\ in \LB\ and \PT\ in
+  \LA, and how reliable are these results?
+\end{quote} \label{qq5}
+
+In question \ref{questSix}, we explore
+\begin{quote}
+  How similar and consistent are the sizes of the solutions?
+\end{quote}
+
+Our only proxy for size is the oft-used, but never accurate ``lines of code"
+metric.
+We claim it to be never accurate due to the ill-defined nature of a ``line" of
+code.
+Is whitespace a line?
+Is documentation?
+If a program is written in a functional language (which are renowned for being
+terse and short) is it the same size as a program written in Java (a verbose
+language)?
+Thus our reformulated question states
+\begin{quote}
+  What is the variation in the lines of code of the solutions?
+\end{quote} \label{qq6}
+
+Finally, question \ref{questSeven} asks about the fit for our own data, and what we can
+infere about the models and their suitability for our development and learning
+process.
+We can say that our question \ref{questSeven} can stay as is --- that is
+\begin{quote}
+  Out of the theoretical models we have chosen, which is the best for modelling
+  our process and why?
+  Impicitly, we also ought to answer why the other models are inappropriate.
+\end{quote} \label{qq7}

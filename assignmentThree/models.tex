@@ -1,1 +1,90 @@
-\section{Measurements} \label{secModels}
+\section{Models} \label{secModels}
+
+In section \ref{secMethod} we outlined three different criteria that our models
+needed to fulfill.
+
+\begin{itemize}
+  \item $a$: the amount of time taken to complete the solution with no knowledge,
+  which should be the value the model takes on \AZ
+  \item $c$: the amount of time taken to complete the solution with complete
+  knowledge, which should be the value the model takes as the number of attempts
+  goes to infinite --- this is the same as saying the model asymptotes at $c$
+  \item $b$: the learning rate, which should determine the curvature of the
+  model and control how fast the students learn
+\end{itemize}
+
+Furthermore, we inferred that $a > c > 0$ and $b > 0$, and this adds additional
+implicit constraints on our models.
+We present four models that were suggested by Woodings for usage.
+Much of their motivation comes from an unpublished paper by Woodings. \FIXME
+We apply each of the constraints that we have to ensure that they comply with
+our criteria.\\
+\\
+For a model $m$, a function of $t$ (the number of iterations), our constraints, as equations, are
+\begin{equation}
+  t = 0 \implies m(t) = a
+\end{equation}
+\begin{equation}
+  \lim_{t \to \infty} m(t) = c
+\end{equation}
+\begin{equation}
+  b > 0
+\end{equation}
+\begin{equation}
+  a > c > 0
+\end{equation}
+
+We present each of our models in subsection \ref{subsecModels} and justify why
+they are valid (or invalid) models in subsection \ref{subsecAppropriateness}.
+
+\subsection{Models} \label{subsecModels}
+
+This following section is based on an unpublished paper by Woodings, which we
+reproduce for the completeness of the paper.
+It is a good motivation for each of the models we use, and it is clear, by
+inspection, that each of the models will be able to fit the criterion.\\
+\\
+Our first model is based on the logarithmic Poisson distribution, which
+deals with time-based data and incidents.
+This hyperbolic model is ideal and has been used to analyse failure intensity.
+This model is given by
+\begin{equation} \label{modelOne}
+  m(t) = \frac{a+bct}{bt+1}
+\end{equation}
+
+Our second model is a psychological model on learning, which is used by Kemerer
+and Sherdii\FIXME referencing.
+We can derive a similar equation to the one used in Humphries Personal Software
+Process (PSP) \FIXME referencing, resulting in
+\begin{equation} \label{modelTwo}
+  m(t) = \frac{a-c}{(t+1)^{b}}+c
+\end{equation}
+
+Our third model is based on the idea that the improvement is proportional
+smaller than
+the effort we have previously invested --- that is, improvement is some function of the
+previous iteration's effort.
+This can be encapsulated by 
+\[
+  m(t+1) = k m(t)
+\]
+where $0 \leq k \leq 1$ is some constant.\\
+\\
+This then yields
+\[
+  m(t) = k^t 
+\]
+Adding the asymptote when $t \to \infty$ yields our third model
+\begin{equation} \label{modelThree}
+  m(t) = (a-c) e^{-bt}
+\end{equation}
+
+Our final model is a model presented by Woodings in \FIXME.
+It is a simple polynomial, given as
+\begin{equation} \label{modelFour}
+  m(t) = a + bt + ct^2
+\end{equation}
+It might immediately be clear to the reader why this model is inappropriate, but
+we will formally justify its exclusion in the subsection \ref{subsecAppropriateness}.
+
+\subsection{Appropriateness of models} \label{subsecAppropriateness}

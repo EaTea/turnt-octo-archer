@@ -19,15 +19,16 @@ Subsection \ref{subsecP2LA} shows the results of fitting our three models to
 
 Some basic analyses that we performed on the data are presented below.
 Although they do not contribute to answering our seven questions, we can make
-some further comments and possible insights into the data and its usefulness.
-
+some further comments and possible insights into the data and its usefulness.\\
+\\
 First, we begin by analysing the data for \PO\ when it was completed four
-separate times in \LA, as shown in table \ref{tableP1La}.
-\begin{table}
+separate times in \LA, as shown in table \ref{tableP1LA}.
+
+\begin{table}[ht!]
 \centering
 \begin{tabular}{|c|c|c|}
 \hline
-{\bf Attempt} &  {\bf Mean} & {\bf Standard Deviation} \\
+{\bf Attempt} &  {\bf Mean (minutes)} & {\bf Standard Deviation (minutes)} \\
 \hline
 \AZ & 172.857 & 91.6195 \\
 \hline
@@ -51,15 +52,16 @@ standard deviation (approximately the spread of student times) began to contract
 However, the standard deviation as a percentage of the mean is still quite high.
 This suggests that although the skill of the group as a whole was increasing, the
 rates of learning, and the way that each student approached each iteration were quite
-different across the entire group.
-
+different across the entire group.\\
+\\
 Table \ref{tableP1LB} shows the analysis of the data for completing \PO\ in
 \LB\ four times.
-\begin{table}
+
+\begin{table}[ht!]
 \centering
 \begin{tabular}{|c|c|c|}
 \hline
-{\bf Attempt} &  {\bf Mean} & {\bf Standard Deviation} \\
+{\bf Attempt} &  {\bf Mean (minutes)} & {\bf Standard Deviation (minutes)} \\
 \AZ & 102.643 & 40.3229 \\
 \hline
 \AO & 62.7143 & 38.0777 \\
@@ -82,15 +84,16 @@ first set of data.
 The mean of their final times was comparable to the mean time taken for the final attempt
 of \PO\ in \LA, but the spread has dramatically decreased.
 This suggests that the students' skills and knowledge were converging and suggests this
-dataset was much more reliable.
-
+dataset was much more reliable.\\
+\\
 Table \ref{tableP2LA} shows the analysis of the data for completing \PT\ in
 \LA\ four times.
-\begin{table}
+
+\begin{table}[ht!]
 \centering
 \begin{tabular}{|c|c|c|}
 \hline
-{\bf Attempt} &  {\bf Mean} & {\bf Standard Deviation} \\
+{\bf Attempt} &  {\bf Mean (minutes)} & {\bf Standard Deviation (minutes)} \\
 \hline
 \AZ & 100.143 & 70.1415 \\
 \hline
@@ -98,7 +101,8 @@ Table \ref{tableP2LA} shows the analysis of the data for completing \PT\ in
 \hline
 \AT & 49.9286  & 38.8794 \\
 \hline
-\ATh & 39.1429 & 34.9436
+\ATh & 39.1429 & 34.9436\\
+\hline
 \end{tabular}
 \caption{Data from the analysis of \PT\ when completed with \LA.}
 \label{tableP2LA}
@@ -114,7 +118,7 @@ changes.
 
 \subsection{Problem one in language A} \label{subsecP1LA}
 
-\begin{table}
+\begin{table}[ht!]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -122,11 +126,11 @@ changes.
 \hline
 $m_1$ & 172.652 & 0.712 & -19.8246 \\
 \hline
-{\bf constrained} $m_1$ & 172.931 & 281.107 & 64.8165 \\
+constrained $m_1$ & 172.931 & 281.107 & 64.8165 \\
 \hline
 $m_2$ & 172.607 & 0.638207 & -49.9154\\
 \hline
-{\bf constrained} $m_2$ & 172.857 & $1.67721 \times 10^10$ & 65.0713 \\
+constrained $m_2$ & 172.857 & $1.67721 \times 10^10$ & 65.0713 \\
 \hline
 $m_3$ & 172.322 & 0.794716 & 29.691 \\
 \hline
@@ -135,7 +139,7 @@ $m_3$ & 172.322 & 0.794716 & 29.691 \\
 \label{table:P1LA:abc}
 \end{table}
 
-\begin{table}
+\begin{table}[ht!]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -143,11 +147,11 @@ $m_3$ & 172.322 & 0.794716 & 29.691 \\
 \hline
 $m_1$ & 4.51941 & 0.18701 & 19.8109 \\
 \hline
-{\bf constrained} $m_1$ & 35.9144 & 53906.8 & 49.4857 \\
+constrained $m_1$ & 35.9144 & 53906.8 & 49.4857 \\
 \hline
 $m_2$ & 4.1785 & 0.236003 & 54.71152\\
 \hline
-{\bf constrained} $m_2$ & N/A & N/A & N/A \\
+constrained $m_2$ & N/A & N/A & N/A \\
 \hline
 $m_3$ & 6.34312 & 0.189644 & 13.1391 \\
 \hline
@@ -156,29 +160,30 @@ $m_3$ & 6.34312 & 0.189644 & 13.1391 \\
 \label{table:P1LA:abc:error}
 \end{table}
 
-Model One gave
-Fit residuals = $\{0.205268, -1.80489, 3.61833, -2.01871\}$
-
-After adding in conditions \ref{conThree} and \ref{conFour} as explicit model
-constraints, as opposed to testing whether they were true after the fit
-with the fit not converging
-Fit residuals = $\{-0.738226, 26.0146, -1.2227, -24.7302\}$
-
-Model two gave
-with error $a = 4.1785, b = 0.236003 c = 54.71152$
-Fit residuals = $\{0.249911, -1.84353, 3.32579, -1.73217\}$
-
-After adding in conditions \ref{conThree} and \ref{conFour}
-$a = 172.857, b = 1.67721 \times 10^10, c = 65.0713$ and crashed the engine,
-  unable to get error but assume this result is junk
-Fit residuals = $\{0.000113456, 26.143, -1.2856, -24.857\}$
-
-Model three gave
-Fit residuals = $\{0.535135, -2.909451, 4.99205, -2.62268\}$
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+{\bf Model} & Sum of squares \\
+\hline
+$m_1$ & 20.4672649169\\
+\hline
+constrained $m_1$ & 1290.3821781171\\
+\hline
+$m_2$ & 17.5223504018\\
+\hline
+constrained $m_2$ & 1302.9796653729\\
+\hline
+$m_3$ & 40.5502881745 \\
+\hline
+\end{tabular}
+\caption{Sum of squares of the residuals for the best fits for each of the models for \PO\ in \LA.}
+\label{table:P1LA:abc:sumsquares}
+\end{table}
 
 \subsection{Problem one in language B} \label{subsecP1LB}
 
-\begin{table}
+\begin{table}[ht!]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -195,7 +200,7 @@ $m_3$ & 102.57 & 1.03095 & 41.3707 \\
 \label{table:P1LB:abc}
 \end{table}
 
-\begin{table}
+\begin{table}[ht!]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -205,32 +210,33 @@ $m_1$ & 0.200046 & 0.0268934 & 0.635585 \\
 \hline
 $m_2$ & 0.224989 & 0.0312964 & 1.17134\\
 \hline
-$m_3$ & 102.57 & 1.03095 & 41.3707 \\
+$m_3$ & 1.24103 & 0.0954955 & 1.80347 \\
 \hline
 \end{tabular}
-\caption{Parameters of the best fits for each of the models for \PO\ in \LB.}
+\caption{Standard errors for the parameters of the best fits for each of the models for \PO\ in \LB.}
 \label{table:P1LB:abc:error}
 \end{table}
 
-Model One gave
-$a = 103.736 b = 1.05646 c = 25.0616$
-with error $a = 0.200046, b = 0.0268934, c = 0.635585$
-Fit residuals = $\{0.00553068, -0.0701684, 0.160782, -0.0961443\}$
-
-Model two gave
-$a = 102.633 b = 1.05789 c = 25.9886$
-
-with error $a = 0.224989, b = 0.0312964 c = 1.17134$
-Fit residuals = $\{0.00975271, -0.089332, 0.180277, -0.100698\}$
-
-Model three gave
-$a = 102.57 b = 1.03095 c = 41.3707$ with error
-$a = 1.24103, b = 0.0954955 c = 1.80347$
-Fit residuals = $\{0.0732756, -0.481464, 0.986894, -0.576006\}$
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+{\bf Model} & Sum of squares \\
+\hline
+$m_1$ & 0.0400487707\\
+\hline
+$m_2$ & 0.0507152055\\
+\hline
+$m_3$ & 1.5429195761\\
+\hline
+\end{tabular}
+\caption{Sum of squares of the residuals for the best fits for each of the models for \PO\ in \LB.}
+\label{table:P1LB:abc:sumsquares}
+\end{table}
 
 \subsection{Problem two in language A} \label{subsecP2LA}
 
-\begin{table}
+\begin{table}[ht!]
 \centering
 \begin{tabular}{|c|c|c|c|}
 \hline
@@ -247,17 +253,36 @@ $m_3$ & 99.9429 & 1.39094 & 41.4713 \\
 \label{table:P2LA:abc}
 \end{table}
 
-Model One gave
-$a = 100.079 b = 1.78221 c = 30.7798$
-with error $a = 4.94326, b = 1.25419, c = 11.5227$
-Fit residuals = $\{0.0634576, -1.47362, 3.96621, -2.55605\}$
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+{\bf Model} &  $a$ & $b$ & $c$ \\
+\hline
+$m_1$ & 4.94326 & 1.25419 & 11.5227 \\
+\hline
+$m_2$ & 5.18028 & 0.883591 & 13.2946 \\
+\hline
+$m_3$ & 6.08996 & 0.662606 & 6.49302 \\
+\hline
+\end{tabular}
+\caption{Standard errors for the parameters of the best fits for each of the models for \PT\ in \LA.}
+\label{table:P2LA:abc:error}
+\end{table}
 
-Model two gave
-$a = 100 b = 1.62075 c = 34.7768$
-with error $a = 5.18028, b = 0.883591 c = 13.2946$
-Fit residuals = $\{0.142489, -1.77108, 4.158877, -2.53028\}$
-
-Model three gave
-$a = 99.9429 b = 1.39094 c = 41.4713$ with error
-$a = 6.08996, b = 0.622606 c = 6.49302$
-Fit residuals = $\{0.199972, -1.80719, 4.8336, -3.22939\}$
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+{\bf Model} & Sum of squares \\
+\hline
+$m_1$ & 24.439796138\\
+\hline
+$m_2$ & 26.8556022611\\
+\hline
+$m_3$ & 37.098573229\\
+\hline
+\end{tabular}
+\caption{Sum of squares of the residuals for the best fits for each of the models for \PT\ in \LA.}
+\label{table:P2LA:abc:error}
+\end{table}

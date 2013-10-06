@@ -118,6 +118,21 @@ changes.
 
 \subsection{Problem one in language A} \label{subsecP1LA}
 
+We first present our results for \PO\ in \LA.
+Table \ref{table:P1LA:abc} shows our best fit parameters.
+Table \ref{table:P1LA:abc:error} gives the standard errors for each of the
+parameter estimates.
+Table \ref{table:P1LA:abc:sumsquares} is the sum of squares of the residuals of
+the model against the data, giving us a rough idea of how good the fit was.\\
+\\
+Before showing the data, a brief comment about the models.
+This is the only dataset where models $m_1$ and $m_2$ were unable to give
+sensible results.
+This is also the dataset with the greatest change in times from \AZ\ to \ATh.
+We conjecture without proof or evidence that models $m_1$ and $m_2$ are not
+tolerant to substantial increases in knowledge (and implicitly greatly reduced
+time taken in each attempt).
+
 \begin{table}[ht!]
 \centering
 \begin{tabular}{|c|c|c|c|}
@@ -139,6 +154,34 @@ $m_3$ & 172.322 & 0.794716 & 29.691 \\
 \label{table:P1LA:abc}
 \end{table}
 
+During the modelling process, $m_1$ and $m_2$ both found negative $c$ values to
+give the best fit.
+This is quite troubling --- it suggests that these models are both inappropriate
+for use in modelling learning.
+The constrained $m_1$ and $m_2$ models have the additional constraints given in
+Equations \ref{conThree} and \ref{conFour}, that is
+\[
+  a > c > 0
+\]
+and
+\[
+  b > 0.
+\]
+
+Adding these constraints in did not result in a good fit --- Mathematica
+returned that the fit did not converge and gave nonsensical values for $b$ (that
+is the learning rate).
+This suggests that both $m_1$ and $m_2$ are inappropriate for modelling repeated
+iterations of a task.
+$m_3$ finds a more suitable fit which suggests that it was more robust in
+finding sensible fits.
+A final comment is that the $a$ values are all very similar and have negligble
+differences between them, suggesting that the $a$ values are relatively similar.
+More information might be found by examining the confidence for each of the
+parameter fits that Mathematica found.
+
+\FIXME grapph here
+
 \begin{table}[ht!]
 \centering
 \begin{tabular}{|c|c|c|c|}
@@ -156,9 +199,25 @@ constrained $m_2$ & N/A & N/A & N/A \\
 $m_3$ & 6.34312 & 0.189644 & 13.1391 \\
 \hline
 \end{tabular}
-\caption{Standard error on the parameters of the best fits for each of the models for \PO\ in \LA.}
+\caption{Standard error on the parameters of the best fits for each of the models for \PO\ in \LA.
+Note that when calculating the standard errors for the constrained $m_2$ the
+  computer repetitively crashed and so these values are not included.}
 \label{table:P1LA:abc:error}
 \end{table}
+
+We take the standard errors for each of the parameters from each of the fits that Mathematica yielded.
+Notice that while the $a$ parameters have low errors, the errors for $c$ and $b$ are
+much greater (indeed, they are significant percentages of the parameters $c$ and
+$b$ --- as an example, giving a confidence interval of approximately $\pm
+23.78\%$ for the $b$-value of $m_3$).
+Even more interesting are the standard errors for $b$ in the constrained $m_1$
+and $m_2$.
+This is a ridiculous
+figure in the constrained $m_1$ and it unfortunately crashed Mathematica (and my
+computer) when calculating the errors for the constrained $m_2$.
+This suggests that these models did not fit very well to the data given, and
+that although our value for $a$ is relatively accurate our value for $c$ is
+quite inaccurate.
 
 \begin{table}[ht!]
 \centering
@@ -181,7 +240,22 @@ $m_3$ & 40.5502881745 \\
 \label{table:P1LA:abc:sumsquares}
 \end{table}
 
+It is most interesting to note that although the constrained $m_1$ and $m_2$ did
+not fit well (and hence we ought to disregard them),
+the unconstrained models $m_1$ and $m_2$ had very low sums of
+squares compared to $m_3$ --- this suggests that perhaps they could fit the data
+very well, but not in a sensible manner.
+This seems to support the conjecture that they are not tolerant to such high
+learning rates and will give nonsensical results.
+
 \subsection{Problem one in language B} \label{subsecP1LB}
+
+We now present our results for \PO\ in \LB.
+Table \ref{table:P1LB:abc} shows our best fit parameters.
+Table \ref{table:P1LB:abc:error} gives the standard errors for each of the
+parameter estimates.
+Table \ref{table:P1LB:abc:sumsquares} is the sum of squares of the residuals of
+the model against the data, giving us a rough idea of how good the fit was.
 
 \begin{table}[ht!]
 \centering
@@ -200,6 +274,15 @@ $m_3$ & 102.57 & 1.03095 & 41.3707 \\
 \label{table:P1LB:abc}
 \end{table}
 
+Notice again that the $a$ values are relatively similar.
+This time, the $b$ values are also quite close, and the $c$ values are the only
+real differences in the models.
+Each of these models gave sensible results, which suggests that since the
+learning rate between each iteration seemed lower compared attempts in \PO\ in
+\LB, the model is able to give useful and meaningful results.
+
+\FIXME grapph here
+
 \begin{table}[ht!]
 \centering
 \begin{tabular}{|c|c|c|c|}
@@ -216,6 +299,13 @@ $m_3$ & 1.24103 & 0.0954955 & 1.80347 \\
 \caption{Standard errors for the parameters of the best fits for each of the models for \PO\ in \LB.}
 \label{table:P1LB:abc:error}
 \end{table}
+
+The errors in Table \ref{table:P1LB:abc:error} are miniscule in comparison to
+Table \ref{table:P1LA:abc:error}.
+Notice that $m_1$ had the smallest errors, whilst $m_3$ had consistently higher
+errors than $m_1$ or $m_2$.
+This suggests that $m_3$ might be more tolerant to high learning rates, but
+gives a poorer fit overall.
 
 \begin{table}[ht!]
 \centering
@@ -234,7 +324,23 @@ $m_3$ & 1.5429195761\\
 \label{table:P1LB:abc:sumsquares}
 \end{table}
 
+The results of the standard errors in Table \ref{table:P1LB:abc:error} are
+confirmed in Table \ref{table:P1LB:abc:sumsquares} (the sum of squares of the
+residuals).
+Although alll models have very low sum of squares, $m_3$ has a greater sum of
+squares of the residuals than $m_1$ and $m_2$.
+Furthermore, $m_1$ again had the lowest sum of squares (and as shown in Table
+\ref{table:P1LB:anc:error} the lowest errors for the parameters) which suggests
+that here, it was the best fit.
+
 \subsection{Problem two in language A} \label{subsecP2LA}
+
+We now present our results for \PO\ in \LB.
+Table \ref{table:P2LA:abc} shows our best fit parameters.
+Table \ref{table:P2LA:abc:error} gives the standard errors for each of the
+parameter estimates.
+Table \ref{table:P2LA:abc:sumsquares} is the sum of squares of the residuals of
+the model against the data, giving us a rough idea of how good the fit was.
 
 \begin{table}[ht!]
 \centering
@@ -253,6 +359,14 @@ $m_3$ & 99.9429 & 1.39094 & 41.4713 \\
 \label{table:P2LA:abc}
 \end{table}
 
+Again, as in Table \ref{table:P1LA:abc} and \ref{table:P1LB:abc} we note that
+the $a$ values as shown in Table \ref{table:P2LA:abc} are very similar.
+The $b$ values show much more difference than in Table \ref{table:P1LB:abc}, and
+the $c$ values show a reasonable variation (this is by inspection only, and
+without justification through evidence).
+
+\FIXME grapph here
+
 \begin{table}[ht!]
 \centering
 \begin{tabular}{|c|c|c|c|}
@@ -270,6 +384,15 @@ $m_3$ & 6.08996 & 0.662606 & 6.49302 \\
 \label{table:P2LA:abc:error}
 \end{table}
 
+Table \ref{table:P2LA:abc:error} shows some interesting results.
+First, we see that the $a$ values have similar errors that are quite small,
+whilst the $b$ values have significant errors, suggesting confidence intervals
+that can be as high as $\pm 70.372\%$ (for the $b$ value of model $m_1$).
+Secondly, we note that the $c$ values had high errors in all models except $m_3$
+--- indeed, $m_3$ had extremely low errors for the $b$ and $c$ values.
+We ought to note that in Table \ref{tableP2LA} the differences between the means
+of each attempt are quite extreme and perhaps are not as amenable to analysis.
+
 \begin{table}[ht!]
 \centering
 \begin{tabular}{|c|c|}
@@ -286,3 +409,21 @@ $m_3$ & 37.098573229\\
 \caption{Sum of squares of the residuals for the best fits for each of the models for \PT\ in \LA.}
 \label{table:P2LA:abc:error}
 \end{table}
+
+The sum of squares of residuals as shown in Table \ref{table:P2LA:abc:error}
+supports our suggestions that this dataset was not as amenable to analysis.
+Again we see that $m_1$ had the lowest sum of squares, which suggests it was the
+best fit.\\
+\\
+From our data, we would suggest that $m_1$ would give the best fits from our analysis of \PT\
+in \LA\ and \PO\ in \LB.
+However, the useless results it gives in analysing the dataset for \PO\ in \LA\
+suggests that it is not tolerant to extremely high learning rates and should be
+used with care.
+We also note that $m_3$ will consistently give good and useful results but will
+not fit as well as $m_1$, though it is a good alternative when the $m_1$ gives
+bad results.
+Since we have so few data points, it is a very rudimentary and early analysis
+and we note that our results are still not very reliable.
+We will next try using our models $m_1$, $m_2$ and $m_3$ to analyse my data and
+a random student's data.

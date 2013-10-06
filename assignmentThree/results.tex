@@ -14,8 +14,8 @@ Subsection \ref{subsecP1LB} shows the results of fitting our three moodels to
 \PO\ using \LB.
 Subsection \ref{subsecP2LA} shows the results of fitting our three models to
 \PT\ using \LA.
-Subsection \ref{subsecInd} shows individual results --- namely, my own and that
-of a randomly selected student, to show how the models may be inappropriate for
+Subsection \ref{subsecInd} shows individual results --- namely, my own for both
+lines of code and time to show how the models may be inappropriate for
 an individual's design process.
 
 \subsection{Analysing the data} \label{subsecData}
@@ -410,10 +410,10 @@ $m_3$ & 37.098573229\\
 \hline
 \end{tabular}
 \caption{Sum of squares of the residuals for the best fits for each of the models for \PT\ in \LA.}
-\label{table:P2LA:abc:error}
+\label{table:P2LA:abc:sumsquares}
 \end{table}
 
-The sum of squares of residuals as shown in Table \ref{table:P2LA:abc:error}
+The sum of squares of residuals as shown in Table \ref{table:P2LA:abc:sumsquares}
 supports our suggestions that this dataset was not as amenable to analysis.
 Again we see that $m_1$ had the lowest sum of squares, which suggests it was the
 best fit.\\
@@ -433,7 +433,29 @@ a random student's data.
 
 \subsection{Individual Data}
 
-\begin{table}
+In this section, we show how my own data fits the different curves.
+Some comments about my design process:
+\begin{itemize}
+  \item I completed the task in C++
+  \item in \AZ\ I attempted to adhere to good design practices, but this
+  diminished as I completed more iterations of the task
+  \item I used the same algorithm each time
+  \item I had a Waterfall-esque design methodology
+\end{itemize}
+
+Firstly, we will fit my lines of code to the data.
+\begin{itemize}
+  \item Table \ref{table:LOC} gives the lines of code in a tabulated form
+  \item Figure \ref{table:LOC} shows a line graph of the lines of code
+  \item Table \ref{table:LOC:abc} shows the parameters of the best fits for the
+  models we were given
+  \item Table \ref{table:LOC:error} shows the standard errors on the parameters
+  for the best fits of the models we use
+  \item Table \ref{table:LOC:sumsquares} shows the sums of the squares of the
+  residuals for the models we are given
+\end{itemize}
+
+\begin{table}[ht!]
 \centering
 \begin{tabular}{|c|c|c|c|c|}
 \hline
@@ -442,17 +464,215 @@ Attempt & \AZ & \AO & \AT & \ATh\\
 Lines of code & 224 & 114 & 98 & 98 \\
 \hline
 \end{tabular}
-\caption{My own individual data for lines of code.}
-\label{table:loc}
+\caption{My own individual data for lines of code. Standard deviation of
+  60.80296, coefficient of variation of 0.455453 and mean of 133.5 lines of
+    code.}
+\label{table:LOC}
 \end{table}
 
-\begin{figure}
+\begin{figure}[ht!]
 \centering
 \FIXME
 \caption{The lines of code as a line graph --- notice that it may also be
   amenable to a similar analysis as the one we performed in the previous
     subsections.}
-\label{figure:loc}
+\label{figure:LOC}
 \end{figure}
 
+What is notable is the (almost) halving of the number of lines of code between
+\AZ\ and \AO.
+This is due to me cutting a lot of unnecessary code out of the solutions I used.
+This will have interesting effects on the rest of my results, as we will see in
+later fiures.
 
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+{\bf Model} &  $a$ & $b$ & $c$ \\
+\hline
+$m_1$ & 224.012 & 3.99377 & 85.3736 \\
+\hline
+$m_2$ & 224.028 & 2.71905 & 93.5197\\
+\hline
+$m_3$ & 224.015 & 2.01731 & 96.8399 \\
+\hline
+\end{tabular}
+\caption{Parameters of the best fits for each of the models for the my data's
+  lines of code.}
+\label{table:LOC:abc}
+\end{table}
+
+\FIXME grapph here
+
+We note that each of these fits again has a similar $a$ value, but 
+reasonably varying $c$ values.
+The learning rate on each also changes, but at least each one has given sensible
+values in this situation.
+We suspect that the data points for \AT\ and \ATh\ are helpful in this regard in
+stabilising the asymptote, since they are (quite surprisingly) exactly the same
+(as shown in Table \ref{table:LOC}).
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+{\bf Model} &  $a$ & $b$ & $c$ \\
+\hline
+$m_1$ & 3.51731 & 1.34623 & 6.19293 \\
+\hline
+$m_2$ & 2.64776 & 0.343038 & 3.418991\\
+\hline
+$m_3$ & 1.41017 & 0.112121 & 1.18685 \\
+\hline
+\end{tabular}
+\caption{Standard errors for the parameters of the best fits for each of the
+  models for my data's lines of code.}
+\label{table:LOC:abc:error}
+\end{table}
+
+We note that the parameterisations here have low error values, suggesting that
+they were very amenable to analysis and fitting.
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+{\bf Model} & Sum of squares \\
+\hline
+$m_1$ & 12.37157\\
+\hline
+$m_2$ & 7.011418\\
+\hline
+$m_3$ & 1.988815\\
+\hline
+\end{tabular}
+\caption{Sum of squares of the residuals for the best fits for each of the
+  models for my data's lines of code.}
+\label{table:LOC:abc:sumsquares}
+\end{table}
+
+Complimenting the conjectures arising from inspecting the values in Table
+\ref{table:LOC:abc:error}, the sum of squares of the residuals in Table
+\ref{table:LOC:abc:sumsquares} are small, suggesting that the fits themselves
+were quite good.
+We see that here, $m_3$ has the least sum of squares, suggesting it is the most
+appropriate model to use.\\
+\\
+We now present the values for my time-based data.
+Firstly, we show its tabulated and graphical forms in Table \ref{table:mytimes}
+and Figure \ref{figure:mytimes}.
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Attempt & \AZ & \AO & \AT & \ATh\\
+\hline
+Time (minutes) & 366 & 88 & 44 & 23 \\
+\hline
+\end{tabular}
+\caption{My own individual data for time (in minutes) per attempt. Standard
+  deviation of 159.48333, coefficient of variation of 1.2244 and mean of 130.25.}
+\label{table:mytimes}
+\end{table}
+
+\begin{figure}[ht!]
+\centering
+\FIXME
+\caption{The lines of code as a line graph --- the huge drop from \AZ\ to \AO\
+  suggests that analyses of this dataset might not be very effective.}
+\label{figure:mytimes}
+\end{figure}
+
+This dataset might be much more difficult to analyse, due to the differences
+between each data point being quite large and unpredictable.
+This was due to spending a long time thinking, learning and debugging in \AZ,
+whilst being able to effectively employ this knowledge in \AO.
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+{\bf Model} &  $a$ & $b$ & $c$ \\
+\hline
+$m_1$ & 365.988 & 2.53243 & -21.1487 \\
+\hline
+$m_2$ & 365.933 & 2.10872 & 5.5325 \\
+\hline
+$m_3$ & 365.833 & 1.66211 & 25.3253 \\
+\hline
+\end{tabular}
+\caption{Parameters of the best fits for each of the models for the my data's
+  time per attempt.}
+\label{table:mytimes:abc}
+\end{table}
+
+\FIXME grapph here
+
+Again, we see that the parameters of $m_1$ have fallen below 0, suggesting that
+$m_1$ is not tolerant to such unpredictable, huge jumps.
+$m_2$ has a somewhat suspicious result --- 5 and a half minutes to complete this
+problem seems too short.
+$m_3$ is probably the most sensible model, by inspection.
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|c|c|c|}
+\hline
+{\bf Model} &  $a$ & $b$ & $c$ \\
+\hline
+$m_1$ & 1.64553 & 0.116261 & 3.31338 \\
+\hline
+$m_2$ & 3.66321 & 0.13148 & 6.43122 \\
+\hline
+$m_3$ & 8.15699 & 0.177838 & 7.62098 \\
+\hline
+\end{tabular}
+\caption{Standard errors for the parameters of the best fits for each of the
+  models for my data's time per attempt.}
+\label{table:mytimes:abc:error}
+\end{table}
+
+The errors shown in Table \ref{table:mytimes:abc:error} disagree with my
+rudimentary analysis, however.
+$m_3$ appears to have suffered a lot of errors, especially in predicting $c$,
+due to the huge jumps.
+It also had a surprisingly large error in predicting $a$.
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|c|}
+\hline
+{\bf Model} & Sum of squares \\
+\hline
+$m_1$ & 2.707908\\
+\hline
+$m_2$ & 13.42355\\
+\hline
+$m_3$ & 66.56446\\
+\hline
+\end{tabular}
+\caption{Sum of squares of the residuals for the best fits for each of the
+  models for my data's time per attempt.}
+\label{table:mytimes:abc:sumsquares}
+\end{table}
+
+Table \ref{table:mytimes:abc:sumsquares} further suggests that $m_3$ is
+inappropriate, due to having a very large least sums of squares.
+However, given the results that both $m_1$ and $m_2$ have shown and how they are
+somewhat impossible, I feel that $m_3$'s parameters, though a poor fit are more
+believable and useful that $m_1$ and $m_2$.\\
+\\
+I believe that overall, $m_3$ would have to be the appropriate model for my
+learning process, due to it being sensible in terms of its results and also
+approximating my final time required to complete the project much more closely
+than $m_1$ and $m_2$.
+It shows me taking a long time to, in an unguided fashion, perform a task.
+Once I have successfully completed that task once, it shows how I can reproduce
+that task in increasingly quicker times.
+It was rather appropriate for my Waterfall-esque approach to completing this
+task, in that it captured the idea of shortening the requirements and design
+phases and simply performing the resulting code.
+Furthermore, since I did not change algorithms and continually reduced my code I
+think $m_3$ was the most appropriate model.

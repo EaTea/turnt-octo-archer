@@ -252,11 +252,53 @@ We have shown this data in Table \ref{table:loc} and Figure \ref{figure:loc}.
 It is clear that there is a high amount of variation between solutions in the
 first few attempts, and that the drastically improve and start to converge to
 around 98 lines of code.
-The standard error of the lines of code was 60.80296, suggesting that between
-solutions I was learning a lot about how to code the problem more quickly and
-succinctly.\\
+The standard error of the lines of code was 60.80296.
+We also took the coefficient of variation of the data, and found that it was
+$0.455453$.
+These two statistics together are indicative of the huge amounts of variation
+that I showed in my solutions, and suggests that overall they were rather
+dissimilar and inconsistent.\\
 \\
 I also tried fitting the three models to the data to see how if there were any
 particular good fits.
+We note that $m_3$ provides the best fit of the three models we use, which is
+surprising since I would have expected $m_1$ and its relation to the Poisson
+distribution to be more useful (where wastage or excess code is thought of as a
+defect).
+It is surprising that a simple factor, applied a number of times to the initial
+number of lines of code is sufficient to model the changes in lines of code
+effectively.
 
 \subsection{Question seven}
+
+Question seven asks
+\begin{quote}
+  Out of the theoretical models we have chosen, which is the best for modelling
+  our process and why?
+  Impicitly, we also ought to answer why the other models are inappropriate.
+\end{quote}
+
+I will make an argument that the best model to use for modelling is $m_3 =$
+\[
+  m_3(t) = (a-c) e^{-bt} + c
+\]
+
+We note that $m_3$ never had better results than $m_1$ or $m_2$ in terms of sum
+of squares as a metric of how good a fit of a model was, except when being
+fitted to my lines of code data.
+However, $m_1$ and $m_2$ twice returned results that were hard to believe or
+entirely nonsense, as shown in Tables \ref{table:P1LA:abc} and
+\ref{table:mytimes:abc}.
+Although they ($m_1$ and $m_2$) present better fits for most time-based data, I believe these are
+glaring weaknesses in these models and that they are not as robust or
+appropriate for modelling as $m_3$.\\
+\\
+However, we ought to note that we only used four data points and this would have
+made it difficult to fit the model accurately.
+Perhaps with more data, $m_1$ and $m_2$ would have behaved more sensibly and
+would have not yielded negative values.
+Even so, I believe we should also note that in software engineering, it might be
+difficult to obtain lots of data, and a model should be tolerant to yielding
+nonsense values, which $m_1$ and $m_2$ are not.
+Therefore, I would advocate discarding them for modelling purposes and using
+$m_3$ as the most appropriate model for modelling purposes.

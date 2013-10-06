@@ -10,7 +10,7 @@ itself, such as the mean time to complete each attempt and the standard
 deviation.
 Subsection \ref{subsecP1LA} shows the results of fitting our three models to
 \PO\ using \LA.
-Subsection \ref{subsecP1LB} shows the results of fitting our three moodels to
+Subsection \ref{subsecP1LB} shows the results of fitting our three models to
 \PO\ using \LB.
 Subsection \ref{subsecP2LA} shows the results of fitting our three models to
 \PT\ using \LA.
@@ -171,6 +171,19 @@ and
   b > 0.
 \]
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.35,angle=90]{./media/P1LAGraph.png}
+\caption{The graph of models for \PO\ in \LA. The key is as follows:
+		 red is $m_1$,
+		 purple is $m_1$, constrained explicitly with conditions \ref{conThree} and \ref{conFour},
+		 blue is $m_2$,
+		 brown is $m_2$, constrained explicitly with conditions \ref{conThree} and \ref{conFour},
+		 green is $m_3$.
+}
+\label{figure:P1LA:abc}
+\end{figure}
+
 Adding these constraints in did not result in a good fit --- Mathematica
 returned that the fit did not converge and gave nonsensical values for $b$ (that
 is the learning rate).
@@ -178,12 +191,10 @@ This suggests that both $m_1$ and $m_2$ are inappropriate for modelling repeated
 iterations of a task.
 $m_3$ finds a more suitable fit which suggests that it was more robust in
 finding sensible fits.
-A final comment is that the $a$ values are all very similar and have negligble
+A final comment is that the $a$ values are all very similar and have negligible
 differences between them, suggesting that the $a$ values are relatively similar.
 More information might be found by examining the confidence for each of the
 parameter fits that Mathematica found.
-
-\FIXME grapph here
 
 \begin{table}[ht!]
 \centering
@@ -277,14 +288,23 @@ $m_3$ & 102.57 & 1.03095 & 41.3707 \\
 \label{table:P1LB:abc}
 \end{table}
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.35,angle=90]{./media/P1LBGraph.png}
+\caption{The graph of models for \PO\ in \LB. The key is as follows:
+		 red is $m_1$,
+		 blue is $m_2$,
+		 green is $m_3$.
+}
+	\label{figure:P1LB:abc}
+\end{figure}
+
 Notice again that the $a$ values are relatively similar.
 This time, the $b$ values are also quite close, and the $c$ values are the only
 real differences in the models.
 Each of these models gave sensible results, which suggests that since the
 learning rate between each iteration seemed lower compared attempts in \PO\ in
 \LB, the model is able to give useful and meaningful results.
-
-\FIXME grapph here
 
 \begin{table}[ht!]
 \centering
@@ -303,7 +323,7 @@ $m_3$ & 1.24103 & 0.0954955 & 1.80347 \\
 \label{table:P1LB:abc:error}
 \end{table}
 
-The errors in Table \ref{table:P1LB:abc:error} are miniscule in comparison to
+The errors in Table \ref{table:P1LB:abc:error} are minuscule in comparison to
 Table \ref{table:P1LA:abc:error}.
 Notice that $m_1$ had the smallest errors, whilst $m_3$ had consistently higher
 errors than $m_1$ or $m_2$.
@@ -330,10 +350,10 @@ $m_3$ & 1.5429195761\\
 The results of the standard errors in Table \ref{table:P1LB:abc:error} are
 confirmed in Table \ref{table:P1LB:abc:sumsquares} (the sum of squares of the
 residuals).
-Although alll models have very low sum of squares, $m_3$ has a greater sum of
+Although all models have very low sum of squares, $m_3$ has a greater sum of
 squares of the residuals than $m_1$ and $m_2$.
 Furthermore, $m_1$ again had the lowest sum of squares (and as shown in Table
-\ref{table:P1LB:anc:error} the lowest errors for the parameters) which suggests
+\ref{table:P1LB:abc:error} the lowest errors for the parameters) which suggests
 that here, it was the best fit.
 
 \subsection{Problem two in language A} \label{subsecP2LA}
@@ -362,13 +382,22 @@ $m_3$ & 99.9429 & 1.39094 & 41.4713 \\
 \label{table:P2LA:abc}
 \end{table}
 
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.35,angle=90]{./media/P2LAGraph.png}
+\caption{The graph of models for \PT\ in \LA. The key is as follows:
+		 red is $m_1$,
+		 blue is $m_2$,
+		 green is $m_3$.
+}
+	\label{figure:P2LA:abc}
+\end{figure}
+
 Again, as in Table \ref{table:P1LA:abc} and \ref{table:P1LB:abc} we note that
 the $a$ values as shown in Table \ref{table:P2LA:abc} are very similar.
 The $b$ values show much more difference than in Table \ref{table:P1LB:abc}, and
 the $c$ values show a reasonable variation (this is by inspection only, and
 without justification through evidence).
-
-\FIXME grapph here
 
 \begin{table}[ht!]
 \centering
@@ -431,7 +460,7 @@ and we note that our results are still not very reliable.
 We will next try using our models $m_1$, $m_2$ and $m_3$ to analyse my data and
 a random student's data.
 
-\subsection{Individual Data}
+\subsection{Individual Data} \label{subsecInd}
 
 In this section, we show how my own data fits the different curves.
 Some comments about my design process:
@@ -449,9 +478,9 @@ Firstly, we will fit my lines of code to the data.
   \item Figure \ref{table:LOC} shows a line graph of the lines of code
   \item Table \ref{table:LOC:abc} shows the parameters of the best fits for the
   models we were given
-  \item Table \ref{table:LOC:error} shows the standard errors on the parameters
+  \item Table \ref{table:LOC:abc:error} shows the standard errors on the parameters
   for the best fits of the models we use
-  \item Table \ref{table:LOC:sumsquares} shows the sums of the squares of the
+  \item Table \ref{table:LOC:abc:sumsquares} shows the sums of the squares of the
   residuals for the models we are given
 \end{itemize}
 
@@ -472,7 +501,7 @@ Lines of code & 224 & 114 & 98 & 98 \\
 
 \begin{figure}[ht!]
 \centering
-\FIXME
+\includegraphics[scale=0.65]{./media/MyData_LOC.png}
 \caption{The lines of code as a line graph --- notice that it may also be
   amenable to a similar analysis as the one we performed in the previous
     subsections.}
@@ -483,7 +512,7 @@ What is notable is the (almost) halving of the number of lines of code between
 \AZ\ and \AO.
 This is due to me cutting a lot of unnecessary code out of the solutions I used.
 This will have interesting effects on the rest of my results, as we will see in
-later fiures.
+later figures.
 
 \begin{table}[ht!]
 \centering
@@ -503,7 +532,16 @@ $m_3$ & 224.015 & 2.01731 & 96.8399 \\
 \label{table:LOC:abc}
 \end{table}
 
-\FIXME grapph here
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.35,angle=90]{./media/LOCGraph.png}
+\caption{The graph of models for the lines of code during my attempts. The key is as follows:
+		 red is $m_1$,
+		 blue is $m_2$,
+		 green is $m_3$.
+}
+	\label{figure:LOC:abc}
+\end{figure}
 
 We note that each of these fits again has a similar $a$ value, but 
 reasonably varying $c$ values.
@@ -579,8 +617,8 @@ Time (minutes) & 366 & 88 & 44 & 23 \\
 
 \begin{figure}[ht!]
 \centering
-\FIXME
-\caption{The lines of code as a line graph --- the huge drop from \AZ\ to \AO\
+\includegraphics[scale=0.65]{./media/MyData_Times.png}
+\caption{The times I took for each attempt as a line graph --- the huge drop from \AZ\ to \AO\
   suggests that analyses of this dataset might not be very effective.}
 \label{figure:mytimes}
 \end{figure}
@@ -608,7 +646,17 @@ $m_3$ & 365.833 & 1.66211 & 25.3253 \\
 \label{table:mytimes:abc}
 \end{table}
 
-\FIXME grapph here
+\begin{figure}[ht!]
+\centering
+\includegraphics[scale=0.35,angle=90]{./media/MyTimesGraph.png}
+\caption{The graph of models for the time taken in minutes for me to complete the programming tasks
+	during my attempts. The key is as follows:
+		 red is $m_1$,
+		 blue is $m_2$,
+		 green is $m_3$.
+}
+	\label{figure:mytimes:abc}
+\end{figure}
 
 Again, we see that the parameters of $m_1$ have fallen below 0, suggesting that
 $m_1$ is not tolerant to such unpredictable, huge jumps.

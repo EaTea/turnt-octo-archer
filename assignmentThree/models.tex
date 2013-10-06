@@ -1,14 +1,14 @@
 \section{Models} \label{secModels}
 
 In section \ref{secMethod} we outlined three different criteria that our models
-needed to fulfill.
+needed to fulfil.
 
 \begin{itemize}
   \item $a$: the amount of time taken to complete the solution with no knowledge,
   which should be the value the model takes on \AZ
   \item $c$: the amount of time taken to complete the solution with complete
   knowledge, which should be the value the model takes as the number of attempts
-  goes to infinite --- this is the same as saying the model asymptotes at $c$
+  goes to infinite --- this is the same as saying the model has an asymptote at $c$
   \item $b$: the learning rate, which should determine the curvature of the
   model and control how fast the students learn
 \end{itemize}
@@ -16,7 +16,7 @@ needed to fulfill.
 Furthermore, we inferred that $a > c > 0$ and $b > 0$, and this adds additional
 implicit constraints on our models.
 We present four models that were suggested by Woodings for usage.
-Much of their motivation comes from an unpublished paper by Woodings. \FIXME
+Much of their motivation comes from an unpublished paper by Woodings \cite{WoodingsUnpublished}.
 We apply each of the constraints that we have to ensure that they comply with
 our criteria.\\
 \\
@@ -53,10 +53,10 @@ This model is given by
   m_1(t) = \frac{a+bct}{bt+1}
 \end{equation}
 
-Our second model is a psychological model on learning, which is used by Kemerer
-and Sherdii\FIXME referencing.
-We can derive a similar equation to the one used in Humphries Personal Software
-Process (PSP) \FIXME referencing, resulting in
+Our second model is a psychological model on learning, which resemble those employed by Kemerer
+\cite{kemerer1992now}.
+We can derive a similar equation to the one used in Humphries' Personal Software
+Process (PSP) \cite{humphrey1997introduction}, resulting in
 \begin{equation} \label{modelTwo}
   m_2(t) = \frac{a-c}{(t+1)^{b}}+c
 \end{equation}
@@ -85,7 +85,7 @@ Note that we set $e$ as the constant since it assists in regression analysis,
 since we can simply take a natural log of the equation and then perform linear
 regression.\\
 \\
-Our final model is a model presented by Woodings in \FIXME.
+Our final model is a model presented by Woodings in \cite{WoodingsUnpublished}.
 It is a simple polynomial, given as
 \begin{equation} \label{modelFour}
   m_4(t) = a + bt + ct^2
@@ -155,7 +155,7 @@ This informal argument states that when $c > 0$ and $b > 0$, there is no
 asymptote --- the model is unbounded and monotonically increases to infinity.
 We can interpret this result as stating that after doing more iterations and
 learning more about the problem, we would take longer to complete it, which I
-think is completely counterintuitive.
+think is completely counter-intuitive.
 If so, no matter what fit we make, we are going to end up with a result that we
 cannot rely upon.
 This justifies discarding model \ref{modelFour} as a reasonable model to use.

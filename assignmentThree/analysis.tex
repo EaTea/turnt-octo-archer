@@ -183,3 +183,80 @@ derivative of the equation of best fit).
 This seems nonsensical to me, and I would suggest doing further analyses beyond
 this rudimentary inspection to determine how learning changes and how learning
 itself is affected between each iteration.
+
+\subsection{Question five}
+
+In question five, we wanted to explore how
+\begin{quote}
+  Prior research suggests that most of the time spent in making software is spent
+  thinking --- if all the thinking has been performed, how long should it take to
+  finish a project?
+\end{quote}
+
+Within our experiment, this meant examining
+\begin{quote}
+  What are the values for $c$ for each of \PO\ in \LA, \PO\ in \LB\ and \PT\ in
+  \LA, and how reliable are these results?
+\end{quote}
+
+In Table \ref{table:CValues}, we show the aggregated $c$ values for each
+dataset, omitting the negative $c$ values and showing the errors for these
+calculations.
+
+\begin{table}[ht!]
+\centering
+\begin{tabular}{|c|c|c|}
+\hline
+  {\bf Dataset} & {\bf Mean} & {\bf Error} \\
+\hline
+  \PO\ in \LA & 29.691 & 13.1391 \\
+\hline
+  \PO\ in \LB & 30.80703 & 1.20379 \\
+\hline
+  \PT\ in \LA & 35.67597 & 10.43677 \\
+\hline
+\end{tabular}
+\caption{The aggregation of $c$ values for each dataset and the aggregation of
+  the error. We note that ``error aggregation" is a poor method to use to
+    analyse the errors and it could cause bias in our numbers.}
+\label{table:CValues}
+\end{table}
+
+We do not include the $c$ values for \PO\ in \LA\ in our calculations.
+Interestingly, the value for $c$ increases between each dataset, suggesting that
+the effect of solving a problem with increased knowledge does not necessarily
+translate to ending up with a lower time to completion overall.
+We note that there was a much greater error for the third $c$ value (\PT\ in
+\LA) than in the second $c$ value (\PO\ in \LB).\\
+\\
+This suggests that we had a very reliable result for the in analysing \PO\ in
+\LB, whereas in the other results we had larger errors that reduce the
+reliability of our results.
+We also note as a caveat that the first $c$ value (\PO\ in \LA) is quite
+unreliable due to us not having any other data points besides the fit of $m_3$
+to use.
+
+\subsection{Question six}
+
+Question six originally asks
+\begin{quote}
+  How similar and consistent are the sizes of the solutions?
+\end{quote}
+
+Within our experimental framework this asks
+\begin{quote}
+  What is the variation in the lines of code of the solutions?
+\end{quote}
+
+We have shown this data in Table \ref{table:loc} and Figure \ref{figure:loc}.
+It is clear that there is a high amount of variation between solutions in the
+first few attempts, and that the drastically improve and start to converge to
+around 98 lines of code.
+The standard error of the lines of code was 60.80296, suggesting that between
+solutions I was learning a lot about how to code the problem more quickly and
+succinctly.\\
+\\
+I also tried fitting the three models to the data to see how if there were any
+particular good fits.
+
+\subsection{Question seven}

@@ -1,6 +1,6 @@
 %-----------------------------------------------------------------------------%
 %Packages%
-\documentclass[12pt, a4paper, titlepage]{article}
+\documentclass{cshonours}
 \usepackage{amsmath, amsfonts, listings, amssymb, mathtools, amsthm} %Mathematical Expressions package
 \usepackage{mathtools}
 \usepackage[usenames, dvipsnames]{color} %Color naming packages
@@ -56,24 +56,17 @@ email: taye03@student.uwa.edu.au }
 
 \tableofcontents
 
-%\include{./introduction}
-%\include{./survey}
-%\include{./analysis}
-%\include{./experiment}
-%\include{./pipeline}
-%\include{./conclusion}
-
-BLAH \cite{humphrey1999bugs}, \cite{mcdonald2007practical} \cite{doolan1992experience}
-\cite{crossman1977some} \cite{cohen2006best}
-\cite{siy2001does}  \cite{Boehm:2001:SDR:619059.621640}
-\cite{AdvancesInSoftwareInspection} \cite{wilkerson2012comparing} \cite{kemerer2009impact} \cite{boehm2005foundations}
+\include{./introduction}
+\include{./survey}
+\include{./experiment}
+\include{./conclusion}
 
 % appendices
 
 \appendix
 \include{./proposal}
 
-\bibliographystyle{ieeetr}
+\bibliographystyle{acm}
 \bibliography{research_project}
 
 \end{document}

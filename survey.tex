@@ -1,57 +1,153 @@
-\section{Literature Survey --- TODO 25 September 2013}
+\chapter{Literature Survey} \label{chapter:litsurvey}
 
-WEDNESDAY OF STUDY BREAK
-
-\subsection{Background}
-
+Defects are common-place occurrences in software development.
+It is almost inevitable that software has defects and flaws, which causes software errors and
+faults.
+{\em Software inspections}, also known as {\em code reviews} are one method of finding defects in
+software, and are a well-studied and field of defect detection and software verification.\\
+\\
+Within this field, there are various techniques for conducting software inspection, and many
+benefits from incorporating software inspections.
+Some, such as high defect detection rates and immediate improvements to software quality, are
+obvious.
+Perhaps less obvious and more subtle are the long-term benefits that code reviews provide.
+This chapter will, through a survey of research address these benefits and discuss the state of the
+art in research.\\
+\\
+This chapter is arranged as follows:
 \begin{itemize}
-  \item what are we discussing
-  \item why is it interesting
-  \item brief salient historical facts
+	\item Section \ref{sec:litsurvey:defect} discusses what defects are and why they occur
+	\item Section \ref{sec:litsurvey:defTechs} lists a wide range of techniques for finding defects
+	\item Section \ref{sec:litsurvey:reviews} discusses the merits and ideas behind reviews
+	\item Section \ref{sec:litsurvey:codeRev} explores code reviews and the different kinds of code
+		reviews
+	\item Section \ref{sec:litsurvey:strWeak} analyses the strengths and weaknesses of the different
+		code reviews
+	\item Section \ref{sec:litsurvey:current} discusses recent research and what the state of the art
+		in research is
 \end{itemize}
 
-\subsection{Approach One}
+\section{What is a defect?} \label{sec:litsurvey:defect}
 
+Historically, software defects were thought of as ``bugs".
+The term was brought to popularity by Grace Hopper, when describing a case of a dead moth being
+responsible for a software problem \FIXME.
+The idea that software defects were ``bugs" became a well-established phenomenon, and the humourous
+idea of software ``bugs" became a reality.\\
+\\
+Calling software problems ``bugs" is somewhat divorced from the serious nature of a software
+problem.
+I agree with \FIXME\ in the essay regarding the etymology of ``bugs" and ``defects".
+In my opinion, the semantics of a ``defect" over a ``bug" highlight the pressing and wrong nature of the defect.
+As a result, I will refer to any software problems that exist in code as ``defects", rather than
+``bugs".\\
+\\
+Defects have been shown to have many evolutions.
+Musa et. al \cite{musa1987software} discuss the evolution of defects, from their origins within
+code to their effects upon users in a software system.
+The evolution stages Musa et. al describe are
 \begin{itemize}
-  \item what is the approach?
-  \item what is the supporting literature
-  \item justify its usage
-  \item two graphs/tables
+	\item a {\em fault} in the code constitutes a mistake in a piece of code as an embodiment of
+		knowledge
+	\item an {\em error} in system is a bad state that resulted from a fault
+	\item a {\em failure} is caused by an {\em error} in a system
 \end{itemize}
 
-\subsection{Approach Two}
+When a failure occurs it is difficult to trace where the original fault that caused it evolved from.
+Machine testing on a finished product is simply not an effective debugging process.
+Indeed, it can take as much as 100 times more person hours and resources to effectively track down
+where the fault came from, according to Boehm et. al \cite{boehm2005foundations}.
+This is supported by similar claims made by Soni \cite{soni2006defect} which are somewhat more
+modern --- within it, he found that fixing early saved a factor of 3 times more than fixing defects
+in the production stage.
+Li et. al \cite{li2010transition} report similar results when changing from a plan-based software
+lifecycle approach to an iterative Scrum-based approach, in terms of constant defect fixing and a
+more efficient software development process.\\
+\\
+I believe that this trend, outlined by Boehm and supported by further research is a sensible one.
+Woodings \cite{terryLecture4220} notes a further analogy about a dragon.
+He notes that it is far easier to slay a dragon when it is a baby, than to try and slay the fully
+grown dragon.
+This metaphor highlights the importance of fixing a defect early.\\
+\\
+Fixing early requires detecting defects early.
+Some schools of thought ascribe to testing early, and testing early and often (see Test Driven Development, in
+subsection \ref{subsec:litsurvey:testDD}).
+However, some software characteristics are not easily amenable to machine testing --- how do we test
+``security" or ``extensibility", as examples?
+What happens if there is not enough code to test?
+This motivates the need to find techniques that can be deployed within the implementation stages
+when the amount of available code for testing is too small to be amenable to machine verification,
+or what we need to verify does not lend itself easily to testing.
 
-\begin{itemize}
-  \item what is the approach?
-  \item what is the supporting literature
-  \item justify its usage
-  \item compare it to previous approaches
-  \item two graphs/tables
-\end{itemize}
+\subsection{The effects of defects} \label{subsec:litsurvey:effects}
 
-\subsection{Approach Three}
+To highlight the effects of seemingly simple errors, I will use three examples of real-world
+software bugs that caused a major problem in the resultant systems.
+In doing so, it will become clear how small problems that are not caught early can be catastrohic,
+and furthermore how the smallest differences in how knowledge is encoded into software can
+drastically affect system performance.
+By exploring the nature of defects, why they occur and how they interplay with representations of
+knowledge, we motivate the need for software to be reviewed by humans, and not just machine-tested
+or analysed.\\
+\\
+The first example is related to video games --- namely, the popular video game ``EVE Online".
+EVE is a massively multiplayer role-playing game (MMORPG), with a large user base and a virtual
+economy \FIXME.
+In December 2007, EVE Online was patched with the ``Trinity" patch, which deleted the ``boot.ini"
+file inside the EVE Online software directory.
+However, this was coded incorrectly, and by assuming that the ``boot.ini" file was being deleted
+within EVE Online's directory, the authors of the patch instead deleted the system ``boot.ini" file
+which was essential for Windows XP to run \FIXME.\\
+\\
+This is a small fault in the code --- the author assumed that one file was being deleted and it
+happened to have the same name as another file.
+That the name of the file in question is the object used to boot the entire operating system
+escalated the issue to severely compromise the systems of hundreds, or possibly thousands of
+users.\\
+\\
+The second example involves security, and a small utility called ``Cryptocat".
+Cryptocat offers secure instant messaging services that are not tied to services of any sort.
+It is popular amongst hacktivist groups for the purposes of communication in a secure manner \FIXME.
+Unfortunately, an old patch in Cryptocat's random number generator, which ensured its keys were
+secure, instead made all the keys used to encrypt the communications predictable.
+The patch was simply an off-by-one error, but it subsequently compromised the integrity of thousands
+of users communications \FIXME.\\
+\\
+The final example revolves around NASA's Mariner 1 --- an ill-fated voyage that ended with the
+Mariner 1 being destroyed during operation.
+This was caused by a mathematical formula being misread, which resulted in an incorrect
+encoding into software.
+As a result, the Mariner 1 destroyed itself, simply because the transcriber had not noticed there
+was an overbar in one of the equations.\\
+\\
+These defects resulted in a fault in the code, and the fault was so small that it is hard to believe
+it caused such a huge problem.
+These are faults that come from a human attempting to transcribe their knowledge into a software
+system.
+Some of these bugs might have been amenable to machine testing, but many of them are not easily
+tested.
+How do you test for randomness?
+What if you misread a formula and your test for the formula was wrong, in addition to the code?\\
+\\
+Verifying that knowledge is transcribed correctly is thus not a problem that is easily automated and
+solved by computers.
+This motivates the ideas of review, and the need to look beyond testing via a machine.
 
-\begin{itemize}
-  \item what is the approach?
-  \item what is the supporting literature
-  \item justify its usage
-  \item compare it to previous approaches
-  \item two graphs/tables
-\end{itemize}
+\section{Defect detection techniques} \label{sec:litsurvey:defTechs}
 
-\subsection{Approach Four}
+Before going directly to code reviews, it is worthwhile to introduce and survey other defect
+detection techniques.
+We will more clearly define machine testing, 
 
-\begin{itemize}
-  \item what is the approach?
-  \item what is the supporting literature
-  \item justify its usage
-  \item compare it to previous approaches
-  \item two graphs/tables
-\end{itemize}
+\subsection{Test Driven Development} \label{subsec:litsurvey:testDD}
 
-\subsection{Open Questions}
+\section{Reviews in management} \label{sec:litsurvey:reviews}
 
-\begin{itemize}
-  \item summarise approaches covered
-  \item summarise interesting questions that we have elicited
-\end{itemize}
+\section{Code reviews} \label{sec:litsurvey:codeRev}
+
+\section{Strengths and weaknesses of code reviews} \label{sec:litsurvey:strWeak}
+
+\section{State of the art} \label{sec:litsurvey:current}
+
+\section{Open questions}

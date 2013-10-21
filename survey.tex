@@ -10,7 +10,8 @@ Within this field, there are various techniques for conducting software inspecti
 benefits from incorporating software inspections.
 Some, such as high defect detection rates and immediate improvements to software quality, are
 obvious.
-Perhaps less obvious and more subtle are the long-term benefits that code reviews provide.
+Perhaps less obvious and more subtle are the long-term benefits, such as future
+defect prevention, that code reviews provide.
 This chapter will, through a survey of research address these benefits and discuss the state of the
 art in research.\\
 \\
@@ -119,7 +120,8 @@ Mariner 1 being destroyed during operation.
 This was caused by a mathematical formula being misread, which resulted in an incorrect
 encoding into software.
 As a result, the Mariner 1 destroyed itself, simply because the transcriber had not noticed there
-was an overbar in one of the equations.\\
+was an overbar in one of the equations.
+\FIXME\ what's the formula that screwed up?\\
 \\
 These defects resulted in a fault in the code, and the fault was so small that it is hard to believe
 it caused such a huge problem.
@@ -134,11 +136,26 @@ Verifying that knowledge is transcribed correctly is thus not a problem that is 
 solved by computers.
 This motivates the ideas of review, and the need to look beyond testing via a machine.
 
-\section{Defect detection techniques} \label{sec:litsurvey:defTechs}
+\section{Defect detection and prevention techniques} \label{sec:litsurvey:defTechs}
 
 Before going directly to code reviews, it is worthwhile to introduce and survey other defect
 detection techniques.
-We will more clearly define machine testing, 
+We can analyse their relative strengths and weaknesses, and discuss why subtle
+errors might escape these techniques.\\
+\\
+To address our claims that code reviews have long term benefits, such as defect
+prevention properties, we ought to look at different defect prevention
+techniques as well.
+We will examine three areas of defect detection, and three areas of defect
+prevention.
+The three defect detection areas are
+\begin{itemize}
+  \item Test-driven
+\end{itemize}
+The three defect prevention techniques are
+\begin{itemize}
+
+\end{itemize}
 
 \subsection{Test Driven Development} \label{subsec:litsurvey:testDD}
 

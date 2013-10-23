@@ -43,8 +43,6 @@ The evolution stages Musa et. al describe are
 
 \FIXME\ needs to focus on faults, and also discuss my own definition\\
 \\
-\FIXME\ change this to focus on faults...\\
-\\
 When a failure occurs it is difficult to trace where the original fault that caused it evolved from.
 Machine testing on a finished product is simply not an effective debugging process.
 Indeed, it can take as much as 100 times more person hours and resources to effectively track down
@@ -60,13 +58,14 @@ I believe that this trend, outlined by Boehm and supported by further research i
 Woodings \cite{terryLecture4220} notes a further analogy about a dragon.
 He notes that it is far easier to slay a dragon when it is a baby, than to try and slay the fully
 grown dragon.
-This metaphor highlights the importance of fixing a defect early.\\
+This metaphor highlights the importance of fixing a defect early --- especially at the stage when it
+is a fault, rather than a failure.\\
 \\
-Fixing early requires detecting defects early.
+Fixing a fault, rather than a failure or error, requires detecting defects early.
 Some schools of thought ascribe to testing early, and testing early and often (see Test Driven Development, in
 subsection \ref{sec:otherdets:testDD}).
 However, some software characteristics are not easily amenable to machine testing --- how do we test
-``security" or ``extensibility", as examples?
+``security" or ``extensibility"?
 What happens if there is not enough code to test?
 This motivates the need to find techniques that can be deployed within the implementation stages
 when the amount of available code for testing is too small to be amenable to machine verification,

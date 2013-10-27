@@ -11,26 +11,52 @@ and their major after-effects?\\
 This chapter is arranged as follows:
 \begin{itemize}
 	\item Section \ref{sec:defects:defect} discusses what defects are and why they occur
+	\item Section \ref{sec:defect:lifetime} discusses the lifetime of a defect
 	\item Section \ref{sec:defects:defEffects} explores some of the problems
   that have resulted from seemingly small defects
 \end{itemize}
 
 \section{What is a defect?} \label{sec:defects:defect}
 
-Historically, software defects were thought of as ``bugs".
-The term was brought to popularity by Grace Hopper, when describing a case of a dead moth being
-responsible for a software problem \FIXME.
-The idea that software defects were ``bugs" became a well-established phenomenon, and the humourous
-idea of software ``bugs" became a reality.\\
+Let us consider the example of an ATM, used to withdraw money from, or check the balance of a bank
+account.
+How can we define the defects in a system?
+To effectively do so, we must first define the idea of {\em customer expectations}.
+\begin{quote}
+	Customer expectations are the implicit or explicit conceptions of abilities and properties a
+	system should have.
+	These expectations come in two forms:
+	\begin{itemize}
+		\item {\em functional}: related to ``doing" or performaing an action or task
+		\item {\em non-functional}: related to a quality or characteristic of the design.
+	\end{itemize}
+\end{quote}
+
+An example of such expectations in our bank account example is easily seen in the following:
+\begin{itemize}
+	\item the customer expects that the ATM can withdraw money from a bank account, which is a
+		functional expectation
+	\item the customer expects the ATM to encrypt all networked communications, in a secure manner ---
+		this is a non-functional expectation
+\end{itemize}
+
+This is very similar to the idea of non-functional and functional requirements.
+The only difference is semantic, with regards to ``requrements" compared to ``expectations".
+``Expectation" highlights the importance of the user, and the (sometimes implicit) conception of
+how a system ought to work that ``requirement" does not capture.
+More information about functional and non-functional defects can be found in the comprehensive
+text by \FIXME.\\
 \\
-Calling software problems ``bugs" is somewhat divorced from the serious nature of a software
-problem.
-I agree with \FIXME\ in the essay regarding the etymology of ``bugs" and ``defects".
-In my opinion, the semantics of a ``defect" over a ``bug" highlight the pressing and wrong nature of the defect.
-As a result, I will refer to any software problems that exist in code as ``defects", rather than
-``bugs".\\
-\\
+We can then define a {\em defect} with respect to this idea, as
+\begin{quote}
+	A defect is a failure to meet customer expectations.
+\end{quote}
+
+\section{Lifetime of a defect} \label{sec:defect:lifetime}
+
 Defects have been shown to have many evolutions.
+Their effect upon a system can be shown to change, depending upon the stage of development and
+usage of the system.
 Musa et. al \cite{musa1987software} discuss the evolution of defects, from their origins within
 code to their effects upon users in a software system.
 The evolution stages Musa et. al describe are
@@ -41,8 +67,6 @@ The evolution stages Musa et. al describe are
 	\item a {\em failure} is caused by an {\em error} in a system
 \end{itemize}
 
-\FIXME\ needs to focus on faults, and also discuss my own definition\\
-\\
 When a failure occurs it is difficult to trace where the original fault that caused it evolved from.
 Machine testing on a finished product is simply not an effective debugging process.
 Indeed, it can take as much as 100 times more person hours and resources to effectively track down

@@ -45,7 +45,7 @@ The only difference is semantic, with regards to ``requirements" compared to ``e
 ``Expectation" highlights the importance of the user, and the (sometimes implicit) conception of
 how a system ought to work that ``requirement" does not capture.
 More information about functional and non-functional defects can be found in the comprehensive
-text by \FIXME.\\
+text by Sommerville \cite{sommerville1989software}.\\
 \\
 We can then define a {\em defect} with respect to this idea, as
 \begin{quote}
@@ -108,12 +108,12 @@ or analysed.\\
 \\
 The first example is related to video games --- namely, the popular video game ``EVE Online".
 EVE is a massively multi-player role-playing game (MMORPG), with a large user base and a virtual
-economy \FIXME.
+economy \cite{EVEWebsite}.
 In December 2007, EVE Online was patched with the ``Trinity" patch, which deleted the ``boot.ini"
 file inside the EVE Online software directory.
 However, this was coded incorrectly, and by assuming that the ``boot.ini" file was being deleted
 within EVE Online's directory, the authors of the patch instead deleted the system ``boot.ini" file
-which was essential for Windows XP to run \FIXME.\\
+which was essential for Windows XP to run \cite{EVEUnboot}.\\
 \\
 This is a small fault in the code --- the author assumed that one file was being deleted and it
 happened to have the same name as another file.
@@ -123,19 +123,19 @@ users.\\
 \\
 The second example involves security, and a small utility called ``Cryptocat".
 Cryptocat offers secure instant messaging services that are not tied to services of any sort.
-It is popular amongst activist groups for the purposes of communication in a secure manner \FIXME.
+It is popular amongst activist groups for the purposes of communication in a secure manner
+\cite{CryptocatWebsite}.
 Unfortunately, an old patch in Cryptocat's random number generator, which ensured its keys were
 secure, instead made all the keys used to encrypt the communications predictable.
 The patch was simply an off-by-one error, but it subsequently compromised the integrity of thousands
-of users communications \FIXME.\\
+of users communications \cite{CryptoShit}.\\
 \\
 The final example revolves around NASA's Mariner 1 --- an ill-fated voyage that ended with the
 Mariner 1 being destroyed during operation.
 This was caused by a mathematical formula being misread, which resulted in an incorrect
 encoding into software.
 As a result, the Mariner 1 destroyed itself, simply because the transcriber had not noticed there
-was an overbar in one of the equations.
-\FIXME\ what's the formula that screwed up?\\
+was an overbar in one of the equations \cite{MarinerBoom}.\\
 \\
 These defects resulted in a fault in the code, and the fault was so small that it is hard to believe
 it caused such a huge problem.

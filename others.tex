@@ -33,16 +33,16 @@ The two defect prevention techniques are
 \section{Test-driven development} \label{sec:otherdets:TDD}
 
 Continuous development, and the continually refactoring and refining a program according to client
-expectations are the basis of Agile programming \FIXME.
-One of the branches of Agile programming is Extreme Programming (XP), defined by \FIXME, in which
-the ideas of test-driven development evolved \FIXME.\\
+expectations are the basis of Agile programming \cite{sommerville1989software}.
+One of the branches of Agile programming is Extreme Programming (XP), defined by Beck
+\cite{beck2006extreme} from which the ideas of test-driven development evolved.\\
 \\
 Test-driven development states that tests should be written before the program is run, as a means of
-specifying a running ``contract" of how the program should work \FIXME.
+specifying a running ``contract" of how the program should work.
 Some of its variants include the {\em red-green-refactor} methodology and acceptance-test-driven
 development.\\
 \\
-{\em Red-green-refactor} (or RGR), introduced by Shore \FIXME, is a formalisation of the test-driven mantra in
+{\em Red-green-refactor} (or RGR), introduced by Shore \cite{shore2005RGR}, is a formalisation of the test-driven mantra in
 terms of an easy to visualise process.
 A developer codes a purposely wrong and small software module, then codes a test that catches the
 error (and thus the test is {\em red}).
@@ -50,18 +50,27 @@ Once the test catches the error, and thus proves it is working, the developer ma
 to the wrong module to correct it, then re-runs the test.
 The test should now be passing ({\em green}), and the developer can then {\em refactor} the code to
 improve it.
-The process repeats itself and slowly makes incremental changes to the system.\\
+The process repeats itself and slowly makes incremental changes to the system.
+This is demonstrated in Figure \ref{figure:RGR}.\\
 \\
-\FIXME Figure\\
+\begin{figure}
+\centering
+\includegraphics{media/Test-driven_development}
+\caption{This is the red-green-refactor model, as taken from \cite{RGR:image}, though not entirely
+truly transcribed.
+However, the basic ideas of RGR can be seen within this model.}
+\label{figure:RGR}
+\end{figure}
 \\
 However, this practice is only as effective as the tester.
 If the test suite itself is fragile, it is clear that the tests are almost useless, and could lure a
 development team into a false sense of security.
 Furthermore, RGR only works a unit-test level, without looking beyond small code modules and at the
 system as a whole.
-Practitioners admit that this is where system testing and acceptance tests are necessary \FIXME.\\
+In my opinion, this is where system testing and acceptance tests are necessary.\\
 \\
-Acceptance-test-driven development, as defined by \FIXME and \FIXME (though they do not appear to be
+Acceptance-test-driven development, as defined by Quartel \cite{AcceptQuartel} and Hendrikson
+\cite{AcceptHendr} (though they do not appear to be
 the originators of the practice) involves a team-based and client-based approach to test-driven
 development.
 Instead of writing tests for code, the team aims to construct acceptance tests with the client
@@ -94,10 +103,11 @@ finding these large problems.
 
 Imagine having a spell- and grammar-checker in your document editor, except it analysed your code,
 instead.
-It detected bad code patterns (code smells \FIXME), potential memory leaks and made optimisations
+It detected bad code patterns (code smells, see Atwood for a more comprehensive list
+\cite{AtwoodCodeSmells}), potential memory leaks and made optimisations
 for you (and it also does spell- and grammar-checking on your documentation).
 This is the domain of automated static analysis --- having a machine inspect code and detect the
-presence of possible faults \FIXME.\\
+presence of possible faults \cite{chess2007secure}.\\
 \\
 Much work has been done to improve the quality of static analysis since Fagan's time.
 Biffl \cite{Biffl2012BenefitAutomatedStaticAnalysis} found that small to medium scale enterprises
@@ -148,13 +158,11 @@ The entire basis for defensive programming is to prevent defects.
 Part of its motivation is to address security concerns and thus decrease the vulnerability of
 software components.\\
 \\
-\FIXME a more comprehensive list about def prog\\
-\\
 Campbell \cite{campbell1998defensive}, as well as Qie et. al \cite{qie2002defensive}, have looked at
 how defensive programming is useful in preventing defects in embedded systems (where testing may
 be more difficult or expensive), as well as building security into programs to make them DoS
 (denial-of-service) resistant.
-However, Roop \FIXME\ argues against defensive programming when employed in an extreme fashion
+However, Roop \cite{roop2009defensive} argues against defensive programming when employed in an extreme fashion
 mainly due to the difficulty in maintaining and readability of the resultant code.\\
 \\
 I agree with Roop --- I recently constructed a networking protocol for file transfers in an
@@ -183,9 +191,9 @@ programming, if we cannot trust the developer themselves to do so?
 Program testing can be used to show the presence of bugs, but never to show their absence.
 \end{quote}
 
-So claimed Dijkstra \FIXME, on the subject of verifying the correctness of a program.
+So claimed Dijkstra \cite{dijkstra1970notes}, on the subject of verifying the correctness of a program.
 At the time, many scientists argued for proofs of correctness for programs --- Dijkstra claimed that
-this would be an expensive and unfeasible task \FIXME.
+this would be an expensive and unfeasible task.
 Indeed, as software has grown and expanded, proving that components work has become an arduous and
 logistically complex task.\\
 \\
@@ -196,7 +204,13 @@ specification that can be run against the resultant system.
 In doing so, we can employ model checkers to verify whether a system will do exactly as it was
 specified, by using an automated prover to show that it does.\\
 \\
-\FIXME SELinux microkernal paragraph\\
+We briefly discuss Klein et. al's contribution to the area of formal methods and model checking, by way of
+discussing, without detail, his provably correct kernel \cite{klein2009sel4}.
+Klein et. al proved that their implementation of an SELinux microkernel, seL4, was correct and
+matched its specification, by means of an automated proving specification in Haskell.
+It showcased the power of formal methods, when employed by familiar and expert users who had
+mastered the concepts of formal methods, and is now being employed in embedded devices the world
+over.\\
 \\
 Formal methods are clearly desirable for safety critical programs.
 Being able to formally show that a program will do exactly what is expected of it is a desirable and

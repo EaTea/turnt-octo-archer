@@ -11,7 +11,7 @@ errors might escape these techniques.\\
 This will not be an in-depth survey of each technique --- we are focusing on code reviews, rather
 than these techniques.
 Instead, we will speak to each of these with a summary of recent achievements and usage, a
-description of what the technique is at a high level, and what the author belives about the
+description of what the technique is at a high level, and what the author believes about the
 technique and its usage.\\
 \\
 To address our claims that code reviews have long term benefits, such as defect
@@ -70,7 +70,7 @@ early, and continually update these tests.\\
 I personally do not like this methodology --- acceptance tests are not at all flexible. 
 I think it carries the risk of aiming toward a goal (customer vision/expectations) without constant
 feedback on whether the goal is appropriate (because it takes so long to satisfy an acceptance test).
-This might be because the terminology ``acceptance test" is an artefact of older lifecycle
+This might be because the terminology ``acceptance test" is an artefact of older life-cycle
 approaches, and does not translate well to an Agile practice.
 One might argue that ``Acceptance Test-Driven Development" is essentially Agile, but this does not
 take into account the ideas of ``regression acceptance test suites" (which seem counter-intuitive",
@@ -78,7 +78,7 @@ or the expense required to change an acceptance test.\\
 \\
 Overall, these two methodologies are some differing ideas about test-driven development.
 I believe they are essential parts of the software engineering process.
-To develop good sosftware, one ought to have code tested continuously, and the tests give the
+To develop good software, one ought to have code tested continuously, and the tests give the
 original developer some measure of confidence in their code.\\
 \\
 However, it is clear that tests rely upon the confidence of the tester, and the unit tests are only
@@ -127,7 +127,7 @@ static analysis is essentially doing what a human code reviewer does.
 They detect faults in the code by examining it against a set of pre-determined criteria.
 These faults can be corrected early before they escalate into major errors and failures.
 My own opinion is that such analyses are still rudimentary, and that we should not so quickly
-diiscard the critical thinking of a human.\\
+discard the critical thinking of a human.\\
 \\
 Furthermore, Biffl et. al \cite{Biffl2012BenefitAutomatedStaticAnalysis} suggest that there is a need to
 select a ``template" for system-wide static analysis.
@@ -155,7 +155,7 @@ how defensive programming is useful in preventing defects in embedded systems (w
 be more difficult or expensive), as well as building security into programs to make them DoS
 (denial-of-service) resistant.
 However, Roop \FIXME\ argues against defensive programming when employed in an extreme fashion
-mainly due to the unmaintainability and readability of the resultant code.\\
+mainly due to the difficulty in maintaining and readability of the resultant code.\\
 \\
 I agree with Roop --- I recently constructed a networking protocol for file transfers in an
 assignment, and found that it was very difficult to reason about the code I had written.

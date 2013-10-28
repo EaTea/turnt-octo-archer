@@ -1,34 +1,162 @@
-\chapter{Experiment --- TODO 11 October 2013} \label{chapter:experiment}
+\chapter{Further work} \label{chapter:experiment}
 
+We outlined several questions in the previous chapter with regards to the state of code reviews.
+My main motivation behind them is to demonstrate how to effectively set up a defect detection and prevention
+process that uses code reviews.
+For such a process to be useful and relevant, it needs to speak to the software industry of today
+--- it has to use ``modern" code reviews, and hopefully elicit how to best detect defects and
+prevent them using code reviews.
+It must be lightweight enough to find applicability within the fast-moving, iteration-based
+processes that comprise today's ``Agile" software engineering practices, especially in small,
+team-based software companies like startups.
+In order to construct such a process, we must first understand how code reviews are affected by
+other defect detection and prevention techniques.\\
+\\
+A final note: these experiments are rudimentary, and not well thought out enough to be employable as
+proper scientific experiments yet.
+I firmly believe that the concepts behind them, as well as an analysis of the threats to their
+validity, are necessary before they could be considered semi-seriously as legitimate experiments.
+I am laying out these ideas because I believe it is important to write these concepts down to show a
+very basic method for empirically justifying a defect detection and prevention process centred
+around code reviews.
+For an excellent statistical analysis of an experiment regarding code reviews, I would direct an
+interested reader to Wilkerson et. al \cite{wilkerson2012comparing}.
+
+\section{Code style and code reviews} \label{section:exp:codeStyle}
+
+One of the open questions we identified lay in the links between defensive programming and software
+inspections.
+There is still some debate over defensive programming in its extremes --- see \FIXME for more
+details.
+Nevertheless, I think it would be worthwhile to investigate whether code reviews will actually be
+aided by defensive programming.\\
+\\
+My own opinion of this is --- yes, surely defensive programming techniques will make it easier to
+reason about and review code.
+Yet some of my own anecdotal experiences suggest otherwise; the skill of a programmer and their
+knowledge can easily translate to a poorly implemented, and difficult to review code module that
+could hide faults inside of it.
+Even so, I would still hold to my opinion that defensive programming techniques are effective in
+improving code and reviews, and thus I would thus hypothesize two things
+\begin{enumerate}
+	\item More defects can be eliminated by code review when defensive programming is effectively employed in coding,
+		as opposed to when it is not
+	\item Defensive programming improves (lowers) the cost and effort required to perform a code review
+\end{enumerate}
+
+In order to test this, it would be necessary to have a number of experienced programmers, and a
+number of experienced reviewers.
+We would divide them into four groups --- two of the groups for developers, and two of the groups
+for reviewers.
+One group of developers would code with the defensive programming best practices in mind, whilst the
+other group would code without them.
+Both development groups would then attempt a programming task, and each developer would then be
+reviewed by a reviewer, who would identify problems in the code and task the developers with
+refactoring their code.
+We would aim to measure the number of defects remaining in the code, using an Estimated Marginal
+Mean (Searl et. al \FIXME) to correct for some of the biases and threats to validity that I identify
+below, as well as the time expended to review and to code the programming task.\\
+\\
+This experiment suffers from several threats to its validity.
+Several that I happened to note were
 \begin{itemize}
-  \item headline the experiment
-  \item what will we discuss
+	\item the initial pool of experienced programmers will have differing levels of experience,
+		competency and familiarity with the languages and tasks we ask them to do, and a normal
+		distribution of their skills cannot be assumed
+	\item differing review techniques between programmers should not be allowed for the sake of
+		consistency between reviews --- a structured reading technique should be advocated for each
+		reviewer to ensure consistency in our results.
+	\item the process described is a far cry from Fagan's code reviews and is an ad-hoc process for
+		code reviews --- I believe this works in favour of ``modern" code reviews, and improves the
+		overall result for the purposes of constructing a software engineering industry pipeline
 \end{itemize}
 
-\section{Motivation}
+I would hope that by measuring the remaining number of defects after correction, we would be able to
+observe if a statistically significant difference in the number of remaining defects was observable
+when using defensive programming.
+Thus, we might determine how effective defensive programming would be in assisting, or perhaps detracting from code reviews' usefulness.
+Furthermore, the time required to review the code will determine whether the coding style assisted
+and thus made it cheaper to review defensive-programming written code.\\
+\\
+I believe that investigating the coding style, and how developers themselves should write code is a
+useful task that forms the first step of a defect prevention and detection guideline --- namely, how
+we can establish a baseline or standard way of writing code to assist with a review and
+verification, or even answer the question of whether such a baseline or standard is necessary at
+all.
 
-\begin{itemize}
-  \item what are we interested in looking at
-  \item why is this relevant to the reader?
-\end{itemize}
+\section{Test driven development and code reviews} \label{section:exp:TDD}
 
-\section{Methodology}
+We note that Wilkerson et. al \cite{wilkerson2012comparing} that a relationship was found between
+code reviews and test driven development that affected the cost to implement both.
+This relationship was not clearly explainable by the authors, but they identified it as a key source
+of further research.
+When reading their paper, I was extremely surprised that their findings concluded in rejecting the
+hypothesis ``Code reviews and test-driven development, when used together, are more effective than
+either used alone".
+I would be interested in replicating their entire experiment, except that instead of having student
+developers and reviewers, it would be far more effective to use industrial level programmers.
+This experiment would be based solely around two hypotheses
+\begin{enumerate}
+	\item Code reviews and test-driven development, when used together, are more effective than
+either used alone --- this is the same hypothesis as the original paper, but hopefully with an
+external threat to validity (student developers/reviewers compared to industry developers and
+reviewers) removed
+	\item Code reviews and test-driven development, when used together, return a better cost-benefit
+		ration than either used alone
+\end{enumerate}
 
-\begin{itemize}
-  \item how did we carry out the experiments
-  \item what assumptions did we make
-  \item diagrams?
-\end{itemize}
+Almost all of the threats to validity outlined in Section \ref{section:exp:codeStyle} remain true
+for this experiment.\\
+\\
+I believe that this experiment would be able to reproduce Wilkerson et. al's results in an
+industrial setting, and hopefully provide scope to explore more about the relationships between
+code reviews and other defect detection and prevention techniques.
 
-\section{Results}
+\section{Automated static analysis} \label{section:exp:staticAnal}
 
-\begin{itemize}
-  \item graph our results everywhere
-\end{itemize}
+As noted in Section \ref{sec:otherdets:static}, static analysis is a code inspection --- but by a
+computer.
+What can a computer find, that a human will miss?
+What, in turn, can a human find, that the computer would miss?
+This is an important question --- it motivates how we could make a software engineering code review
+more efficient and useful.\\
+\\
+Again, we would have a number of software developers, who each would again be split into four
+groups.
+Both groups would complete a small software task, but one group would be assigned a static analysis
+tool, and the other group would not.
+The group with the static analysis tool would be able to use it to check their program, whilst the
+other, without a static analysis tool of any sort, would not be able to do so.\\
+\\
+At this point, I am somewhat stymied as to what kind of hypothesis I would formulate.
+Although I believe the general {\em form} of the experiment should be thus, I note that my claims
+throughout the paper have involved code reviews being able to find subtleties and maintenance
+issues.
+In such a small programming task, what kind of subtleties would we expect to find?
+What maintenance issues might there be?
+I find it difficult to conceive any, for any kind of small programming task, and so perhaps the
+experiment itself needs to take place within a larger project whose data we had access to.\\
+\\
+Overall, the experiment would be to determine what static analysis detection overlaps with code
+reviews.
+I believe this could facilitate an effective increase in reading techniques, and help to formulate
+new structured and unstructured reading techniques that can focus a code reviewer on the important
+areas of the code that could contain critical or hidden defects.
 
-\section{Analysis}
+\section{Comments on these experiments}
 
-\begin{itemize}
-  \item what did we notice
-  \item interesting analyses and suggestions
-\end{itemize}
+Again, these experiments are rudimentary and I believe they are far from complete.
+In my project proposal (Appendix \ref{appn:proposal}), I discussed experiments that I wanted to run.
+I was really inspired by Wilkerson et. al \cite{wilkerson2012comparing} and Grbac et. al
+\cite{grbac2012quantifying}, whose analyses of the experiments they ran and the empirical and
+statistical evidence they presented seemed whole, complete and objective.
+I was hoping to replicate these results, or an orthogonal line of investigation in some area of how
+code reviews relate to the wider defect detection set of verification techniques found in today's
+software engineering industry.\\
+\\
+Unfortunately, I did not have the time or the resources to perform these experiments and write about
+their results.
+At best, I can only write down the initial conceptions I had with which to base some of these
+experiments and ideas upon.
+I hope that at some point, these ideas for experiments could be expanded upon, to explore how code reviews are
+affected by other defect detection/prevention techniques.

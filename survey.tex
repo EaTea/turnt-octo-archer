@@ -36,7 +36,11 @@ He further advocates a stringent process for conducting a code review, as shown 
 \ref{fig:codeRev:process}.
 
 \begin{figure}
-\FIXME code review process 
+\centering
+\includegraphics{media/ComparingDefectReductionBenefits}
+\caption{The code review process, as described by Fagan \cite{AdvancesInSoftwareInspection} and
+reproduced by Wilkerson \cite{wilkerson2012comparing}.}
+\label{fig:codeRev:process}
 \end{figure}
 
 Furthermore, Fagan \cite{AdvancesInSoftwareInspection} notes that the inspection process should only proceed for 2 hours, since a single developer
@@ -56,7 +60,8 @@ He further advocates that there should be a stringent set of roles in the review
 Much of the findings in Fagan's paper highlight positive aspects of code reviews.
 He notes that software inspections
 \begin{itemize}
-	\item had long term cost savings over the lifetime of a project, as shown in Figure \FIXME
+	\item had long term cost savings over the lifetime of a project, as shown in Figure
+		\ref{fig:codeRev:costs}
 	\item were more effective than automated testing in finding defects
 	\item increased professionalism and developed a culture of cooperation and collaboration amongst
 		developers
@@ -64,13 +69,18 @@ He notes that software inspections
 \end{itemize}
 
 \begin{figure}
-	\FIXME graph
+\centering
+\includegraphics{media/SWInspection_Graph}
+\caption{The rate of expenditure, from Fagan's 1986 paper regarding Advances in Software Inspections
+	\cite{AdvancesInSoftwareInspection}. Notice that the cost of using software inspections is much
+cheaper in the long term than the cost of not using them and simply relying on machine testing.}
+\label{fig:codeRev:costs}
 \end{figure}
 
 I think Fagan presented code reviews as a revolutionary and must-do technique.
 In hindsight, it is perhaps somewhat obvious the code reviews are good --- why not have lots of
 people work on, and contribute to improving code?
-In the words of Torvalds, ``given enough eyeballs, all bugs are shallow" \FIXME.
+In the words of Raymond, ``given enough eyeballs, all bugs are shallow" \cite{raymond1999cathedral}.
 Although this adage applies to open-source software, a similar mentality can be applied to any
 software engineering industry.
 Thus, I would say that Fagan presents the obvious --- code reviews are good for software --- and
@@ -103,7 +113,7 @@ software engineering industry.\\
 Fagan prescribed advanced training and coaching for the inspection moderator, but the expense
 required to train a person would be counter-intuitive to setting up code reviews.
 Perhaps this might be seen to go against the Agile Manifesto's decree of ``people over processes"
-\FIXME, but nevertheless it contributes to a perception that Fagan's code reviews are heavier
+\cite{fowler2001agile}, but nevertheless it contributes to a perception that Fagan's code reviews are heavier
 processes that are difficult to integrate with other development methodologies (especially those in
 the ``Agile" class of development processes).\\
 \\
@@ -111,7 +121,7 @@ Secondly, Fagan did not discuss reviewer training --- he merely advocated that t
 reviewers and that there should be a guideline of defects that they should look for.
 However, reviewers have different levels of experience and competency, and the difference between
 developers in terms of effort expended to finish a programming task can sometimes be as much as more
-than a factor of 15 \FIXME.
+than a factor of 15, according to lectures for this unit.
 The competency of the reviewers was not discussed, nor was the issue of how might the guidelines
 that a reviewer uses affect their ability to review effectively.\\
 \\
@@ -303,7 +313,7 @@ knowledge
 		support for code reviews was still in its fledgling stages, and it was stated that the support
 		had little to no effect upon inspection effectiveness. How has that changed since then? Have
 		reviews become better or worse because of code review tools such as the one provided on GitHub
-		\FIXME\ becoming readily available?
+		becoming readily available?
 		For both the commercial software industry, and for the new and relatively unstudied field of open source software?
 	\item Much of the recent work done has begun to look at how code reviews are affected by other
 		defect detection and prevention techniques.

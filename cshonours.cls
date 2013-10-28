@@ -113,8 +113,6 @@ class report.cls by Cara MacNish August 1999/September 2000]
 \ProcessOptions
 
 \def\@submityear{\number\the\year}              %ckm
-\def\keywords#1{\gdef\@keywords{#1}}		%ckm
-\def\categories#1{\gdef\@categories{#1}}	%ckm
 
 \input{size1\@ptsize.clo}
 \setlength\lineskip{1\p@}
@@ -508,8 +506,6 @@ class report.cls by Cara MacNish August 1999/September 2000]
 	{\chapter*{Abstract}}
 	{\vfill					%ckm
 	\noindent				%ckm
-	{\bf Keywords:} \@keywords \\		%ckm	
-	{\bf CR Categories:} \@categories	%ckm
 	\addcontentsline{toc}{chapter}{Abstract}
 	}
 
